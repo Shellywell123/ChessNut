@@ -1,0 +1,15 @@
+/Users/shellywell123/Programming/CSharp_Projects/Chess/bin/Debug/net6.0/Chess
+/Users/shellywell123/Programming/CSharp_Projects/Chess/bin/Debug/net6.0/Chess.deps.json
+/Users/shellywell123/Programming/CSharp_Projects/Chess/bin/Debug/net6.0/Chess.runtimeconfig.json
+/Users/shellywell123/Programming/CSharp_Projects/Chess/bin/Debug/net6.0/Chess.dll
+/Users/shellywell123/Programming/CSharp_Projects/Chess/bin/Debug/net6.0/Chess.pdb
+/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/Chess.csproj.AssemblyReference.cache
+/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/Chess.GeneratedMSBuildEditorConfig.editorconfig
+/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/Chess.AssemblyInfoInputs.cache
+/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/Chess.AssemblyInfo.cs
+/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/Chess.csproj.CoreCompileInputs.cache
+/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/Chess.dll
+/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/refint/Chess.dll
+/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/Chess.pdb
+/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/Chess.genruntimeconfig.cache
+/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/ref/Chess.dll
