@@ -1,36 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace ChessNut{
 
-    class Program{
+    static class Program{
 
         static Board chessNutBoard = new Board(8);
 
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        // static void Main()
+        // {
+        //     // To customize application configuration such as set high DPI settings or default font,
+        //     // see https://aka.ms/applicationconfiguration.
+        //     ApplicationConfiguration.Initialize();
+        //     Application.Run(new Form1());
+        // }    
+
+        // terminal main
         static void Main(string[] args)
         {
             // show empty chess board
             //printBoard(chessNutBoard);
 
-            // ask user for piece of choice - clean up input checks
-            Console.WriteLine("\nEnter the Piece to place:\n - K, King (being fixed)\n - Q, Queen\n - B, Bishop\n - R, Rook\n - k, Knight");
-            string piece = Console.ReadLine();
+            // // ask user for piece of choice - clean up input checks
+            // Console.WriteLine("\nEnter the Piece to place:\n - K, King (being fixed)\n - Q, Queen\n - B, Bishop\n - R, Rook\n - k, Knight");
+            // string piece = Console.ReadLine();
 
-            // ask user for x any coord - clean up input checks
-            Square currentSquare = setCurrentSquare();
-            currentSquare.CurrentlyOccupied = true;
+            // // ask user for x any coord - clean up input checks
+            // Square currentSquare = setCurrentSquare();
+            // currentSquare.CurrentlyOccupied = true;
+            
 
-            // calc all legal moves for piece
-            chessNutBoard.MarkNextLegalMoves(currentSquare, piece);
+            // // calc all legal moves for piece
+            // chessNutBoard.MarkNextLegalMoves(currentSquare, piece);
 
             // print chess board with piece + legal moves
-            printBoard(chessNutBoard, piece);
+            //printBoard(chessNutBoard, piece);
+
+          
+
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Form1());
 
             // enter key to close program
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
         public static void printBoard(Board board, string piece)
@@ -59,6 +72,7 @@ namespace ChessNut{
                     icon = "B";
                     break;
             }
+
             // print chess board to terminal
             for (int i = 0; i < board.Size; i++)
             {
