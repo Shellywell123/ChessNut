@@ -1,5 +1,0 @@
-/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/ChessNet.csproj.AssemblyReference.cache
-/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/ChessNet.GeneratedMSBuildEditorConfig.editorconfig
-/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/ChessNet.AssemblyInfoInputs.cache
-/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/ChessNet.AssemblyInfo.cs
-/Users/shellywell123/Programming/CSharp_Projects/Chess/obj/Debug/net6.0/ChessNet.csproj.CoreCompileInputs.cache

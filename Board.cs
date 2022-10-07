@@ -1,34 +1,35 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ChessNut
 {
     public class Board
     {
         // size of the board
-        public int Size {get; set;}
+        public int Size { get; set; }
 
         // 2d array
-        public Square[,] squares {get; set;}
+        public Square[,] squares { get; set; }
 
         // constructor
-        public Board (int s)
+        public Board(int s)
         {
             // intial board size
             Size = s;
-            squares = new Square[Size,Size];
+            squares = new Square[Size, Size];
 
             // new 2d array
             for (int i = 0; i < Size; i++)
             {
                 for (int j = 0; j < Size; j++)
                 {
-                    squares[i,j] = new Square(i,j);
+                    squares[i, j] = new Square(i, j);
                 }
             }
         }
-
         public void MarkNextLegalMoves(Square currentSquare, string chessPiece)
         {
             // clear the board
@@ -36,55 +37,55 @@ namespace ChessNut
             {
                 for (int j = 0; j < Size; j++)
                 {
-                    squares[i,j].LegalNextMove = false;
-                    squares[i,j].CurrentlyOccupied = false;
+                    squares[i, j].LegalNextMove = false;
+                    squares[i, j].CurrentlyOccupied = false;
                 }
             }
 
             // find all legal moves on board and mark them 
             switch (chessPiece)
             {
-                case "Knight" or "k":
+                case "Knight":
                     // can be rewitten 
-                    if (SquareOnBoard(currentSquare.RowNumber +2, currentSquare.ColumnNumber +1) == true)
+                    if (SquareOnBoard(currentSquare.RowNumber + 2, currentSquare.ColumnNumber + 1) == true)
                     {
-                        squares[currentSquare.RowNumber +2, currentSquare.ColumnNumber +1].LegalNextMove = true;
+                        squares[currentSquare.RowNumber + 2, currentSquare.ColumnNumber + 1].LegalNextMove = true;
                     }
-                    if (SquareOnBoard(currentSquare.RowNumber +2, currentSquare.ColumnNumber -1) == true)
+                    if (SquareOnBoard(currentSquare.RowNumber + 2, currentSquare.ColumnNumber - 1) == true)
                     {
-                        squares[currentSquare.RowNumber +2, currentSquare.ColumnNumber -1].LegalNextMove = true;
+                        squares[currentSquare.RowNumber + 2, currentSquare.ColumnNumber - 1].LegalNextMove = true;
                     }
-                    if (SquareOnBoard(currentSquare.RowNumber -2, currentSquare.ColumnNumber +1) == true)
+                    if (SquareOnBoard(currentSquare.RowNumber - 2, currentSquare.ColumnNumber + 1) == true)
                     {
-                        squares[currentSquare.RowNumber -2, currentSquare.ColumnNumber +1].LegalNextMove = true;
+                        squares[currentSquare.RowNumber - 2, currentSquare.ColumnNumber + 1].LegalNextMove = true;
                     }
-                    if (SquareOnBoard(currentSquare.RowNumber -2, currentSquare.ColumnNumber -1) == true)
+                    if (SquareOnBoard(currentSquare.RowNumber - 2, currentSquare.ColumnNumber - 1) == true)
                     {
-                        squares[currentSquare.RowNumber -2, currentSquare.ColumnNumber -1].LegalNextMove = true;
+                        squares[currentSquare.RowNumber - 2, currentSquare.ColumnNumber - 1].LegalNextMove = true;
                     }
-                    if (SquareOnBoard(currentSquare.RowNumber +1, currentSquare.ColumnNumber +2) == true)
+                    if (SquareOnBoard(currentSquare.RowNumber + 1, currentSquare.ColumnNumber + 2) == true)
                     {
-                        squares[currentSquare.RowNumber +1, currentSquare.ColumnNumber +2].LegalNextMove = true;
+                        squares[currentSquare.RowNumber + 1, currentSquare.ColumnNumber + 2].LegalNextMove = true;
                     }
-                    if (SquareOnBoard(currentSquare.RowNumber +1, currentSquare.ColumnNumber -2) == true)
+                    if (SquareOnBoard(currentSquare.RowNumber + 1, currentSquare.ColumnNumber - 2) == true)
                     {
-                        squares[currentSquare.RowNumber +1, currentSquare.ColumnNumber -2].LegalNextMove = true;
+                        squares[currentSquare.RowNumber + 1, currentSquare.ColumnNumber - 2].LegalNextMove = true;
                     }
-                    if (SquareOnBoard(currentSquare.RowNumber -1, currentSquare.ColumnNumber +2) == true)
+                    if (SquareOnBoard(currentSquare.RowNumber - 1, currentSquare.ColumnNumber + 2) == true)
                     {
-                        squares[currentSquare.RowNumber -1, currentSquare.ColumnNumber +2].LegalNextMove = true;
+                        squares[currentSquare.RowNumber - 1, currentSquare.ColumnNumber + 2].LegalNextMove = true;
                     }
-                    if (SquareOnBoard(currentSquare.RowNumber -1, currentSquare.ColumnNumber -2) == true)
+                    if (SquareOnBoard(currentSquare.RowNumber - 1, currentSquare.ColumnNumber - 2) == true)
                     {
-                        squares[currentSquare.RowNumber -1, currentSquare.ColumnNumber -2].LegalNextMove = true;
+                        squares[currentSquare.RowNumber - 1, currentSquare.ColumnNumber - 2].LegalNextMove = true;
                     }
                     break;
 
-                case "King" or "K":
+                case "King":
                     int leftLim = currentSquare.ColumnNumber - 1;
-                    int rightLim = currentSquare.ColumnNumber +1;
-                    int topLim = currentSquare.RowNumber -1;
-                    int bottomLim = currentSquare.RowNumber+1;
+                    int rightLim = currentSquare.ColumnNumber + 1;
+                    int topLim = currentSquare.RowNumber - 1;
+                    int bottomLim = currentSquare.RowNumber + 1;
 
                     if (leftLim < 0)
                     {
@@ -111,8 +112,8 @@ namespace ChessNut
                         }
                     }
                     break;
-                
-                case "Rook" or "R":
+
+                case "Rook":
                     for (int i = 0; i < 8; i++)
                     {
                         for (int j = 0; j < 8; j++)
@@ -125,21 +126,21 @@ namespace ChessNut
                     }
                     break;
 
-                case "Bishop" or "B":
+                case "Bishop":
                     for (int i = 0; i < 8; i++)
                     {
                         for (int j = 0; j < 8; j++)
                         {
                             // can be rewritten to compare squared values instead of 2 if stats
-                            if ((((i) - currentSquare.RowNumber )  == ((j) - currentSquare.ColumnNumber)) | (((i) - currentSquare.RowNumber )  == - ((j) - currentSquare.ColumnNumber)))
+                            if ((((i) - currentSquare.RowNumber) == ((j) - currentSquare.ColumnNumber)) | (((i) - currentSquare.RowNumber) == -((j) - currentSquare.ColumnNumber)))
                             {
                                 squares[i, j].LegalNextMove = true;
                             }
                         }
-                    } 
+                    }
                     break;
 
-                case "Queen" or "Q":
+                case "Queen":
                     for (int i = 0; i < 8; i++)
                     {
                         for (int j = 0; j < 8; j++)
@@ -149,11 +150,11 @@ namespace ChessNut
                                 squares[i, j].LegalNextMove = true;
                             }
                             // can be rewritten to compare squared values instead of 2 if stats
-                            if (((i) - currentSquare.RowNumber )  == ((j) - currentSquare.ColumnNumber))
+                            if (((i) - currentSquare.RowNumber) == ((j) - currentSquare.ColumnNumber))
                             {
                                 squares[i, j].LegalNextMove = true;
                             }
-                            if (((i) - currentSquare.RowNumber )  == - ((j) - currentSquare.ColumnNumber))
+                            if (((i) - currentSquare.RowNumber) == -((j) - currentSquare.ColumnNumber))
                             {
                                 squares[i, j].LegalNextMove = true;
                             }
@@ -161,7 +162,7 @@ namespace ChessNut
                     }
                     break;
 
-                case "Pawn" or "P":
+                case "Pawn":
                     // requires a direction based on color/player position
                     break;
             }
@@ -172,7 +173,7 @@ namespace ChessNut
         public bool SquareOnBoard(int RowNumber, int ColumnNumber)
         {
             bool onBoard = false;
-            if ((0 <= RowNumber) & (RowNumber < 8 ) & (0 <=ColumnNumber) & (ColumnNumber < 8 ))
+            if ((0 <= RowNumber) & (RowNumber < 8) & (0 <= ColumnNumber) & (ColumnNumber < 8))
             {
                 onBoard = true;
             }

@@ -1,22 +1,29 @@
-namespace ChessNut{
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-    static class Program{
-
+namespace ChessNut
+{
+    internal static class Program
+    {
         static Board chessNutBoard = new Board(8);
 
         /// <summary>
-        ///  The main entry point for the application.
+        /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        // static void Main()
-        // {
-        //     // To customize application configuration such as set high DPI settings or default font,
-        //     // see https://aka.ms/applicationconfiguration.
-        //     ApplicationConfiguration.Initialize();
-        //     Application.Run(new Form1());
-        // }    
 
-        // terminal main
+        //"""
+        //static void Main()
+        //{
+        ///    Application.EnableVisualStyles();
+        //    Application.SetCompatibleTextRenderingDefault(false);
+        //    Application.Run(new Form1());
+        //}
+        //"""
+
         static void Main(string[] args)
         {
             // show empty chess board
@@ -29,7 +36,7 @@ namespace ChessNut{
             // // ask user for x any coord - clean up input checks
             // Square currentSquare = setCurrentSquare();
             // currentSquare.CurrentlyOccupied = true;
-            
+
 
             // // calc all legal moves for piece
             // chessNutBoard.MarkNextLegalMoves(currentSquare, piece);
@@ -37,10 +44,11 @@ namespace ChessNut{
             // print chess board with piece + legal moves
             //printBoard(chessNutBoard, piece);
 
-          
 
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Table());
 
             // enter key to close program
             //Console.ReadLine();
@@ -52,23 +60,23 @@ namespace ChessNut{
             string icon = "X";
             switch (piece)
             {
-                case "K" or "King":
+                case "King":
                     icon = "K";
                     break;
 
-                case "Q" or "Queen":
+                case "Queen":
                     icon = "Q";
                     break;
 
-                case "R" or "Rook":
+                case "Rook":
                     icon = "R";
                     break;
 
-                case "k" or "Knight":
+                case "Knight":
                     icon = "k";
                     break;
 
-                case "B" or "Bishop":
+                case "Bishop":
                     icon = "B";
                     break;
             }
@@ -77,15 +85,15 @@ namespace ChessNut{
             for (int i = 0; i < board.Size; i++)
             {
                 Console.WriteLine("  .---.---.---.---.---.---.---.---.");
-                Console.Write((8-i).ToString()+" ");
+                Console.Write((8 - i).ToString() + " ");
 
                 for (int j = 0; j < board.Size; j++)
                 {
-                    Square s = board.squares[i,j];
+                    Square s = board.squares[i, j];
 
                     if (s.CurrentlyOccupied == true)
                     {
-                        Console.Write("| "+icon+" ");
+                        Console.Write("| " + icon + " ");
                     }
                     else if (s.LegalNextMove == true)
                     {
@@ -111,7 +119,7 @@ namespace ChessNut{
             // get x + y coord from user and return a square loc
             Console.WriteLine("\nEnter the current row number:\n 1, 2, 3, 4, 5, 6, 7, 8");
             string inputRow = Console.ReadLine();
-            currentRow = 8-int.Parse(inputRow);
+            currentRow = 8 - int.Parse(inputRow);
 
             // if (ValidateInput("8-"+inputRow) == true)
             // {
@@ -123,7 +131,7 @@ namespace ChessNut{
             //     Console.WriteLine("Invalid input - set to default of 5 (3).");
             //     currentRow = 3;
             // }
-            
+
             Console.WriteLine("\nEnter the current square Letter:\n - A, B, C, D, E, F, G, H");
 
             // to c sharpify
