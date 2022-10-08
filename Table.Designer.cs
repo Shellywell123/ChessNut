@@ -41,7 +41,7 @@
             "Knight",
             "Rook",
             "Bishop"});
-            this.PieceSelectionBox.Location = new System.Drawing.Point(803, 405);
+            this.PieceSelectionBox.Location = new System.Drawing.Point(624, 67);
             this.PieceSelectionBox.Margin = new System.Windows.Forms.Padding(4);
             this.PieceSelectionBox.Name = "PieceSelectionBox";
             this.PieceSelectionBox.Size = new System.Drawing.Size(160, 24);
@@ -61,7 +61,7 @@
             "6",
             "7",
             "8"});
-            this.RowSelectionBox.Location = new System.Drawing.Point(803, 458);
+            this.RowSelectionBox.Location = new System.Drawing.Point(624, 99);
             this.RowSelectionBox.Margin = new System.Windows.Forms.Padding(4);
             this.RowSelectionBox.Name = "RowSelectionBox";
             this.RowSelectionBox.Size = new System.Drawing.Size(160, 24);
@@ -81,7 +81,7 @@
             "F",
             "G",
             "H"});
-            this.ColumnSelectionBox.Location = new System.Drawing.Point(803, 513);
+            this.ColumnSelectionBox.Location = new System.Drawing.Point(624, 131);
             this.ColumnSelectionBox.Margin = new System.Windows.Forms.Padding(4);
             this.ColumnSelectionBox.Name = "ColumnSelectionBox";
             this.ColumnSelectionBox.Size = new System.Drawing.Size(160, 24);
@@ -93,7 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 615);
+            this.ClientSize = new System.Drawing.Size(801, 615);
             this.Controls.Add(this.ColumnSelectionBox);
             this.Controls.Add(this.RowSelectionBox);
             this.Controls.Add(this.PieceSelectionBox);
@@ -103,6 +103,7 @@
             this.Load += new System.EventHandler(this.Table_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Table_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

@@ -30,7 +30,7 @@ namespace ChessNut
                 }
             }
         }
-        public void MarkNextLegalMoves(Square currentSquare, string chessPiece)
+        public int MarkNextLegalMoves(Square currentSquare, string chessPiece)
         {
             // clear the board
             for (int i = 0; i < Size; i++)
@@ -41,6 +41,7 @@ namespace ChessNut
                     squares[i, j].CurrentlyOccupied = false;
                 }
             }
+            int availableMoves = 0;
 
             // find all legal moves on board and mark them 
             switch (chessPiece)
@@ -50,34 +51,42 @@ namespace ChessNut
                     if (SquareOnBoard(currentSquare.RowNumber + 2, currentSquare.ColumnNumber + 1) == true)
                     {
                         squares[currentSquare.RowNumber + 2, currentSquare.ColumnNumber + 1].LegalNextMove = true;
+                        availableMoves += 1;
                     }
                     if (SquareOnBoard(currentSquare.RowNumber + 2, currentSquare.ColumnNumber - 1) == true)
                     {
                         squares[currentSquare.RowNumber + 2, currentSquare.ColumnNumber - 1].LegalNextMove = true;
+                        availableMoves += 1;
                     }
                     if (SquareOnBoard(currentSquare.RowNumber - 2, currentSquare.ColumnNumber + 1) == true)
                     {
                         squares[currentSquare.RowNumber - 2, currentSquare.ColumnNumber + 1].LegalNextMove = true;
+                        availableMoves += 1;
                     }
                     if (SquareOnBoard(currentSquare.RowNumber - 2, currentSquare.ColumnNumber - 1) == true)
                     {
                         squares[currentSquare.RowNumber - 2, currentSquare.ColumnNumber - 1].LegalNextMove = true;
+                        availableMoves += 1;
                     }
                     if (SquareOnBoard(currentSquare.RowNumber + 1, currentSquare.ColumnNumber + 2) == true)
                     {
                         squares[currentSquare.RowNumber + 1, currentSquare.ColumnNumber + 2].LegalNextMove = true;
+                        availableMoves += 1;
                     }
                     if (SquareOnBoard(currentSquare.RowNumber + 1, currentSquare.ColumnNumber - 2) == true)
                     {
                         squares[currentSquare.RowNumber + 1, currentSquare.ColumnNumber - 2].LegalNextMove = true;
+                        availableMoves += 1;
                     }
                     if (SquareOnBoard(currentSquare.RowNumber - 1, currentSquare.ColumnNumber + 2) == true)
                     {
                         squares[currentSquare.RowNumber - 1, currentSquare.ColumnNumber + 2].LegalNextMove = true;
+                        availableMoves += 1;
                     }
                     if (SquareOnBoard(currentSquare.RowNumber - 1, currentSquare.ColumnNumber - 2) == true)
                     {
                         squares[currentSquare.RowNumber - 1, currentSquare.ColumnNumber - 2].LegalNextMove = true;
+                        availableMoves += 1;
                     }
                     break;
 
@@ -109,6 +118,7 @@ namespace ChessNut
                         for (int j = leftLim; j <= rightLim; j++)
                         {
                             squares[i, j].LegalNextMove = true;
+                            availableMoves += 1;
                         }
                     }
                     break;
@@ -121,6 +131,7 @@ namespace ChessNut
                             if ((i == currentSquare.RowNumber) | (j == currentSquare.ColumnNumber))
                             {
                                 squares[i, j].LegalNextMove = true;
+                                availableMoves += 1;
                             }
                         }
                     }
@@ -135,6 +146,7 @@ namespace ChessNut
                             if ((((i) - currentSquare.RowNumber) == ((j) - currentSquare.ColumnNumber)) | (((i) - currentSquare.RowNumber) == -((j) - currentSquare.ColumnNumber)))
                             {
                                 squares[i, j].LegalNextMove = true;
+                                availableMoves += 1;
                             }
                         }
                     }
@@ -148,15 +160,18 @@ namespace ChessNut
                             if ((i == currentSquare.RowNumber) | (j == currentSquare.ColumnNumber))
                             {
                                 squares[i, j].LegalNextMove = true;
+                                availableMoves += 1;
                             }
                             // can be rewritten to compare squared values instead of 2 if stats
                             if (((i) - currentSquare.RowNumber) == ((j) - currentSquare.ColumnNumber))
                             {
                                 squares[i, j].LegalNextMove = true;
+                                availableMoves += 1;
                             }
                             if (((i) - currentSquare.RowNumber) == -((j) - currentSquare.ColumnNumber))
                             {
                                 squares[i, j].LegalNextMove = true;
+                                availableMoves += 1;
                             }
                         }
                     }
@@ -166,8 +181,9 @@ namespace ChessNut
                     // requires a direction based on color/player position
                     break;
             }
-            // reset currnelty occipied square as it was cleared earlier
+            // reset currently occupied square as it was cleared earlier
             squares[currentSquare.RowNumber, currentSquare.ColumnNumber].CurrentlyOccupied = true;
+            return availableMoves;
         }
 
         public bool SquareOnBoard(int RowNumber, int ColumnNumber)
