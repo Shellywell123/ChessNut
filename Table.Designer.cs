@@ -30,7 +30,6 @@
             this.PieceSelectionBox = new System.Windows.Forms.ComboBox();
             this.RowSelectionBox = new System.Windows.Forms.ComboBox();
             this.ColumnSelectionBox = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // PieceSelectionBox
@@ -42,9 +41,10 @@
             "Knight",
             "Rook",
             "Bishop"});
-            this.PieceSelectionBox.Location = new System.Drawing.Point(602, 329);
+            this.PieceSelectionBox.Location = new System.Drawing.Point(803, 405);
+            this.PieceSelectionBox.Margin = new System.Windows.Forms.Padding(4);
             this.PieceSelectionBox.Name = "PieceSelectionBox";
-            this.PieceSelectionBox.Size = new System.Drawing.Size(121, 21);
+            this.PieceSelectionBox.Size = new System.Drawing.Size(160, 24);
             this.PieceSelectionBox.TabIndex = 0;
             this.PieceSelectionBox.Text = "Piece ...";
             this.PieceSelectionBox.SelectedIndexChanged += new System.EventHandler(this.PieceSelectionBox_SelectedIndexChanged);
@@ -61,9 +61,10 @@
             "6",
             "7",
             "8"});
-            this.RowSelectionBox.Location = new System.Drawing.Point(602, 372);
+            this.RowSelectionBox.Location = new System.Drawing.Point(803, 458);
+            this.RowSelectionBox.Margin = new System.Windows.Forms.Padding(4);
             this.RowSelectionBox.Name = "RowSelectionBox";
-            this.RowSelectionBox.Size = new System.Drawing.Size(121, 21);
+            this.RowSelectionBox.Size = new System.Drawing.Size(160, 24);
             this.RowSelectionBox.TabIndex = 1;
             this.RowSelectionBox.Text = "Row ...";
             this.RowSelectionBox.SelectedIndexChanged += new System.EventHandler(this.RowSelectionBox_SelectedIndexChanged);
@@ -80,42 +81,28 @@
             "F",
             "G",
             "H"});
-            this.ColumnSelectionBox.Location = new System.Drawing.Point(602, 417);
+            this.ColumnSelectionBox.Location = new System.Drawing.Point(803, 513);
+            this.ColumnSelectionBox.Margin = new System.Windows.Forms.Padding(4);
             this.ColumnSelectionBox.Name = "ColumnSelectionBox";
-            this.ColumnSelectionBox.Size = new System.Drawing.Size(121, 21);
+            this.ColumnSelectionBox.Size = new System.Drawing.Size(160, 24);
             this.ColumnSelectionBox.TabIndex = 2;
             this.ColumnSelectionBox.Text = "Column ...";
             this.ColumnSelectionBox.SelectedIndexChanged += new System.EventHandler(this.ColumnSelectionBox_SelectedIndexChanged);
             // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(149, 210);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
-            this.panel1.TabIndex = 3;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
             // Table
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 500);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1000, 615);
             this.Controls.Add(this.ColumnSelectionBox);
             this.Controls.Add(this.RowSelectionBox);
             this.Controls.Add(this.PieceSelectionBox);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Table";
             this.Text = "ChessNut";
             this.Load += new System.EventHandler(this.Table_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Table_Load);
             this.ResumeLayout(false);
-            //
-            // Board
-            //
-            this.ChessBoard = new Board(8);
-            int border_size = 50;
-            int square_size = 50;
-
 
         }
 
@@ -124,8 +111,6 @@
         private System.Windows.Forms.ComboBox PieceSelectionBox;
         private System.Windows.Forms.ComboBox RowSelectionBox;
         private System.Windows.Forms.ComboBox ColumnSelectionBox;
-        private System.Windows.Forms.Panel panel1;
-        private Board ChessBoard;
     }
 }
 

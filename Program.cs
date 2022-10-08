@@ -110,7 +110,6 @@ namespace ChessNut
             Console.WriteLine("  .---.---.---.---.---.---.---.---.");
             Console.WriteLine("    A   B   C   D   E   F   G   H ");
         }
-
         private static Square setCurrentSquare()
         {
             int currentRow;
