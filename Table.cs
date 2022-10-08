@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ChessNut
 {
     public partial class Table : Form
-    { 
+    {
+        //FontFamily ChessFont = new FontFamily(@"assets\fonts\#Chess TFB");
+    
+
 
         static Board chessNutBoard = new Board(8);
 
@@ -87,23 +92,23 @@ namespace ChessNut
             switch (piece)
             {
                 case "King":
-                    icon = "K";
+                    icon = "S";
                     break;
 
                 case "Queen":
-                    icon = "Q";
+                    icon = "T";
                     break;
 
                 case "Rook":
-                    icon = "R";
+                    icon = "P";
                     break;
 
                 case "Knight":
-                    icon = "k";
+                    icon = "Q";
                     break;
 
                 case "Bishop":
-                    icon = "B";
+                    icon = "R";
                     break;
             }
 
@@ -116,7 +121,7 @@ namespace ChessNut
 
                     if (s.CurrentlyOccupied == true)
                     {
-                        e.Graphics.DrawString(icon, new Font("Verdana", 20), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size);
+                        e.Graphics.DrawString(icon, new Font("Chess TFB", 35), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size);
 
                     }
                     else if (s.LegalNextMove == true)
