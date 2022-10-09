@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
+    <Compile Include="ConsoleGame.cs" />
     <Compile Include="Selection.cs" />
     <Compile Include="Square.cs" />
     <Compile Include="Table.cs">

@@ -15,13 +15,12 @@ namespace ChessNut
     public partial class Table : Form
     {
         //FontFamily ChessFont = new FontFamily(@"assets\fonts\#Chess TFB");
-    
-
 
         static Board chessNutBoard = new Board(8);
 
         Selection Selected = new Selection();
-        
+        Selection Selected2 = new Selection();
+
 
         int border_size = 50;
         int square_size = 50;
@@ -59,13 +58,14 @@ namespace ChessNut
                 }
             }
         }
+
         private void Draw_Labels(object sender, PaintEventArgs e)
         {
             // add numbers
             int num = 1;
             for (int y = 8; y > 0; y--)
             {
-                e.Graphics.DrawString(y.ToString(), new Font("Verdana", 10), new SolidBrush(Color.Black), border_size / 2 - 10, square_size * (num));
+                e.Graphics.DrawString(y.ToString(), new Font("Courier New", 10), new SolidBrush(Color.Black), border_size - 12, square_size * (num)+20);
                 num += 1;
             }
 
@@ -73,7 +73,7 @@ namespace ChessNut
             string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H" };
             for (int x = 0; x < letters.Length; x++)
             {
-                e.Graphics.DrawString(letters[x], new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * x + border_size + 10, square_size * 8 + border_size);
+                e.Graphics.DrawString(letters[x], new Font("Courier New", 10), new SolidBrush(Color.Black), square_size * x + border_size + 16, square_size * 8 + border_size);
             }
         }
 
@@ -83,12 +83,13 @@ namespace ChessNut
             string[] letters = { "C", "h", "e", "s", "s", "N", "u", "t" };
             for (int x = 0; x < letters.Length; x++)
             {
-                e.Graphics.DrawString(letters[x], new Font("Verdana", 20), new SolidBrush(Color.Black), square_size * x + border_size + 10, 0);
+                e.Graphics.DrawString(letters[x], new Font("Cooper", 20), new SolidBrush(Color.Black), square_size * x + border_size + 10, 10);
             }
         }
+
         private void Draw_Piece(object sender, PaintEventArgs e, string piece)
         {
-            string icon = "X";
+            string icon = "";
             switch (piece)
             {
                 case "King":
@@ -121,7 +122,7 @@ namespace ChessNut
 
                     if (s.CurrentlyOccupied == true)
                     {
-                        e.Graphics.DrawString(icon, new Font("Chess TFB", 35), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size);
+                        e.Graphics.DrawString(icon, new Font("Chess TFB", 35), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size+1);
 
                     }
                     else if (s.LegalNextMove == true)
@@ -137,19 +138,25 @@ namespace ChessNut
                 }
             }
         }
+
         private void Table_Load(object sender, PaintEventArgs e)
         {   
             Draw_Board(sender, e);
             Draw_Labels(sender, e);
             Draw_Title(sender, e);
             Draw_Piece(sender, e, Selected.SelectedPiece);
+            Draw_Piece(sender, e, Selected2.SelectedPiece);
             Draw_AvailableMoves(sender, e);
+            Draw_AvailableMoves2(sender, e);
         }
 
         private void Table_Load(object sender, EventArgs e)
         {
             chessNutBoard.squares[Selected.SelectedColumn, Selected.SelectedRow].CurrentlyOccupied = true;
             Selected.SelectedAvalailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard.squares[Selected.SelectedColumn, Selected.SelectedRow], Selected.SelectedPiece);
+
+            chessNutBoard.squares[Selected2.SelectedColumn, Selected2.SelectedRow].CurrentlyOccupied = true;
+            //Selected2.SelectedAvalailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard.squares[Selected2.SelectedColumn, Selected2.SelectedRow], Selected2.SelectedPiece);
         }
 
         private void PieceSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -179,8 +186,39 @@ namespace ChessNut
         private void Draw_AvailableMoves(object sender, PaintEventArgs e)
         {
             // print number of avalible moves
-            string message = "Avalaible Moves: " + Selected.SelectedAvalailableMoves.ToString();
-            e.Graphics.DrawString(message, new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * 8 + border_size + 10, 300);   
+            string message = "Possible Moves: " + Selected.SelectedAvalailableMoves.ToString();
+            e.Graphics.DrawString(message, new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * 8 + border_size + 15, 140);   
+        }
+
+        private void PieceSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
+        {
+            // set currently selected piece 
+            Selected2.SelectedPiece = PieceSelectionBox2.GetItemText(this.PieceSelectionBox2.SelectedItem);
+            Table_Load(sender, e);
+            this.Invalidate();
+        }
+
+        private void RowSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
+        {
+            // set currently selected row
+            Selected2.SelectedRow = 7 - RowSelectionBox2.SelectedIndex;
+            Table_Load(sender, e);
+            this.Invalidate();
+        }
+
+        private void ColumnSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
+        {
+            // set currently selected column
+            Selected2.SelectedColumn = ColumnSelectionBox2.SelectedIndex;
+            Table_Load(sender, e);
+            this.Invalidate();
+        }
+
+        private void Draw_AvailableMoves2(object sender, PaintEventArgs e)
+        {
+            // print number of avalible moves
+            string message = "Possible Moves: " + Selected2.SelectedAvalailableMoves.ToString();
+            e.Graphics.DrawString(message, new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * 8 + border_size + 15, 250);
         }
     }
 }
