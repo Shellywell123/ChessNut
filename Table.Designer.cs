@@ -33,6 +33,8 @@
             this.ColumnSelectionBox2 = new System.Windows.Forms.ComboBox();
             this.RowSelectionBox2 = new System.Windows.Forms.ComboBox();
             this.PieceSelectionBox2 = new System.Windows.Forms.ComboBox();
+            this.SelectionColorBox = new System.Windows.Forms.ComboBox();
+            this.SelectionColorBox2 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // PieceSelectionBox
@@ -104,7 +106,7 @@
             "F",
             "G",
             "H"});
-            this.ColumnSelectionBox2.Location = new System.Drawing.Point(624, 275);
+            this.ColumnSelectionBox2.Location = new System.Drawing.Point(624, 302);
             this.ColumnSelectionBox2.Margin = new System.Windows.Forms.Padding(4);
             this.ColumnSelectionBox2.Name = "ColumnSelectionBox2";
             this.ColumnSelectionBox2.Size = new System.Drawing.Size(160, 24);
@@ -124,7 +126,7 @@
             "6",
             "7",
             "8"});
-            this.RowSelectionBox2.Location = new System.Drawing.Point(624, 243);
+            this.RowSelectionBox2.Location = new System.Drawing.Point(624, 270);
             this.RowSelectionBox2.Margin = new System.Windows.Forms.Padding(4);
             this.RowSelectionBox2.Name = "RowSelectionBox2";
             this.RowSelectionBox2.Size = new System.Drawing.Size(160, 24);
@@ -141,7 +143,7 @@
             "Knight",
             "Rook",
             "Bishop"});
-            this.PieceSelectionBox2.Location = new System.Drawing.Point(624, 211);
+            this.PieceSelectionBox2.Location = new System.Drawing.Point(624, 238);
             this.PieceSelectionBox2.Margin = new System.Windows.Forms.Padding(4);
             this.PieceSelectionBox2.Name = "PieceSelectionBox2";
             this.PieceSelectionBox2.Size = new System.Drawing.Size(160, 24);
@@ -149,11 +151,40 @@
             this.PieceSelectionBox2.Text = "Piece ...";
             this.PieceSelectionBox2.SelectedIndexChanged += new System.EventHandler(this.PieceSelectionBox_SelectedIndexChanged2);
             // 
+            // SelectionColorBox
+            // 
+            this.SelectionColorBox.FormattingEnabled = true;
+            this.SelectionColorBox.Items.AddRange(new object[] {
+            "White",
+            "Black"});
+            this.SelectionColorBox.Location = new System.Drawing.Point(624, 162);
+            this.SelectionColorBox.Name = "SelectionColorBox";
+            this.SelectionColorBox.Size = new System.Drawing.Size(160, 24);
+            this.SelectionColorBox.TabIndex = 6;
+            this.SelectionColorBox.Text = "Color ...";
+            this.SelectionColorBox.SelectedIndexChanged += new System.EventHandler(this.ColorSelectionBox_SelectedIndexChanged);
+            // 
+            // SelectionColorBox2
+            // 
+            this.SelectionColorBox2.FormattingEnabled = true;
+            this.SelectionColorBox2.Items.AddRange(new object[] {
+            "White",
+            "Black"});
+            this.SelectionColorBox2.Location = new System.Drawing.Point(624, 333);
+            this.SelectionColorBox2.Name = "SelectionColorBox2";
+            this.SelectionColorBox2.Size = new System.Drawing.Size(160, 24);
+            this.SelectionColorBox2.TabIndex = 7;
+            this.SelectionColorBox2.Text = "Color ...";
+            this.SelectionColorBox2.SelectedIndexChanged += new System.EventHandler(this.ColorSelectionBox_SelectedIndexChanged2);
+
+            // 
             // Table
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(801, 615);
+            this.Controls.Add(this.SelectionColorBox2);
+            this.Controls.Add(this.SelectionColorBox);
             this.Controls.Add(this.ColumnSelectionBox2);
             this.Controls.Add(this.RowSelectionBox2);
             this.Controls.Add(this.PieceSelectionBox2);
@@ -174,10 +205,12 @@
         private System.Windows.Forms.ComboBox PieceSelectionBox;
         private System.Windows.Forms.ComboBox RowSelectionBox;
         private System.Windows.Forms.ComboBox ColumnSelectionBox;
+        private System.Windows.Forms.ComboBox SelectionColorBox;
 
         private System.Windows.Forms.ComboBox ColumnSelectionBox2;
         private System.Windows.Forms.ComboBox RowSelectionBox2;
         private System.Windows.Forms.ComboBox PieceSelectionBox2;
+        private System.Windows.Forms.ComboBox SelectionColorBox2;
     }
 }
 

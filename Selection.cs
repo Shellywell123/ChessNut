@@ -12,5 +12,7 @@ namespace ChessNut
         public int SelectedRow { get; set; }
         public int SelectedColumn { get; set; }
         public int SelectedAvalailableMoves { get; set; }
+        public string SelectedPieceColor { get; set; }
+
     }
 }
