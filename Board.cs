@@ -34,8 +34,9 @@ namespace ChessNut
                 }
             }
         }
-        public int MarkNextLegalMoves(Square currentSquare, string chessPiece)
+        public int MarkNextLegalMoves(Board currentBoard, Piece currentPiece)
         {
+            Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
             // clear the board
             for (int i = 0; i < Size; i++)
             {
@@ -48,7 +49,7 @@ namespace ChessNut
             int availableMoves = 0;
 
             // find all legal moves on board and mark them 
-            switch (chessPiece)
+            switch (currentPiece.Class)
             {
                 case "Knight":
                     // can be rewitten 
@@ -128,28 +129,136 @@ namespace ChessNut
                     break;
 
                 case "Rook":
-                    for (int i = 0; i < 8; i++)
+
+                    //top
+                    for (int y = currentPiece.Row; y >= 0; y--)
                     {
-                        for (int j = 0; j < 8; j++)
+                        //ignore currently occupied square
+                        if (y == currentSquare.ColumnNumber)
                         {
-                            if ((i == currentSquare.RowNumber) | (j == currentSquare.ColumnNumber))
-                            {
-                                squares[i, j].LegalNextMove = true;
-                                availableMoves += 1;
-                            }
+                            continue;
                         }
+
+                        squares[currentPiece.Column, y].LegalNextMove = true;
+                        availableMoves += 1;
+                    }
+
+                    // right
+                    for (int x = currentPiece.Column; x < 8; x++)
+                    {
+                        //ignore currently occupied square
+                        if (x == currentSquare.RowNumber)
+                        {
+                            continue;
+                        }
+
+                        squares[x, currentPiece.Row].LegalNextMove = true;
+                        availableMoves += 1;
+                    }
+
+                    // bottom
+                    for (int y = currentPiece.Row; y < 8; y++)
+                    {
+                        //ignore currently occupied square
+                        if (y == currentSquare.ColumnNumber)
+                        {
+                            continue;
+                        }
+
+                        squares[currentPiece.Column, y].LegalNextMove = true;
+                        availableMoves += 1;
+                    }
+
+                    // left
+                    for (int x = currentPiece.Column; x >= 0; x--)
+                    {
+                        //ignore currently occupied square
+                        if (x == currentSquare.RowNumber)
+                        {
+                            continue;
+                        }
+
+                        squares[x, currentPiece.Row].LegalNextMove = true;
+                        availableMoves += 1;
                     }
                     break;
 
                 case "Bishop":
-                    for (int i = 0; i < 8; i++)
+                    // top left
+                    for (int x = currentPiece.Column; x >= 0; x--)
                     {
-                        for (int j = 0; j < 8; j++)
+                        for (int y = currentPiece.Row; y >= 0; y--)
                         {
-                            // can be rewritten to compare squared values instead of 2 if stats
-                            if ((((i) - currentSquare.RowNumber) == ((j) - currentSquare.ColumnNumber)) | (((i) - currentSquare.RowNumber) == -((j) - currentSquare.ColumnNumber)))
+                            // ignore currently occupied square
+                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
                             {
-                                squares[i, j].LegalNextMove = true;
+                                continue;
+                            }
+
+                            // y=-x
+                            if ((x - currentSquare.RowNumber) == (y - currentSquare.ColumnNumber))
+                            {
+                                squares[x, y].LegalNextMove = true;
+                                availableMoves += 1;
+                            }
+                        }
+                    }
+
+                    // top right
+                    for (int x = currentPiece.Column; x < 8; x++)
+                    {
+                        for (int y = currentPiece.Row; y >= 0; y--)
+                        {
+                            // ignore currently occupied square
+                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
+                            {
+                                continue;
+                            }
+
+                            // y=x
+                            if ((x - currentSquare.RowNumber) == -(y - currentSquare.ColumnNumber))
+                            {
+                                squares[x, y].LegalNextMove = true;
+                                availableMoves += 1;
+                            }
+                        }
+                    }
+
+                    // bottom right
+                    for (int x = currentPiece.Column; x < 8; x++)
+                    {
+                        for (int y = currentPiece.Row; y < 8; y++)
+                        {
+                            // ignore currently occupied square
+                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
+                            {
+                                continue;
+                            }
+
+                            // y=x
+                            if ((x - currentSquare.RowNumber) == (y - currentSquare.ColumnNumber))
+                            {
+                                squares[x, y].LegalNextMove = true;
+                                availableMoves += 1;
+                            }
+                        }
+                    }
+
+                    // bottom left
+                    for (int x = currentPiece.Column; x >= 0; x--)
+                    {
+                        for (int y = currentPiece.Row; y < 8; y++)
+                        {
+                            // ignore currently occupied square
+                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
+                            {
+                                continue;
+                            }
+
+                            // y=x
+                            if ((x - currentSquare.RowNumber) == -(y - currentSquare.ColumnNumber))
+                            {
+                                squares[x, y].LegalNextMove = true;
                                 availableMoves += 1;
                             }
                         }
@@ -157,28 +266,139 @@ namespace ChessNut
                     break;
 
                 case "Queen":
-                    for (int i = 0; i < 8; i++)
+
+                    // top left
+                    for (int x = currentPiece.Column; x >= 0; x--)
                     {
-                        for (int j = 0; j < 8; j++)
+                        for (int y = currentPiece.Row; y >= 0; y--)
                         {
-                            if ((i == currentSquare.RowNumber) | (j == currentSquare.ColumnNumber))
+                            // ignore currently occupied square
+                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
                             {
-                                squares[i, j].LegalNextMove = true;
-                                availableMoves += 1;
+                                continue;
                             }
-                            // can be rewritten to compare squared values instead of 2 if stats
-                            if (((i) - currentSquare.RowNumber) == ((j) - currentSquare.ColumnNumber))
+
+                            // y=-x
+                            if ((x - currentSquare.RowNumber) == (y - currentSquare.ColumnNumber))
                             {
-                                squares[i, j].LegalNextMove = true;
-                                availableMoves += 1;
-                            }
-                            if (((i) - currentSquare.RowNumber) == -((j) - currentSquare.ColumnNumber))
-                            {
-                                squares[i, j].LegalNextMove = true;
+                                squares[x, y].LegalNextMove = true;
                                 availableMoves += 1;
                             }
                         }
                     }
+
+                    //top
+                    for (int y = currentPiece.Row; y >= 0; y--)
+                    {
+                        //ignore currently occupied square
+                        if (y == currentSquare.ColumnNumber)
+                        {
+                            continue;
+                        }
+
+                        squares[currentPiece.Column, y].LegalNextMove = true;
+                        availableMoves += 1;
+                    }
+
+                    // top right
+                    for (int x = currentPiece.Column; x < 8; x++)
+                    {
+                        for (int y = currentPiece.Row; y >= 0; y--)
+                        {
+                            // ignore currently occupied square
+                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
+                            {
+                                continue;
+                            }
+
+                            // y=x
+                            if ((x - currentSquare.RowNumber) == -(y - currentSquare.ColumnNumber))
+                            {
+                                squares[x, y].LegalNextMove = true;
+                                availableMoves += 1;
+                            }
+                        }
+                    }
+
+                    // right
+                    for (int x = currentPiece.Column; x < 8; x++)
+                    {
+                        //ignore currently occupied square
+                        if (x == currentSquare.RowNumber)
+                        {
+                            continue;
+                        }
+
+                        squares[x, currentPiece.Row].LegalNextMove = true;
+                        availableMoves += 1;
+                    }
+
+                    // bottom right
+                    for (int x = currentPiece.Column; x < 8; x++)
+                    {
+                        for (int y = currentPiece.Row; y < 8; y++)
+                        {
+                            // ignore currently occupied square
+                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
+                            {
+                                continue;
+                            }
+
+                            // y=x
+                            if ((x - currentSquare.RowNumber) == (y - currentSquare.ColumnNumber))
+                            {
+                                squares[x, y].LegalNextMove = true;
+                                availableMoves += 1;
+                            }
+                        }
+                    }
+
+                    // bottom
+                    for (int y = currentPiece.Row; y < 8; y++)
+                    {
+                        //ignore currently occupied square
+                        if (y == currentSquare.ColumnNumber)
+                        {
+                            continue;
+                        }
+
+                        squares[currentPiece.Column, y].LegalNextMove = true;
+                        availableMoves += 1;
+                    }
+
+                    // bottom left
+                    for (int x = currentPiece.Column; x >= 0; x--)
+                    {
+                        for (int y = currentPiece.Row; y < 8; y++)
+                        {
+                            // ignore currently occupied square
+                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
+                            {
+                                continue;
+                            }
+
+                            // y=x
+                            if ((x - currentSquare.RowNumber) == -(y - currentSquare.ColumnNumber))
+                            {
+                                squares[x, y].LegalNextMove = true;
+                                availableMoves += 1;
+                            }
+                        }
+                    }
+
+                    // left
+                    for (int x = currentPiece.Column; x >= 0 ; x--)
+                    {
+                        //ignore currently occupied square
+                        if (x == currentSquare.RowNumber)
+                        {
+                            continue;
+                        }
+
+                        squares[x, currentPiece.Row].LegalNextMove = true;
+                        availableMoves += 1;
+                    }
+
                     break;
 
                 case "Pawn":

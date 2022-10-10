@@ -18,8 +18,8 @@ namespace ChessNut
 
         static Board chessNutBoard = new Board(8);
 
-        Selection Selected = new Selection();
-        Selection Selected2 = new Selection();
+        Piece Piece1 = new Piece();
+        Piece Piece2 = new Piece();
 
         int border_size = 50;
         int square_size = 50;
@@ -28,15 +28,15 @@ namespace ChessNut
         {
             InitializeComponent();
 
-            Selected.SelectedRow = 0;
-            Selected.SelectedColumn = 0;
-            Selected.SelectedPiece = "";
-            Selected.SelectedPieceColor = "White";
+            Piece1.Row = 0;
+            Piece1.Column = 0;
+            Piece1.Class = "";
+            Piece1.Color = "White";
 
-            Selected2.SelectedRow = 0;
-            Selected2.SelectedColumn = 0;
-            Selected2.SelectedPiece = "";
-            Selected2.SelectedPieceColor = "Black";
+            Piece2.Row = 0;
+            Piece2.Column = 0;
+            Piece2.Class = "";
+            Piece2.Color = "Black";
         }
 
         private void Draw_Board(object sender, PaintEventArgs e)
@@ -93,10 +93,10 @@ namespace ChessNut
             }
         }
 
-        private void Draw_Piece(object sender, PaintEventArgs e, Selection selected)
+        private void Draw_Piece(object sender, PaintEventArgs e, Piece piece)
         {
             string icon = "";
-            switch (selected.SelectedPiece)
+            switch (piece.Class)
             {
                 case "King":
                     icon = "S";
@@ -120,7 +120,7 @@ namespace ChessNut
             }
 
             SolidBrush brush = new SolidBrush(Color.Black);
-            switch (selected.SelectedPieceColor)
+            switch (piece.Color)
             {
                 case "Black":
                     brush.Color = Color.Black;
@@ -138,17 +138,13 @@ namespace ChessNut
                     Square s = chessNutBoard.squares[x, y];
                     Console.Write(x.ToString() + y.ToString());
 
-                    if ((x == selected.SelectedColumn) & (y == selected.SelectedRow))
+                    if ((x == piece.Column) & (y == piece.Row))
                     {
                         e.Graphics.DrawString(icon, new Font("Chess TFB", 35), brush, x * square_size + border_size, y * square_size + border_size+1);
                     }
                     else if (s.LegalNextMove == true)
                     {
                         e.Graphics.DrawString("+", new Font("Verdana", 20), brush, x * square_size + border_size, y * square_size + border_size);
-                    }
-                    else
-                    {
-                        e.Graphics.DrawString(" ", new Font("Verdana", 20), brush, x * square_size + border_size, y * square_size + border_size);
                     }
                 }
             }
@@ -160,26 +156,26 @@ namespace ChessNut
             Draw_Board(sender, e);
             Draw_Labels(sender, e);
 
-            Draw_Piece(sender, e, Selected);
-            Draw_Piece(sender, e, Selected2);
+            Draw_Piece(sender, e, Piece1);
+            Draw_Piece(sender, e, Piece2);
 
-            //Draw_AvailableMoves(sender, e);
-           // Draw_AvailableMoves2(sender, e);
+            Draw_AvailableMoves(sender, e);
+            Draw_AvailableMoves2(sender, e);
         }
 
         private void Table_Load(object sender, EventArgs e)
         {
-            chessNutBoard.squares[Selected.SelectedColumn, Selected.SelectedRow].CurrentlyOccupied = true;
-            //Selected.SelectedAvalailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard.squares[Selected.SelectedColumn, Selected.SelectedRow], Selected.SelectedPiece);
+            chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
+            Piece1.SelectedAvalailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, Piece1);
 
-            chessNutBoard.squares[Selected2.SelectedColumn, Selected2.SelectedRow].CurrentlyOccupied = true;
+            chessNutBoard.squares[Piece2.Column, Piece2.Row].CurrentlyOccupied = true;
             //Selected2.SelectedAvalailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard.squares[Selected2.SelectedColumn, Selected2.SelectedRow], Selected2.SelectedPiece);
         }
 
         private void PieceSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // set currently selected piece 
-            Selected.SelectedPiece = PieceSelectionBox.GetItemText(this.PieceSelectionBox.SelectedItem);
+            Piece1.Class = PieceSelectionBox.GetItemText(this.PieceSelectionBox.SelectedItem);
             Table_Load(sender, e);
             this.Invalidate();
         }
@@ -187,7 +183,7 @@ namespace ChessNut
         private void RowSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // set currently selected row
-            Selected.SelectedRow = 7 - RowSelectionBox.SelectedIndex;
+            Piece1.Row = 7 - RowSelectionBox.SelectedIndex;
             Table_Load(sender, e);
             this.Invalidate();
         }
@@ -195,7 +191,7 @@ namespace ChessNut
         private void ColumnSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // set currently selected column
-            Selected.SelectedColumn = ColumnSelectionBox.SelectedIndex;
+            Piece1.Column = ColumnSelectionBox.SelectedIndex;
             Table_Load(sender, e);
             this.Invalidate();
         }
@@ -203,14 +199,14 @@ namespace ChessNut
         private void Draw_AvailableMoves(object sender, PaintEventArgs e)
         {
             // print number of avalible moves
-            string message = "Possible Moves: " + Selected.SelectedAvalailableMoves.ToString();
-            e.Graphics.DrawString(message, new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * 8 + border_size + 15, 140);   
+            string message = "Possible Moves: " + Piece1.SelectedAvalailableMoves.ToString();
+            e.Graphics.DrawString(message, new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * 8 + border_size + 15, 160);   
         }
 
         private void PieceSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
         {
             // set currently selected piece 
-            Selected2.SelectedPiece = PieceSelectionBox2.GetItemText(this.PieceSelectionBox2.SelectedItem);
+            Piece2.Class = PieceSelectionBox2.GetItemText(this.PieceSelectionBox2.SelectedItem);
             Table_Load(sender, e);
             this.Invalidate();
         }
@@ -218,7 +214,7 @@ namespace ChessNut
         private void RowSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
         {
             // set currently selected row
-            Selected2.SelectedRow = 7 - RowSelectionBox2.SelectedIndex;
+            Piece2.Row = 7 - RowSelectionBox2.SelectedIndex;
             Table_Load(sender, e);
             this.Invalidate();
         }
@@ -226,7 +222,7 @@ namespace ChessNut
         private void ColumnSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
         {
             // set currently selected column
-            Selected2.SelectedColumn = ColumnSelectionBox2.SelectedIndex;
+            Piece2.Column = ColumnSelectionBox2.SelectedIndex;
             Table_Load(sender, e);
             this.Invalidate();
         }
@@ -234,20 +230,20 @@ namespace ChessNut
         private void Draw_AvailableMoves2(object sender, PaintEventArgs e)
         {
             // print number of avalible moves
-            string message = "Possible Moves: " + Selected2.SelectedAvalailableMoves.ToString();
-            e.Graphics.DrawString(message, new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * 8 + border_size + 15, 250);
+            string message = "Possible Moves: " + Piece2.SelectedAvalailableMoves.ToString();
+            e.Graphics.DrawString(message, new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * 8 + border_size + 15, 270);
         }
 
         private void ColorSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Selected.SelectedPieceColor = SelectionColorBox.GetItemText(this.SelectionColorBox.SelectedItem);
+            Piece1.Color = SelectionColorBox.GetItemText(this.SelectionColorBox.SelectedItem);
             Table_Load(sender, e);
             this.Invalidate();
         }
 
         private void ColorSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
         {
-            Selected2.SelectedPieceColor = SelectionColorBox2.GetItemText(this.SelectionColorBox2.SelectedItem);
+            Piece2.Color = SelectionColorBox2.GetItemText(this.SelectionColorBox2.SelectedItem);
             Table_Load(sender, e);
             this.Invalidate();
         }
