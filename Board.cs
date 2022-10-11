@@ -37,13 +37,15 @@ namespace ChessNut
         public int MarkNextLegalMoves(Board currentBoard, Piece currentPiece)
         {
             Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
+
+            squares = currentBoard.squares;
             // clear the board
             for (int i = 0; i < Size; i++)
             {
                 for (int j = 0; j < Size; j++)
                 {
                     squares[i, j].LegalNextMove = false;
-                    squares[i, j].CurrentlyOccupied = false;
+           //         squares[i, j].CurrentlyOccupied = false;
                 }
             }
             int availableMoves = 0;
@@ -134,13 +136,18 @@ namespace ChessNut
                     for (int y = currentPiece.Row; y >= 0; y--)
                     {
                         //ignore currently occupied square
-                        if (y == currentSquare.ColumnNumber)
+                        if (y == currentPiece.Row)
                         {
                             continue;
                         }
 
                         squares[currentPiece.Column, y].LegalNextMove = true;
                         availableMoves += 1;
+
+                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == true)
+                        {
+                            break;
+                        }
                     }
 
                     // right
@@ -154,6 +161,11 @@ namespace ChessNut
 
                         squares[x, currentPiece.Row].LegalNextMove = true;
                         availableMoves += 1;
+
+                        if (currentBoard.squares[x, currentPiece.Row].CurrentlyOccupied == true)
+                        {
+                            break;
+                        }
                     }
 
                     // bottom
@@ -167,6 +179,11 @@ namespace ChessNut
 
                         squares[currentPiece.Column, y].LegalNextMove = true;
                         availableMoves += 1;
+
+                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == true)
+                        {
+                            break;
+                        }
                     }
 
                     // left
@@ -180,6 +197,11 @@ namespace ChessNut
 
                         squares[x, currentPiece.Row].LegalNextMove = true;
                         availableMoves += 1;
+
+                        if (currentBoard.squares[x, currentPiece.Row].CurrentlyOccupied == true)
+                        {
+                            break;
+                        }
                     }
                     break;
 
@@ -201,6 +223,11 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves += 1;
                             }
+
+                            if (currentBoard.squares[x, y].CurrentlyOccupied == true)
+                            {
+                                break;
+                            }
                         }
                     }
 
@@ -220,6 +247,11 @@ namespace ChessNut
                             {
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves += 1;
+                            }
+
+                            if (currentBoard.squares[x, y].CurrentlyOccupied == true)
+                            {
+                                break;
                             }
                         }
                     }
@@ -241,6 +273,11 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves += 1;
                             }
+
+                            if (currentBoard.squares[x, y].CurrentlyOccupied == true)
+                            {
+                                break;
+                            }
                         }
                     }
 
@@ -260,6 +297,11 @@ namespace ChessNut
                             {
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves += 1;
+                            }
+
+                            if (currentBoard.squares[x, y].CurrentlyOccupied == true)
+                            {
+                                break;
                             }
                         }
                     }
@@ -284,6 +326,11 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves += 1;
                             }
+
+                            if (currentBoard.squares[x, y].CurrentlyOccupied == true)
+                            {
+                                break;
+                            }
                         }
                     }
 
@@ -291,13 +338,18 @@ namespace ChessNut
                     for (int y = currentPiece.Row; y >= 0; y--)
                     {
                         //ignore currently occupied square
-                        if (y == currentSquare.ColumnNumber)
+                        if (y == currentPiece.Row)
                         {
                             continue;
                         }
 
                         squares[currentPiece.Column, y].LegalNextMove = true;
                         availableMoves += 1;
+
+                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == true)
+                        {
+                            break;
+                        }
                     }
 
                     // top right
@@ -317,6 +369,11 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves += 1;
                             }
+
+                            if (currentBoard.squares[x, y].CurrentlyOccupied == true)
+                            {
+                                break;
+                            }
                         }
                     }
 
@@ -331,6 +388,11 @@ namespace ChessNut
 
                         squares[x, currentPiece.Row].LegalNextMove = true;
                         availableMoves += 1;
+
+                        if (currentBoard.squares[x, currentPiece.Row].CurrentlyOccupied == true)
+                        {
+                            break;
+                        }
                     }
 
                     // bottom right
@@ -350,6 +412,11 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves += 1;
                             }
+
+                            if (currentBoard.squares[x, y].CurrentlyOccupied == true)
+                            {
+                                break;
+                            }
                         }
                     }
 
@@ -364,6 +431,11 @@ namespace ChessNut
 
                         squares[currentPiece.Column, y].LegalNextMove = true;
                         availableMoves += 1;
+
+                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == true)
+                        {
+                            break;
+                        }
                     }
 
                     // bottom left
@@ -383,11 +455,16 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves += 1;
                             }
+
+                            if (currentBoard.squares[x, y].CurrentlyOccupied == true)
+                            {
+                                break;
+                            }
                         }
                     }
 
                     // left
-                    for (int x = currentPiece.Column; x >= 0 ; x--)
+                    for (int x = currentPiece.Column; x >= 0; x--)
                     {
                         //ignore currently occupied square
                         if (x == currentSquare.RowNumber)
@@ -397,6 +474,11 @@ namespace ChessNut
 
                         squares[x, currentPiece.Row].LegalNextMove = true;
                         availableMoves += 1;
+
+                        if (currentBoard.squares[x, currentPiece.Row].CurrentlyOccupied == true)
+                        {
+                            break;
+                        }
                     }
 
                     break;

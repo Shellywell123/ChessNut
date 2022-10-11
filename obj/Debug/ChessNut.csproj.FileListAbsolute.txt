@@ -1,11 +1,11 @@
-C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.csproj.AssemblyReference.cache
-C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.csproj.SuggestedBindingRedirects.cache
-C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.Properties.Resources.resources
-C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.csproj.GenerateResource.cache
-C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.csproj.CoreCompileInputs.cache
 C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\bin\Debug\ChessNut.exe.config
 C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\bin\Debug\ChessNut.exe
 C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\bin\Debug\ChessNut.pdb
+C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.csproj.AssemblyReference.cache
+C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.csproj.SuggestedBindingRedirects.cache
+C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.Table.resources
+C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.Properties.Resources.resources
+C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.csproj.GenerateResource.cache
+C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.csproj.CoreCompileInputs.cache
 C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.exe
 C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.pdb
-C:\Users\benja\Programming\Visual_Studio_Projects\WinFormApps\ChessNut\obj\Debug\ChessNut.Table.resources

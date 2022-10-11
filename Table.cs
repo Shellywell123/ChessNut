@@ -165,10 +165,15 @@ namespace ChessNut
 
         private void Table_Load(object sender, EventArgs e)
         {
+            chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
+            chessNutBoard.squares[Piece2.PrevColumn, Piece2.PrevRow].CurrentlyOccupied = false;
+
             chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
+            chessNutBoard.squares[Piece2.Column, Piece2.Row].CurrentlyOccupied = true;
+
             Piece1.SelectedAvalailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, Piece1);
 
-            chessNutBoard.squares[Piece2.Column, Piece2.Row].CurrentlyOccupied = true;
+            
             //Selected2.SelectedAvalailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard.squares[Selected2.SelectedColumn, Selected2.SelectedRow], Selected2.SelectedPiece);
         }
 
@@ -183,6 +188,7 @@ namespace ChessNut
         private void RowSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // set currently selected row
+            Piece1.PrevRow = Piece1.Row;
             Piece1.Row = 7 - RowSelectionBox.SelectedIndex;
             Table_Load(sender, e);
             this.Invalidate();
@@ -191,6 +197,7 @@ namespace ChessNut
         private void ColumnSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // set currently selected column
+            Piece2.PrevColumn = Piece2.Column;
             Piece1.Column = ColumnSelectionBox.SelectedIndex;
             Table_Load(sender, e);
             this.Invalidate();
@@ -205,7 +212,7 @@ namespace ChessNut
 
         private void PieceSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
         {
-            // set currently selected piece 
+            // set currently selected piece
             Piece2.Class = PieceSelectionBox2.GetItemText(this.PieceSelectionBox2.SelectedItem);
             Table_Load(sender, e);
             this.Invalidate();
@@ -214,6 +221,7 @@ namespace ChessNut
         private void RowSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
         {
             // set currently selected row
+            Piece1.PrevRow = Piece1.Row;
             Piece2.Row = 7 - RowSelectionBox2.SelectedIndex;
             Table_Load(sender, e);
             this.Invalidate();
@@ -222,6 +230,7 @@ namespace ChessNut
         private void ColumnSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
         {
             // set currently selected column
+            Piece2.PrevColumn = Piece2.Column;
             Piece2.Column = ColumnSelectionBox2.SelectedIndex;
             Table_Load(sender, e);
             this.Invalidate();
