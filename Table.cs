@@ -30,6 +30,7 @@ namespace ChessNut
 
             Piece1.Row = 0;
             Piece1.Column = 0;
+            //chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
             Piece1.Class = "";
             Piece1.Color = "White";
 
@@ -48,19 +49,38 @@ namespace ChessNut
             SolidBrush whiteBrush = new SolidBrush(white);
             SolidBrush blackBrush = new SolidBrush(black);
 
+
+            chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
+
             // draw squares
-            for (int x = 0; x < 8; x++)
+            for (int x = 0; x < 8; x++)  
             {
                 for (int y = 0; y < 8; y++)
                 {
                     if (((x % 2 == 0) & (y % 2 == 0)) | ((x % 2 != 0) & (y % 2 != 0)))
                     {
-                        e.Graphics.FillRectangle(whiteBrush, x * square_size + border_size, y * square_size + border_size, square_size, square_size);
+                        if (chessNutBoard.squares[x, y].CurrentlyOccupied == true)
+                        {
+                            e.Graphics.FillRectangle(new SolidBrush(Color.Red), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
+                        }
+                        else
+                        {
+                            e.Graphics.FillRectangle(whiteBrush, x * square_size + border_size, y * square_size + border_size, square_size, square_size);
+                        }
                     }
                     else
                     {
-                        e.Graphics.FillRectangle(blackBrush, x * square_size + border_size, y * square_size + border_size, square_size, square_size);
+                        if (chessNutBoard.squares[x, y].CurrentlyOccupied == true)
+                        {
+                            e.Graphics.FillRectangle(new SolidBrush(Color.Red), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
+                        }
+                        else
+                        {
+                            e.Graphics.FillRectangle(blackBrush, x * square_size + border_size, y * square_size + border_size, square_size, square_size);
+                        }
                     }
+                    e.Graphics.DrawString(x.ToString()+y.ToString(), new Font("Courier New", 10), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size);
+
                 }
             }
         }
@@ -152,6 +172,9 @@ namespace ChessNut
 
         private void Table_Load(object sender, PaintEventArgs e)
         {
+            chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
+            chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
+
             Draw_Title(sender, e);
             Draw_Board(sender, e);
             Draw_Labels(sender, e);
@@ -166,39 +189,26 @@ namespace ChessNut
         private void Table_Load(object sender, EventArgs e)
         {
             chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
-            chessNutBoard.squares[Piece2.PrevColumn, Piece2.PrevRow].CurrentlyOccupied = false;
 
-            chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
-            chessNutBoard.squares[Piece2.Column, Piece2.Row].CurrentlyOccupied = true;
-
-            Piece1.SelectedAvalailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, Piece1);
+            //Piece1.SelectedAvalailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, Piece1);
 
             
             //Selected2.SelectedAvalailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard.squares[Selected2.SelectedColumn, Selected2.SelectedRow], Selected2.SelectedPiece);
+        }
+
+        private void MovePiece(object sender, EventArgs e, Piece pieceToMove)
+        {
+            chessNutBoard.squares[pieceToMove.PrevColumn, pieceToMove.PrevRow].CurrentlyOccupied = false;
+            chessNutBoard.squares[pieceToMove.Column, pieceToMove.Row].CurrentlyOccupied = true;
+
+            Table_Load(sender, e);
+            this.Invalidate();
         }
 
         private void PieceSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // set currently selected piece 
             Piece1.Class = PieceSelectionBox.GetItemText(this.PieceSelectionBox.SelectedItem);
-            Table_Load(sender, e);
-            this.Invalidate();
-        }
-
-        private void RowSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // set currently selected row
-            Piece1.PrevRow = Piece1.Row;
-            Piece1.Row = 7 - RowSelectionBox.SelectedIndex;
-            Table_Load(sender, e);
-            this.Invalidate();
-        }
-
-        private void ColumnSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // set currently selected column
-            Piece2.PrevColumn = Piece2.Column;
-            Piece1.Column = ColumnSelectionBox.SelectedIndex;
             Table_Load(sender, e);
             this.Invalidate();
         }
@@ -218,13 +228,27 @@ namespace ChessNut
             this.Invalidate();
         }
 
-        private void RowSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
+        private void RowSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // set currently selected row
             Piece1.PrevRow = Piece1.Row;
+            Piece1.Row = 7 - RowSelectionBox.SelectedIndex;
+            MovePiece(sender, e, Piece1);
+        }
+
+        private void ColumnSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // set currently selected column
+            Piece1.PrevColumn = Piece1.Column;
+            Piece1.Column = ColumnSelectionBox.SelectedIndex;
+            MovePiece(sender, e, Piece1);
+        }
+        private void RowSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
+        {
+            // set currently selected row
+            Piece2.PrevRow = Piece2.Row;
             Piece2.Row = 7 - RowSelectionBox2.SelectedIndex;
-            Table_Load(sender, e);
-            this.Invalidate();
+            MovePiece(sender, e, Piece2);
         }
 
         private void ColumnSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
@@ -232,8 +256,7 @@ namespace ChessNut
             // set currently selected column
             Piece2.PrevColumn = Piece2.Column;
             Piece2.Column = ColumnSelectionBox2.SelectedIndex;
-            Table_Load(sender, e);
-            this.Invalidate();
+            MovePiece(sender, e, Piece2);
         }
 
         private void Draw_AvailableMoves2(object sender, PaintEventArgs e)

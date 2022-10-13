@@ -45,7 +45,7 @@ namespace ChessNut
                 for (int j = 0; j < Size; j++)
                 {
                     squares[i, j].LegalNextMove = false;
-           //         squares[i, j].CurrentlyOccupied = false;
+                    squares[i, j].CurrentlyOccupied = false;
                 }
             }
             int availableMoves = 0;
@@ -488,7 +488,7 @@ namespace ChessNut
                     break;
             }
             // reset currently occupied square as it was cleared earlier
-            squares[currentSquare.RowNumber, currentSquare.ColumnNumber].CurrentlyOccupied = true;
+            //squares[currentSquare.RowNumber, currentSquare.ColumnNumber].CurrentlyOccupied = true;
             return availableMoves;
         }
 
