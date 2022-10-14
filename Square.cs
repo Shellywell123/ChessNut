@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChessNut
 {
-    public class Square
+    public class Square  
     {
         public int RowNumber { get; set; }
         public int ColumnNumber { get; set; }

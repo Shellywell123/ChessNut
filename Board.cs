@@ -34,7 +34,7 @@ namespace ChessNut
                 }
             }
         }
-        public int MarkNextLegalMoves(Board currentBoard, Piece currentPiece)
+        public int MarkNextLegalMoves(Board currentBoard, Piece currentPiece, Piece otherPiece)
         {
             Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
 
@@ -45,9 +45,14 @@ namespace ChessNut
                 for (int j = 0; j < Size; j++)
                 {
                     squares[i, j].LegalNextMove = false;
-                    squares[i, j].CurrentlyOccupied = false;
+                    //squares[i, j].CurrentlyOccupied = false;
                 }
             }
+
+            // reset currently occupied square as it was cleared earlier
+            //currentBoard.squares[currentPiece.Column, currentPiece.Row].CurrentlyOccupied = true;
+            //currentBoard.squares[otherPiece.Column, otherPiece.Row].CurrentlyOccupied = true;
+
             int availableMoves = 0;
 
             // find all legal moves on board and mark them 
@@ -487,8 +492,7 @@ namespace ChessNut
                     // requires a direction based on color/player position
                     break;
             }
-            // reset currently occupied square as it was cleared earlier
-            //squares[currentSquare.RowNumber, currentSquare.ColumnNumber].CurrentlyOccupied = true;
+            
             return availableMoves;
         }
 
