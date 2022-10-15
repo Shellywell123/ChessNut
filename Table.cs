@@ -20,16 +20,40 @@ namespace ChessNut
 
         Piece Piece1 = new Piece();
         Piece Piece2 = new Piece();
-        Piece Piece3 = new Piece();
-        Piece Piece4 = new Piece();
-        Piece Piece5 = new Piece();
-        Piece Piece6 = new Piece();
-        Piece Piece7 = new Piece();
-        Piece Piece8 = new Piece();
-        Piece Piece9 = new Piece();
-        Piece Piece10 = new Piece();
-        Piece Piece11= new Piece();
-        Piece Piece12 = new Piece();
+
+        Piece WhiteQueen   = new Piece { Class = "Queen",  Color = "White" };
+        Piece WhiteKing    = new Piece { Class = "King",   Color = "White" };
+        Piece WhiteBishop1 = new Piece { Class = "Bishop", Color = "White" };
+        Piece WhiteBishop2 = new Piece { Class = "Bishop", Color = "White" };
+        Piece WhiteKnight1 = new Piece { Class = "Knight", Color = "White" };
+        Piece WhiteKnight2 = new Piece { Class = "Knight", Color = "White" };
+        Piece WhiteRook1   = new Piece { Class = "Rook",   Color = "White" };
+        Piece WhiteRook2   = new Piece { Class = "Rook",   Color = "White" };
+        Piece WhitePawn1   = new Piece { Class = "Pawn",   Color = "White" };
+        Piece WhitePawn2   = new Piece { Class = "Pawn",   Color = "White" };
+        Piece WhitePawn3   = new Piece { Class = "Pawn",   Color = "White" };
+        Piece WhitePawn4   = new Piece { Class = "Pawn",   Color = "White" };
+        Piece WhitePawn5   = new Piece { Class = "Pawn",   Color = "White" };
+        Piece WhitePawn6   = new Piece { Class = "Pawn",   Color = "White" };
+        Piece WhitePawn7   = new Piece { Class = "Pawn",   Color = "White" };
+        Piece WhitePawn8   = new Piece { Class = "Pawn",   Color = "White" };
+
+        Piece BlackQueen   = new Piece { Class = "Queen",  Color = "Black" };
+        Piece BlackKing    = new Piece { Class = "King",   Color = "Black" };
+        Piece BlackBishop1 = new Piece { Class = "Bishop", Color = "Black" };
+        Piece BlackBishop2 = new Piece { Class = "Bishop", Color = "Black" };
+        Piece BlackKnight1 = new Piece { Class = "Knight", Color = "Black" };
+        Piece BlackKnight2 = new Piece { Class = "Knight", Color = "Black" };
+        Piece BlackRook1   = new Piece { Class = "Rook",   Color = "Black" };
+        Piece BlackRook2   = new Piece { Class = "Rook",   Color = "Black" };
+        Piece BlackPawn1   = new Piece { Class = "Pawn",   Color = "Black" };
+        Piece BlackPawn2   = new Piece { Class = "Pawn",   Color = "Black" };
+        Piece BlackPawn3   = new Piece { Class = "Pawn",   Color = "Black" };
+        Piece BlackPawn4   = new Piece { Class = "Pawn",   Color = "Black" };
+        Piece BlackPawn5   = new Piece { Class = "Pawn",   Color = "Black" };
+        Piece BlackPawn6   = new Piece { Class = "Pawn",   Color = "Black" };
+        Piece BlackPawn7   = new Piece { Class = "Pawn",   Color = "Black" };
+        Piece BlackPawn8   = new Piece { Class = "Pawn",   Color = "Black" };
 
         int border_size = 50;
         int square_size = 50;
@@ -38,14 +62,14 @@ namespace ChessNut
         {
             InitializeComponent();
 
-            Piece1.Row = 0;
-            Piece1.Column = 0;
+            Piece1.Row = 4;
+            Piece1.Column = 4;
             //chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
             Piece1.Class = "";
             Piece1.Color = "White";
 
-            Piece2.Row = 0;
-            Piece2.Column = 0;
+            Piece2.Row = 5;
+            Piece2.Column = 4;
             Piece2.Class = "";
             Piece2.Color = "Black";
 
@@ -54,45 +78,104 @@ namespace ChessNut
 
         public void initialise_table()
         {
-            Piece1.Row = 7;
-            Piece1.Column = 0;
-            Piece1.Class = "Rook";
-            Piece1.Color = "White";
+            // white sttart positions
+            WhiteQueen.Row = 7;
+            WhiteQueen.Column = 3;
 
-            Piece2.Row = 7;
-            Piece2.Column = 1;
-            Piece2.Class = "Knight"; ;
-            Piece2.Color = "White";
+            WhiteKing.Row = 7;
+            WhiteKing.Column = 4;
 
-            Piece3.Row = 7;
-            Piece3.Column = 2;
-            Piece3.Class = "Bishop";
-            Piece3.Color = "White";
+            WhiteBishop1.Row = 7;
+            WhiteBishop1.Column = 2;
 
-            Piece4.Row = 7;
-            Piece4.Column = 3;
-            Piece4.Class = "King";
-            Piece4.Color = "White";
+            WhiteBishop2.Row = 7;
+            WhiteBishop2.Column = 5;
 
-            Piece5.Row = 7;
-            Piece5.Column = 4;
-            Piece5.Class = "Quuen";
-            Piece5.Color = "White";
+            WhiteKnight1.Row = 7;
+            WhiteKnight1.Column = 1;
 
-            Piece6.Row = 7;
-            Piece6.Column = 5;
-            Piece6.Class = "Bishop";
-            Piece6.Color = "White";
+            WhiteKnight2.Row = 7;
+            WhiteKnight2.Column = 6;
 
-            Piece7.Row = 7;
-            Piece7.Column = 6;
-            Piece7.Class = "Knight"; ;
-            Piece7.Color = "White";
+            WhiteRook1.Row = 7;
+            WhiteRook1.Column = 0;
 
-            Piece8.Row = 7;
-            Piece8.Column = 7;
-            Piece8.Class = "Rook";
-            Piece8.Color = "White";
+            WhiteRook2.Row = 7;
+            WhiteRook2.Column = 7;
+
+            WhitePawn1.Row = 6;
+            WhitePawn1.Column = 0;
+
+            WhitePawn2.Row = 6;
+            WhitePawn2.Column = 1;
+
+            WhitePawn3.Row = 6;
+            WhitePawn3.Column = 2;
+
+            WhitePawn4.Row = 6;
+            WhitePawn4.Column = 3;
+
+            WhitePawn5.Row = 6;
+            WhitePawn5.Column = 4;
+
+            WhitePawn6.Row = 6;
+            WhitePawn6.Column = 5;
+
+            WhitePawn7.Row = 6;
+            WhitePawn7.Column = 6;
+
+            WhitePawn8.Row = 6;
+            WhitePawn8.Column = 7;
+
+
+            // black start positions
+            BlackQueen.Row = 0;
+            BlackQueen.Column = 3;
+
+            BlackKing.Row = 0;
+            BlackKing.Column = 4;
+
+            BlackBishop1.Row = 0;
+            BlackBishop1.Column = 2;
+
+            BlackBishop2.Row = 0;
+            BlackBishop2.Column = 5;
+
+            BlackKnight1.Row = 0;
+            BlackKnight1.Column = 1;
+
+            BlackKnight2.Row = 0;
+            BlackKnight2.Column = 6;
+
+            BlackRook1.Row = 0;
+            BlackRook1.Column = 0;
+
+            BlackRook2.Row = 0;
+            BlackRook2.Column = 7;
+
+            BlackPawn1.Row = 1;
+            BlackPawn1.Column = 0;
+
+            BlackPawn2.Row = 1;
+            BlackPawn2.Column = 1;
+
+            BlackPawn3.Row = 1;
+            BlackPawn3.Column = 2;
+
+            BlackPawn4.Row = 1;
+            BlackPawn4.Column = 3;
+
+            BlackPawn5.Row = 1;
+            BlackPawn5.Column = 4;
+
+            BlackPawn6.Row = 1;
+            BlackPawn6.Column = 5;
+
+            BlackPawn7.Row = 1;
+            BlackPawn7.Column = 6;
+
+            BlackPawn8.Row = 1;
+            BlackPawn8.Column = 7;
 
         }
 
@@ -174,38 +257,50 @@ namespace ChessNut
         private void Draw_Piece(object sender, PaintEventArgs e, Piece piece)
         {
             string icon = "";
+            string outline = "";
             switch (piece.Class)
             {
                 case "King":
                     icon = "S";
+                    outline = "X";
                     break;
 
                 case "Queen":
                     icon = "T";
+                    outline = "Y";
                     break;
 
                 case "Rook":
                     icon = "P";
+                    outline = "V";
                     break;
 
                 case "Knight":
                     icon = "Q";
+                    outline = "W";
                     break;
 
                 case "Bishop":
                     icon = "R";
+                    outline = "Z";
+                    break;
+
+                case "Pawn":
+                    icon = "O";
+                    outline = "U";
                     break;
             }
 
-            SolidBrush brush = new SolidBrush(Color.Black);
             switch (piece.Color)
             {
                 case "Black":
-                    brush.Color = Color.Black;
+                    e.Graphics.DrawString(icon, new Font("Chess TFB", 40), new SolidBrush(Color.Black), (piece.Column - 1 / 2) * square_size + border_size, piece.Row * square_size + border_size);
                     break;
 
                 case "White":
-                    brush.Color = Color.White;
+                    e.Graphics.DrawString(icon, new Font("Chess TFB", 40), new SolidBrush(Color.White), (piece.Column  - 1 / 2) * square_size + border_size, piece.Row * square_size + border_size);
+                    e.Graphics.DrawString(outline, new Font("Chess TFB", 40), new SolidBrush(Color.Black), (piece.Column - 1 / 2) * square_size + border_size, piece.Row * square_size + border_size);
+
                     break;
             }
 
@@ -215,13 +310,11 @@ namespace ChessNut
                 {
                     Square s = chessNutBoard.squares[x, y];
 
-                    if ((x == piece.Column) & (y == piece.Row))
+                    if (s.LegalNextMove == true)
                     {
-                        e.Graphics.DrawString(icon, new Font("Chess TFB", 35), brush, x * square_size + border_size, y * square_size + border_size+1);
-                    }
-                    else if (s.LegalNextMove == true)
-                    {
-                        e.Graphics.DrawString("+", new Font("Verdana", 20), brush, x * square_size + border_size, y * square_size + border_size);
+                        //e.Graphics.DrawString("+", new Font("Verdana", 20), new SolidBrush(Color.Green), (x - 1 / 2) * square_size + border_size, y * square_size + border_size + 1);
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(6,77,255,77)), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
+                        e.Graphics.DrawString(x.ToString() + y.ToString(), new Font("Courier New", 10), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size);
                     }
                 }
             }
@@ -230,12 +323,40 @@ namespace ChessNut
         {
             Draw_Piece(sender, e, Piece1);
             Draw_Piece(sender, e, Piece2);
-            Draw_Piece(sender, e, Piece3);
-            Draw_Piece(sender, e, Piece4);
-            Draw_Piece(sender, e, Piece5);
-            Draw_Piece(sender, e, Piece6);
-            Draw_Piece(sender, e, Piece7);
-            Draw_Piece(sender, e, Piece8);
+
+            Draw_Piece(sender, e, WhiteQueen);
+            Draw_Piece(sender, e, WhiteKing);
+            Draw_Piece(sender, e, WhiteRook1);
+            Draw_Piece(sender, e, WhiteRook2);
+            Draw_Piece(sender, e, WhiteBishop1);
+            Draw_Piece(sender, e, WhiteBishop2);
+            Draw_Piece(sender, e, WhiteKnight1);
+            Draw_Piece(sender, e, WhiteKnight2);
+            Draw_Piece(sender, e, WhitePawn1);
+            Draw_Piece(sender, e, WhitePawn2);
+            Draw_Piece(sender, e, WhitePawn3);
+            Draw_Piece(sender, e, WhitePawn4);
+            Draw_Piece(sender, e, WhitePawn5);
+            Draw_Piece(sender, e, WhitePawn6);
+            Draw_Piece(sender, e, WhitePawn7);
+            Draw_Piece(sender, e, WhitePawn8);
+
+            Draw_Piece(sender, e, BlackQueen);
+            Draw_Piece(sender, e, BlackKing);
+            Draw_Piece(sender, e, BlackRook1);
+            Draw_Piece(sender, e, BlackRook2);
+            Draw_Piece(sender, e, BlackBishop1);
+            Draw_Piece(sender, e, BlackBishop2);
+            Draw_Piece(sender, e, BlackKnight1);
+            Draw_Piece(sender, e, BlackKnight2);
+            Draw_Piece(sender, e, BlackPawn1);
+            Draw_Piece(sender, e, BlackPawn2);
+            Draw_Piece(sender, e, BlackPawn3);
+            Draw_Piece(sender, e, BlackPawn4);
+            Draw_Piece(sender, e, BlackPawn5);
+            Draw_Piece(sender, e, BlackPawn6);
+            Draw_Piece(sender, e, BlackPawn7);
+            Draw_Piece(sender, e, BlackPawn8);
         }
 
         private void Table_Load(object sender, PaintEventArgs e)
