@@ -34,7 +34,7 @@ namespace ChessNut
                 }
             }
         }
-        public int MarkNextLegalMoves(Board currentBoard, Piece currentPiece, Piece otherPiece)
+        public int MarkNextLegalMoves(Board currentBoard, Piece currentPiece)
         {
             Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
 
@@ -490,6 +490,20 @@ namespace ChessNut
 
                 case "Pawn":
                     // requires a direction based on color/player position
+
+                    switch (currentPiece.Color)
+                    {
+                        case "White":
+                            currentBoard.squares[currentPiece.Column, currentPiece.Row - 1].LegalNextMove = true;
+                            availableMoves += 1;
+                            break;
+
+                        case "Black":
+                            currentBoard.squares[currentPiece.Column, currentPiece.Row + 1].LegalNextMove = true;
+                            availableMoves += 1;
+                            break;
+                    }
+
                     break;
             }
             

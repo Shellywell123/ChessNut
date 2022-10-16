@@ -27,34 +27,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.PieceSelectionBox = new System.Windows.Forms.ComboBox();
+            this.WhitePieceSelectionBox = new System.Windows.Forms.ComboBox();
             this.RowSelectionBox = new System.Windows.Forms.ComboBox();
             this.ColumnSelectionBox = new System.Windows.Forms.ComboBox();
-            this.ColumnSelectionBox2 = new System.Windows.Forms.ComboBox();
-            this.RowSelectionBox2 = new System.Windows.Forms.ComboBox();
-            this.PieceSelectionBox2 = new System.Windows.Forms.ComboBox();
-            this.SelectionColorBox = new System.Windows.Forms.ComboBox();
-            this.SelectionColorBox2 = new System.Windows.Forms.ComboBox();
+            this.BlackPieceSelectionBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Moves = new System.Windows.Forms.Label();
+            this.CurrentPiece = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // PieceSelectionBox
+            // WhitePieceSelectionBox
             // 
-            this.PieceSelectionBox.FormattingEnabled = true;
-            this.PieceSelectionBox.Items.AddRange(new object[] {
-            "King",
-            "Queen",
-            "Knight",
-            "Rook",
-            "Bishop"});
-            this.PieceSelectionBox.Location = new System.Drawing.Point(624, 67);
-            this.PieceSelectionBox.Margin = new System.Windows.Forms.Padding(4);
-            this.PieceSelectionBox.Name = "PieceSelectionBox";
-            this.PieceSelectionBox.Size = new System.Drawing.Size(160, 24);
-            this.PieceSelectionBox.TabIndex = 0;
-            this.PieceSelectionBox.Text = "Piece ...";
-            this.PieceSelectionBox.SelectedIndexChanged += new System.EventHandler(this.PieceSelectionBox_SelectedIndexChanged);
+            this.WhitePieceSelectionBox.FormattingEnabled = true;
+            this.WhitePieceSelectionBox.Location = new System.Drawing.Point(624, 67);
+            this.WhitePieceSelectionBox.Margin = new System.Windows.Forms.Padding(4);
+            this.WhitePieceSelectionBox.Name = "WhitePieceSelectionBox";
+            this.WhitePieceSelectionBox.Size = new System.Drawing.Size(160, 24);
+            this.WhitePieceSelectionBox.TabIndex = 0;
+            this.WhitePieceSelectionBox.Text = "Piece ...";
+            this.WhitePieceSelectionBox.SelectedIndexChanged += new System.EventHandler(this.WhitePieceSelectionBox_SelectedIndexChanged);
             // 
-            // RowSelectionBox
+            // WhiteRowSelectionBox
             // 
             this.RowSelectionBox.FormattingEnabled = true;
             this.RowSelectionBox.Items.AddRange(new object[] {
@@ -66,7 +60,7 @@
             "6",
             "7",
             "8"});
-            this.RowSelectionBox.Location = new System.Drawing.Point(624, 99);
+            this.RowSelectionBox.Location = new System.Drawing.Point(624, 177);
             this.RowSelectionBox.Margin = new System.Windows.Forms.Padding(4);
             this.RowSelectionBox.Name = "RowSelectionBox";
             this.RowSelectionBox.Size = new System.Drawing.Size(160, 24);
@@ -74,7 +68,7 @@
             this.RowSelectionBox.Text = "Row ...";
             this.RowSelectionBox.SelectedIndexChanged += new System.EventHandler(this.RowSelectionBox_SelectedIndexChanged);
             // 
-            // ColumnSelectionBox
+            // WhiteColumnSelectionBox
             // 
             this.ColumnSelectionBox.FormattingEnabled = true;
             this.ColumnSelectionBox.Items.AddRange(new object[] {
@@ -86,7 +80,7 @@
             "F",
             "G",
             "H"});
-            this.ColumnSelectionBox.Location = new System.Drawing.Point(624, 131);
+            this.ColumnSelectionBox.Location = new System.Drawing.Point(624, 209);
             this.ColumnSelectionBox.Margin = new System.Windows.Forms.Padding(4);
             this.ColumnSelectionBox.Name = "ColumnSelectionBox";
             this.ColumnSelectionBox.Size = new System.Drawing.Size(160, 24);
@@ -94,123 +88,99 @@
             this.ColumnSelectionBox.Text = "Column ...";
             this.ColumnSelectionBox.SelectedIndexChanged += new System.EventHandler(this.ColumnSelectionBox_SelectedIndexChanged);
             // 
-            // ColumnSelectionBox2
+            // BlackPieceSelectionBox
             // 
-            this.ColumnSelectionBox2.FormattingEnabled = true;
-            this.ColumnSelectionBox2.Items.AddRange(new object[] {
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H"});
-            this.ColumnSelectionBox2.Location = new System.Drawing.Point(624, 302);
-            this.ColumnSelectionBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.ColumnSelectionBox2.Name = "ColumnSelectionBox2";
-            this.ColumnSelectionBox2.Size = new System.Drawing.Size(160, 24);
-            this.ColumnSelectionBox2.TabIndex = 3;
-            this.ColumnSelectionBox2.Text = "Column ...";
-            this.ColumnSelectionBox2.SelectedIndexChanged += new System.EventHandler(this.ColumnSelectionBox_SelectedIndexChanged2);
-            // 
-            // RowSelectionBox2
-            // 
-            this.RowSelectionBox2.FormattingEnabled = true;
-            this.RowSelectionBox2.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8"});
-            this.RowSelectionBox2.Location = new System.Drawing.Point(624, 270);
-            this.RowSelectionBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.RowSelectionBox2.Name = "RowSelectionBox2";
-            this.RowSelectionBox2.Size = new System.Drawing.Size(160, 24);
-            this.RowSelectionBox2.TabIndex = 4;
-            this.RowSelectionBox2.Text = "Row ...";
-            this.RowSelectionBox2.SelectedIndexChanged += new System.EventHandler(this.RowSelectionBox_SelectedIndexChanged2);
-            // 
-            // PieceSelectionBox2
-            // 
-            this.PieceSelectionBox2.FormattingEnabled = true;
-            this.PieceSelectionBox2.Items.AddRange(new object[] {
+            this.BlackPieceSelectionBox.FormattingEnabled = true;
+            this.BlackPieceSelectionBox.Items.AddRange(new object[] {
             "King",
             "Queen",
             "Knight",
             "Rook",
             "Bishop"});
-            this.PieceSelectionBox2.Location = new System.Drawing.Point(624, 238);
-            this.PieceSelectionBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.PieceSelectionBox2.Name = "PieceSelectionBox2";
-            this.PieceSelectionBox2.Size = new System.Drawing.Size(160, 24);
-            this.PieceSelectionBox2.TabIndex = 5;
-            this.PieceSelectionBox2.Text = "Piece ...";
-            this.PieceSelectionBox2.SelectedIndexChanged += new System.EventHandler(this.PieceSelectionBox_SelectedIndexChanged2);
+            this.BlackPieceSelectionBox.Location = new System.Drawing.Point(624, 125);
+            this.BlackPieceSelectionBox.Margin = new System.Windows.Forms.Padding(4);
+            this.BlackPieceSelectionBox.Name = "BlackPieceSelectionBox";
+            this.BlackPieceSelectionBox.Size = new System.Drawing.Size(160, 24);
+            this.BlackPieceSelectionBox.TabIndex = 5;
+            this.BlackPieceSelectionBox.Text = "Piece ...";
+            this.BlackPieceSelectionBox.SelectedIndexChanged += new System.EventHandler(this.BlackPieceSelectionBox_SelectedIndexChanged);
             // 
-            // SelectionColorBox
+            // label1
             // 
-            this.SelectionColorBox.FormattingEnabled = true;
-            this.SelectionColorBox.Items.AddRange(new object[] {
-            "White",
-            "Black"});
-            this.SelectionColorBox.Location = new System.Drawing.Point(624, 162);
-            this.SelectionColorBox.Name = "SelectionColorBox";
-            this.SelectionColorBox.Size = new System.Drawing.Size(160, 24);
-            this.SelectionColorBox.TabIndex = 6;
-            this.SelectionColorBox.Text = "Color ...";
-            this.SelectionColorBox.SelectedIndexChanged += new System.EventHandler(this.ColorSelectionBox_SelectedIndexChanged);
+            this.label1.AutoSize = true;
+            this.label1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(624, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 16);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "White";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // SelectionColorBox2
+            // label2
             // 
-            this.SelectionColorBox2.FormattingEnabled = true;
-            this.SelectionColorBox2.Items.AddRange(new object[] {
-            "White",
-            "Black"});
-            this.SelectionColorBox2.Location = new System.Drawing.Point(624, 333);
-            this.SelectionColorBox2.Name = "SelectionColorBox2";
-            this.SelectionColorBox2.Size = new System.Drawing.Size(160, 24);
-            this.SelectionColorBox2.TabIndex = 7;
-            this.SelectionColorBox2.Text = "Color ...";
-            this.SelectionColorBox2.SelectedIndexChanged += new System.EventHandler(this.ColorSelectionBox_SelectedIndexChanged2);
-
+            this.label2.AutoSize = true;
+            this.label2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(624, 105);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 16);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Black";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // Moves
+            // 
+            this.Moves.AutoSize = true;
+            this.Moves.Location = new System.Drawing.Point(624, 399);
+            this.Moves.Name = "Moves";
+            this.Moves.Size = new System.Drawing.Size(60, 20);
+            this.Moves.TabIndex = 10;
+            this.Moves.Text = "Moves";
+            // 
+            // CurrentPiece
+            // 
+            this.CurrentPiece.AutoSize = true;
+            this.CurrentPiece.Location = new System.Drawing.Point(624, 373);
+            this.CurrentPiece.Name = "CurrentPiece";
+            this.CurrentPiece.Size = new System.Drawing.Size(109, 20);
+            this.CurrentPiece.TabIndex = 12;
+            this.CurrentPiece.Text = "Current Piece";
+            this.CurrentPiece.Click += new System.EventHandler(this.CurrentPiece_Click);
             // 
             // Table
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(801, 615);
-            this.Controls.Add(this.SelectionColorBox2);
-            this.Controls.Add(this.SelectionColorBox);
-            this.Controls.Add(this.ColumnSelectionBox2);
-            this.Controls.Add(this.RowSelectionBox2);
-            this.Controls.Add(this.PieceSelectionBox2);
+            this.ClientSize = new System.Drawing.Size(837, 615);
+            this.Controls.Add(this.CurrentPiece);
+            this.Controls.Add(this.Moves);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.BlackPieceSelectionBox);
             this.Controls.Add(this.ColumnSelectionBox);
             this.Controls.Add(this.RowSelectionBox);
-            this.Controls.Add(this.PieceSelectionBox);
+            this.Controls.Add(this.WhitePieceSelectionBox);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Table";
             this.Text = "ChessNut";
             this.Load += new System.EventHandler(this.Table_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Table_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ComboBox PieceSelectionBox;
+        private System.Windows.Forms.ComboBox WhitePieceSelectionBox;
+        private System.Windows.Forms.ComboBox BlackPieceSelectionBox;
         private System.Windows.Forms.ComboBox RowSelectionBox;
         private System.Windows.Forms.ComboBox ColumnSelectionBox;
-        private System.Windows.Forms.ComboBox SelectionColorBox;
-
-        private System.Windows.Forms.ComboBox ColumnSelectionBox2;
-        private System.Windows.Forms.ComboBox RowSelectionBox2;
-        private System.Windows.Forms.ComboBox PieceSelectionBox2;
-        private System.Windows.Forms.ComboBox SelectionColorBox2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Moves;
+        private System.Windows.Forms.Label CurrentPiece;
     }
 }
 

@@ -17,43 +17,44 @@ namespace ChessNut
         //FontFamily ChessFont = new FontFamily(@"assets\fonts\#Chess TFB");
 
         static Board chessNutBoard = new Board(8);
+        
 
-        Piece Piece1 = new Piece();
-        Piece Piece2 = new Piece();
+        Piece WhiteQueen   = new Piece { Class = "Queen",  Color = "White", Name = "White Queen"};
+        Piece WhiteKing    = new Piece { Class = "King",   Color = "White", Name = "White King"};
+        Piece WhiteBishop1 = new Piece { Class = "Bishop", Color = "White", Name = "White Bishop 1"};
+        Piece WhiteBishop2 = new Piece { Class = "Bishop", Color = "White", Name = "White Bishop 2" };
+        Piece WhiteKnight1 = new Piece { Class = "Knight", Color = "White", Name = "White Knight 1"};
+        Piece WhiteKnight2 = new Piece { Class = "Knight", Color = "White", Name = "White Knight 2"};
+        Piece WhiteRook1   = new Piece { Class = "Rook",   Color = "White", Name = "White Rook 1"};
+        Piece WhiteRook2   = new Piece { Class = "Rook",   Color = "White", Name = "White Rook 2"};
+        Piece WhitePawn1   = new Piece { Class = "Pawn",   Color = "White", Name = "White Pawn 1"};
+        Piece WhitePawn2   = new Piece { Class = "Pawn",   Color = "White", Name = "White Pawn 2"};
+        Piece WhitePawn3   = new Piece { Class = "Pawn",   Color = "White", Name = "White Pawn 3"};
+        Piece WhitePawn4   = new Piece { Class = "Pawn",   Color = "White", Name = "White Pawn 4"};
+        Piece WhitePawn5   = new Piece { Class = "Pawn",   Color = "White", Name = "White Pawn 5"};
+        Piece WhitePawn6   = new Piece { Class = "Pawn",   Color = "White", Name = "White Pawn 6"};
+        Piece WhitePawn7   = new Piece { Class = "Pawn",   Color = "White", Name = "White Pawn 7"};
+        Piece WhitePawn8   = new Piece { Class = "Pawn",   Color = "White", Name = "White Pawn 8" };
 
-        Piece WhiteQueen   = new Piece { Class = "Queen",  Color = "White" };
-        Piece WhiteKing    = new Piece { Class = "King",   Color = "White" };
-        Piece WhiteBishop1 = new Piece { Class = "Bishop", Color = "White" };
-        Piece WhiteBishop2 = new Piece { Class = "Bishop", Color = "White" };
-        Piece WhiteKnight1 = new Piece { Class = "Knight", Color = "White" };
-        Piece WhiteKnight2 = new Piece { Class = "Knight", Color = "White" };
-        Piece WhiteRook1   = new Piece { Class = "Rook",   Color = "White" };
-        Piece WhiteRook2   = new Piece { Class = "Rook",   Color = "White" };
-        Piece WhitePawn1   = new Piece { Class = "Pawn",   Color = "White" };
-        Piece WhitePawn2   = new Piece { Class = "Pawn",   Color = "White" };
-        Piece WhitePawn3   = new Piece { Class = "Pawn",   Color = "White" };
-        Piece WhitePawn4   = new Piece { Class = "Pawn",   Color = "White" };
-        Piece WhitePawn5   = new Piece { Class = "Pawn",   Color = "White" };
-        Piece WhitePawn6   = new Piece { Class = "Pawn",   Color = "White" };
-        Piece WhitePawn7   = new Piece { Class = "Pawn",   Color = "White" };
-        Piece WhitePawn8   = new Piece { Class = "Pawn",   Color = "White" };
+        Piece BlackQueen   = new Piece { Class = "Queen",  Color = "Black", Name = "Black Queen"};
+        Piece BlackKing    = new Piece { Class = "King",   Color = "Black", Name = "Black King"};
+        Piece BlackBishop1 = new Piece { Class = "Bishop", Color = "Black", Name = "Black Bishop 1"};
+        Piece BlackBishop2 = new Piece { Class = "Bishop", Color = "Black", Name = "Black Bishop 2"};
+        Piece BlackKnight1 = new Piece { Class = "Knight", Color = "Black", Name = "Black Knight 1"};
+        Piece BlackKnight2 = new Piece { Class = "Knight", Color = "Black", Name = "Black Knight 2"};
+        Piece BlackRook1   = new Piece { Class = "Rook",   Color = "Black", Name = "Black Rook 1"};
+        Piece BlackRook2   = new Piece { Class = "Rook",   Color = "Black", Name = "Black Rook2"};
+        Piece BlackPawn1   = new Piece { Class = "Pawn",   Color = "Black", Name = "Black Pawn 1"};
+        Piece BlackPawn2   = new Piece { Class = "Pawn",   Color = "Black", Name = "Black Pawn 2"};
+        Piece BlackPawn3   = new Piece { Class = "Pawn",   Color = "Black", Name = "Black Pawn 3"};
+        Piece BlackPawn4   = new Piece { Class = "Pawn",   Color = "Black", Name = "Black Pawn 4"};
+        Piece BlackPawn5   = new Piece { Class = "Pawn",   Color = "Black", Name = "Black Pawn 5"};
+        Piece BlackPawn6   = new Piece { Class = "Pawn",   Color = "Black", Name = "Black Pawn 6"};
+        Piece BlackPawn7   = new Piece { Class = "Pawn",   Color = "Black", Name = "Black Pawn 7"};
+        Piece BlackPawn8   = new Piece { Class = "Pawn",   Color = "Black", Name = "Black Pawn 8" };
 
-        Piece BlackQueen   = new Piece { Class = "Queen",  Color = "Black" };
-        Piece BlackKing    = new Piece { Class = "King",   Color = "Black" };
-        Piece BlackBishop1 = new Piece { Class = "Bishop", Color = "Black" };
-        Piece BlackBishop2 = new Piece { Class = "Bishop", Color = "Black" };
-        Piece BlackKnight1 = new Piece { Class = "Knight", Color = "Black" };
-        Piece BlackKnight2 = new Piece { Class = "Knight", Color = "Black" };
-        Piece BlackRook1   = new Piece { Class = "Rook",   Color = "Black" };
-        Piece BlackRook2   = new Piece { Class = "Rook",   Color = "Black" };
-        Piece BlackPawn1   = new Piece { Class = "Pawn",   Color = "Black" };
-        Piece BlackPawn2   = new Piece { Class = "Pawn",   Color = "Black" };
-        Piece BlackPawn3   = new Piece { Class = "Pawn",   Color = "Black" };
-        Piece BlackPawn4   = new Piece { Class = "Pawn",   Color = "Black" };
-        Piece BlackPawn5   = new Piece { Class = "Pawn",   Color = "Black" };
-        Piece BlackPawn6   = new Piece { Class = "Pawn",   Color = "Black" };
-        Piece BlackPawn7   = new Piece { Class = "Pawn",   Color = "Black" };
-        Piece BlackPawn8   = new Piece { Class = "Pawn",   Color = "Black" };
+        Piece SelectedPiece;
+        
 
         int border_size = 50;
         int square_size = 50;
@@ -62,18 +63,55 @@ namespace ChessNut
         {
             InitializeComponent();
 
-            Piece1.Row = 4;
-            Piece1.Column = 4;
-            //chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
-            Piece1.Class = "";
-            Piece1.Color = "White";
+            // white combo box piece selector
+            List<Piece> whitePieces = new List<Piece>();
+            whitePieces.Add(WhiteQueen);
+            whitePieces.Add(WhiteKing);
+            whitePieces.Add(WhiteBishop1);
+            whitePieces.Add(WhiteBishop2);
+            whitePieces.Add(WhiteKnight1);
+            whitePieces.Add(WhiteKnight2);
+            whitePieces.Add(WhiteRook1);
+            whitePieces.Add(WhiteRook2);
+            whitePieces.Add(WhitePawn1);
+            whitePieces.Add(WhitePawn2);
+            whitePieces.Add(WhitePawn3);
+            whitePieces.Add(WhitePawn4);
+            whitePieces.Add(WhitePawn5);
+            whitePieces.Add(WhitePawn6);
+            whitePieces.Add(WhitePawn7);
+            whitePieces.Add(WhitePawn8);
 
-            Piece2.Row = 5;
-            Piece2.Column = 4;
-            Piece2.Class = "";
-            Piece2.Color = "Black";
+            WhitePieceSelectionBox.DataSource = whitePieces;
+            WhitePieceSelectionBox.DisplayMember = "Name";
+            WhitePieceSelectionBox.Text = "Piece ...";
+
+            // black combo box piece selector
+            List<Piece> blackPieces = new List<Piece>();
+            blackPieces.Add(BlackQueen);
+            blackPieces.Add(BlackKing);
+            blackPieces.Add(BlackBishop1);
+            blackPieces.Add(BlackBishop2);
+            blackPieces.Add(BlackKnight1);
+            blackPieces.Add(BlackKnight2);
+            blackPieces.Add(BlackRook1);
+            blackPieces.Add(BlackRook2);
+            blackPieces.Add(BlackPawn1);
+            blackPieces.Add(BlackPawn2);
+            blackPieces.Add(BlackPawn3);
+            blackPieces.Add(BlackPawn4);
+            blackPieces.Add(BlackPawn5);
+            blackPieces.Add(BlackPawn6);
+            blackPieces.Add(BlackPawn7);
+            blackPieces.Add(BlackPawn8);
+
+            BlackPieceSelectionBox.DataSource = blackPieces;
+            BlackPieceSelectionBox.DisplayMember = "Name";
+            BlackPieceSelectionBox.Text = "Piece ...";
 
             initialise_table();
+
+            SelectedPiece = WhitePawn4;
         }
 
         public void initialise_table()
@@ -190,7 +228,7 @@ namespace ChessNut
             SolidBrush blackBrush = new SolidBrush(black);
 
 
-            chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
+            //chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
 
             // draw squares
             for (int x = 0; x < 8; x++)  
@@ -290,7 +328,10 @@ namespace ChessNut
                     outline = "U";
                     break;
             }
-
+            if (piece.Name == SelectedPiece.Name)
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(10, 77, 255, 77)), SelectedPiece.Column * square_size + border_size, SelectedPiece.Row * square_size + border_size, square_size, square_size);
+            }
             switch (piece.Color)
             {
                 case "Black":
@@ -321,9 +362,6 @@ namespace ChessNut
         }
         private void Draw_Pieces(object sender, PaintEventArgs e)
         {
-            Draw_Piece(sender, e, Piece1);
-            Draw_Piece(sender, e, Piece2);
-
             Draw_Piece(sender, e, WhiteQueen);
             Draw_Piece(sender, e, WhiteKing);
             Draw_Piece(sender, e, WhiteRook1);
@@ -361,57 +399,58 @@ namespace ChessNut
 
         private void Table_Load(object sender, PaintEventArgs e)
         {
-            chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
-            chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
+            //chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
+            //chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
 
             Draw_Title(sender, e);
             Draw_Board(sender, e);
             Draw_Labels(sender, e);
-
             Draw_Pieces(sender, e);
-
-            Draw_AvailableMoves(sender, e);
-            Draw_AvailableMoves2(sender, e);
+            Draw_CurrentInfo(sender, e);
+            
         }
 
         private void Table_Load(object sender, EventArgs e)
         {
+            
             //chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
 
-            Piece1.SelectedAvalailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, Piece1, Piece2);
-
-            
-            //Selected2.SelectedAvalailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard.squares[Selected2.SelectedColumn, Selected2.SelectedRow], Selected2.SelectedPiece);
+            SelectedPiece.SelectedAvalailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, SelectedPiece);
         }
 
         private void MovePiece(object sender, EventArgs e, Piece pieceToMove)
         {
             //chessNutBoard.squares[pieceToMove.PrevColumn, pieceToMove.PrevRow].CurrentlyOccupied = false;
             
-
             Table_Load(sender, e);
             this.Invalidate();
         }
 
-        private void PieceSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void WhitePieceSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SelectedPiece = WhitePieceSelectionBox.SelectedItem as Piece;
+
             // set currently selected piece 
-            Piece1.Class = PieceSelectionBox.GetItemText(this.PieceSelectionBox.SelectedItem);
+            //Piece1.Class = PieceSelectionBox.GetItemText(this.PieceSelectionBox.SelectedItem);
             Table_Load(sender, e);
             this.Invalidate();
         }
 
-        private void Draw_AvailableMoves(object sender, PaintEventArgs e)
+        private void Draw_CurrentInfo(object sender, PaintEventArgs e)
         {
             // print number of avalible moves
-            string message = "Possible Moves: " + Piece1.SelectedAvalailableMoves.ToString();
-            e.Graphics.DrawString(message, new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * 8 + border_size + 15, 160);   
+
+            Moves.Text = "Possible Moves: " + SelectedPiece.SelectedAvalailableMoves.ToString();
+            CurrentPiece.Text = "Current Piece: " + SelectedPiece.Name.ToString();
+
+            // e.Graphics.DrawString(message, new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * 8 + border_size + 15, 140);   
         }
 
-        private void PieceSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
+        private void BlackPieceSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SelectedPiece = BlackPieceSelectionBox.SelectedItem as Piece;
             // set currently selected piece
-            Piece2.Class = PieceSelectionBox2.GetItemText(this.PieceSelectionBox2.SelectedItem);
+            //Piece2.Class = BlackPieceSelectionBox.GetItemText(this.BlackPieceSelectionBox.SelectedItem);
             Table_Load(sender, e);
             this.Invalidate();
         }
@@ -419,69 +458,43 @@ namespace ChessNut
         private void RowSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // set currently selected row
-            Piece1.PrevRow = Piece1.Row;
-            Piece1.Row = 7 - RowSelectionBox.SelectedIndex;
+            SelectedPiece.PrevRow = SelectedPiece.Row;
+            SelectedPiece.Row = 7 - RowSelectionBox.SelectedIndex;
 
-            chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
-            chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
+            //chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
+            //chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
 
-            MovePiece(sender, e, Piece1);
+            MovePiece(sender, e, SelectedPiece);
         }
 
         private void ColumnSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // set currently selected column
-            Piece1.PrevColumn = Piece1.Column;
-            Piece1.Column = ColumnSelectionBox.SelectedIndex;
+            SelectedPiece.PrevColumn = SelectedPiece.Column;
+            SelectedPiece.Column = ColumnSelectionBox.SelectedIndex;
 
-            chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
-            chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
+            //chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
+            //chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
 
-            MovePiece(sender, e, Piece1);
+            MovePiece(sender, e, SelectedPiece);
         }
-        private void RowSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
+       
+
+
+
+        private void label1_Click(object sender, EventArgs e)
         {
-            // set currently selected row
-            Piece2.PrevRow = Piece2.Row;
-            Piece2.Row = 7 - RowSelectionBox2.SelectedIndex;
 
-            chessNutBoard.squares[Piece2.PrevColumn, Piece2.PrevRow].CurrentlyOccupied = false;
-            chessNutBoard.squares[Piece2.Column, Piece2.Row].CurrentlyOccupied = true;
-
-            MovePiece(sender, e, Piece2);
         }
 
-        private void ColumnSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
-            // set currently selected column
-            Piece2.PrevColumn = Piece2.Column;
-            Piece2.Column = ColumnSelectionBox2.SelectedIndex;
 
-            chessNutBoard.squares[Piece2.PrevColumn, Piece2.PrevRow].CurrentlyOccupied = false;
-            chessNutBoard.squares[Piece2.Column, Piece2.Row].CurrentlyOccupied = true;
-
-            MovePiece(sender, e, Piece2);
         }
 
-        private void Draw_AvailableMoves2(object sender, PaintEventArgs e)
+        private void CurrentPiece_Click(object sender, EventArgs e)
         {
-            // print number of avalible moves
-            string message = "Possible Moves: " + Piece2.SelectedAvalailableMoves.ToString();
-            e.Graphics.DrawString(message, new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * 8 + border_size + 15, 270);
-        }
 
-        private void ColorSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Piece1.Color = SelectionColorBox.GetItemText(this.SelectionColorBox.SelectedItem);
-            Table_Load(sender, e);
-            this.Invalidate();
-        }
-
-        private void ColorSelectionBox_SelectedIndexChanged2(object sender, EventArgs e)
-        {
-            Piece2.Color = SelectionColorBox2.GetItemText(this.SelectionColorBox2.SelectedItem);
-            Table_Load(sender, e);
-            this.Invalidate();
         }
     }
 }
