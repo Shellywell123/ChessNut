@@ -19,6 +19,9 @@ namespace ChessNut
         // 2d array
         public Square[,] squares { get; set; }
 
+        string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H" };
+
+
         // constructor
         public Board(int s)
         {
@@ -127,16 +130,20 @@ namespace ChessNut
                         bottomLim = 7;
                     }
 
-                    for (int i = topLim; i <= bottomLim; i++)
+                    for (int x = topLim; x <= bottomLim; x++)
                     {
-                        for (int j = leftLim; j <= rightLim; j++)
+                        for (int y = leftLim; y <= rightLim; y++)
                         {
-                            squares[i, j].LegalNextMove = true;
+                            if ((x == currentPiece.Column) & (y == currentPiece.Row))
+                            {
+                                continue;
+                            }
+                            squares[x, y].LegalNextMove = true;
                             availableMoves.Add(new Move
                             {
-                                BoardPosition = i.ToString() + j.ToString(),
-                                Column = 0,
-                                Row = 0
+                                BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                                Column = x,
+                                Row = 7-y
                             });
                         }
                     }
@@ -158,9 +165,9 @@ namespace ChessNut
                         squares[x, y].LegalNextMove = true;
                         availableMoves.Add(new Move
                         {
-                            BoardPosition = x.ToString() + y.ToString(),
-                            Column = 0,
-                            Row = 0
+                            BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                            Column = x,
+                            Row = 7 - y
                         });
 
                         if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == true)
@@ -183,9 +190,9 @@ namespace ChessNut
                         squares[x, currentPiece.Row].LegalNextMove = true;
                         availableMoves.Add(new Move
                         {
-                            BoardPosition = x.ToString() + y.ToString(),
-                            Column = 0,
-                            Row = 0
+                            BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                            Column = x,
+                            Row = 7 - y
                         });
 
                         if (currentBoard.squares[x, y].CurrentlyOccupied == true)
@@ -197,16 +204,22 @@ namespace ChessNut
                     // bottom
                     for (int y = currentPiece.Row; y < 8; y++)
                     {
+                        int x = currentPiece.Column;
                         //ignore currently occupied square
                         if (y == currentSquare.ColumnNumber)
                         {
                             continue;
                         }
 
-                        squares[currentPiece.Column, y].LegalNextMove = true;
-                        availableMoves.Add(new Move { BoardPosition = "XX", Column = 0, Row = 0 });
+                        squares[x, y].LegalNextMove = true;
+                        availableMoves.Add(new Move
+                        {
+                            BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                            Column = x,
+                            Row = 7 - y
+                        });
 
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == true)
+                        if (currentBoard.squares[x, y].CurrentlyOccupied == true)
                         {
                             break;
                         }
@@ -225,12 +238,12 @@ namespace ChessNut
                         squares[x, y].LegalNextMove = true;
                         availableMoves.Add(new Move
                         {
-                            BoardPosition = x.ToString() + y.ToString(),
-                            Column = 0,
-                            Row = 0
+                            BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                            Column = x,
+                            Row = 7 - y
                         });
 
-                        if (currentBoard.squares[x, currentPiece.Row].CurrentlyOccupied == true)
+                        if (currentBoard.squares[x, y].CurrentlyOccupied == true)
                         {
                             break;
                         }
@@ -255,9 +268,9 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves.Add(new Move
                                 {
-                                    BoardPosition = x.ToString() + y.ToString(),
-                                    Column = 0,
-                                    Row = 0
+                                    BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                                    Column = x,
+                                    Row = 7 - y
                                 });
                             }
 
@@ -285,9 +298,9 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves.Add(new Move
                                 {
-                                    BoardPosition = x.ToString() + y.ToString(),
-                                    Column = 0,
-                                    Row = 0
+                                    BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                                    Column = x,
+                                    Row = 7 - y
                                 });
                             }
 
@@ -315,9 +328,9 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves.Add(new Move
                                 {
-                                    BoardPosition = x.ToString() + y.ToString(),
-                                    Column = 0,
-                                    Row = 0
+                                    BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                                    Column = x,
+                                    Row = 7 - y
                                 });
                             }
 
@@ -345,9 +358,9 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves.Add(new Move
                                 {
-                                    BoardPosition = x.ToString() + y.ToString(),
-                                    Column = 0,
-                                    Row = 0
+                                    BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                                    Column = x,
+                                    Row = 7 - y
                                 });
                             }
 
@@ -378,9 +391,9 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves.Add(new Move
                                 {
-                                    BoardPosition = x.ToString() + y.ToString(),
-                                    Column = 0,
-                                    Row = 0
+                                    BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                                    Column = x,
+                                    Row = 7 - y
                                 });
                             }
 
@@ -394,19 +407,20 @@ namespace ChessNut
                     //top
                     for (int y = currentPiece.Row; y >= 0; y--)
                     {
+                        int x = currentPiece.Column;
                         //ignore currently occupied square
                         if (y == currentPiece.Row)
                         {
                             continue;
                         }
 
-                        squares[currentPiece.Column, y].LegalNextMove = true;
-                        availableMoves.Add(new Move { BoardPosition = "XX", Column = 0, Row = 0 });
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == true)
+                        squares[x, y].LegalNextMove = true;
+                        availableMoves.Add(new Move
                         {
-                            break;
-                        }
+                            BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                            Column = x,
+                            Row = 7 - y
+                        });
                     }
 
                     // top right
@@ -426,9 +440,9 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves.Add(new Move
                                 {
-                                    BoardPosition = x.ToString() + y.ToString(),
-                                    Column = 0,
-                                    Row = 0
+                                    BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                                    Column = x,
+                                    Row = 7 - y
                                 });
                             }
 
@@ -452,9 +466,9 @@ namespace ChessNut
                         squares[x, y].LegalNextMove = true;
                         availableMoves.Add(new Move
                         {
-                            BoardPosition = x.ToString() + y.ToString(),
-                            Column = 0,
-                            Row = 0
+                            BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                            Column = x,
+                            Row = 7 - y
                         });
 
                         if (currentBoard.squares[x, currentPiece.Row].CurrentlyOccupied == true)
@@ -480,9 +494,9 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves.Add(new Move
                                 {
-                                    BoardPosition = x.ToString() + y.ToString(),
-                                    Column = 0,
-                                    Row = 0
+                                    BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                                    Column = x,
+                                    Row = 7 - y
                                 });
                             }
 
@@ -506,9 +520,9 @@ namespace ChessNut
                         squares[x, y].LegalNextMove = true;
                         availableMoves.Add(new Move
                         {
-                            BoardPosition = x.ToString() + y.ToString(),
-                            Column = 0,
-                            Row = 0
+                            BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                            Column = x,
+                            Row = 7 - y
                         });
 
                         if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == true)
@@ -534,9 +548,9 @@ namespace ChessNut
                                 squares[x, y].LegalNextMove = true;
                                 availableMoves.Add(new Move
                                 {
-                                    BoardPosition = x.ToString() + y.ToString(),
-                                    Column = 0,
-                                    Row = 0
+                                    BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                                    Column = x,
+                                    Row = 7 - y
                                 });
                             }
 
@@ -560,9 +574,9 @@ namespace ChessNut
                         squares[x, y].LegalNextMove = true;
                         availableMoves.Add(new Move
                         {
-                            BoardPosition = x.ToString() + y.ToString(),
-                            Column = 0,
-                            Row = 0
+                            BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                            Column = x,
+                            Row = 7 - y
                         });
 
                         if (currentBoard.squares[x, currentPiece.Row].CurrentlyOccupied == true)
@@ -587,10 +601,12 @@ namespace ChessNut
                             y = currentPiece.Row - 1;
 
                             currentBoard.squares[x, y].LegalNextMove = true;
-                            availableMoves.Add(new Move { 
-                                BoardPosition = x.ToString() + y.ToString(), 
-                                Column = 0, 
-                                Row = 0 });
+                            availableMoves.Add(new Move
+                            {
+                                BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                                Column = x,
+                                Row = 7 - y
+                            });
 
                             //if (currentBoard.squares[currentPiece.Column + 1, currentPiece.Row - 1].CurrentlyOccupied == true)
                             //{
@@ -612,9 +628,9 @@ namespace ChessNut
                             currentBoard.squares[xb,yb].LegalNextMove = true;
                             availableMoves.Add(new Move
                             {
-                                BoardPosition = xb.ToString() + yb.ToString(),
-                                Column = 0,
-                                Row = 0
+                                BoardPosition = letters[xb] + (8 - yb).ToString() + " " + xb.ToString() + yb.ToString(),
+                                Column = xb,
+                                Row = 7 - yb
                             });
 
                             //if ((currentBoard.squares[currentPiece.Column + 1, currentPiece.Row + 1].CurrentlyOccupied)))

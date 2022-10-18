@@ -113,16 +113,13 @@ namespace ChessNut
 
             initialise_table();
 
-            SelectedPiece = WhitePawn4;
-            WhitePieceSelectionBox.SelectedItem = WhiteQueen;
+            SelectedPiece = new Piece { Name = "No Selected Piece" };
+            WhitePieceSelectionBox.Text = "No Selected Piece";
+            BlackPieceSelectionBox.Text = "No Selected Piece";
             SelectedPiece.AvailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, SelectedPiece);
-
-
-            
+                        
             AvailableMoves.DisplayMember = "BoardPosition";
             AvailableMoves.Text = "Avaliable Moves ...";
-
-            
         }
 
         public void initialise_table()
@@ -408,6 +405,18 @@ namespace ChessNut
             Draw_Piece(sender, e, BlackPawn8);
         }
 
+        private void Draw_CurrentInfo(object sender, PaintEventArgs e)
+        {
+            // print number of avalible moves
+
+            Moves.Text = "Possible Moves : " + SelectedPiece.AvailableMoves.Count.ToString();
+            CurrentPiece.Text = "Current Piece  : " + SelectedPiece.Name.ToString();
+            Takable.Text = "Takable Pieces : 0";
+            CheckStatus.Text = "CheckStatus    : 0";
+
+            // e.Graphics.DrawString(message, new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * 8 + border_size + 15, 140);   
+        }
+
         private void Table_Load(object sender, PaintEventArgs e)
         {
             //chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
@@ -453,18 +462,6 @@ namespace ChessNut
             //Piece1.Class = PieceSelectionBox.GetItemText(this.PieceSelectionBox.SelectedItem);
             Table_Load(sender, e);
             this.Invalidate();
-        }
-
-        private void Draw_CurrentInfo(object sender, PaintEventArgs e)
-        {
-            // print number of avalible moves
-
-            Moves.Text        = "Possible Moves : " + SelectedPiece.AvailableMoves.Count.ToString();
-            CurrentPiece.Text = "Current Piece  : " + SelectedPiece.Name.ToString();
-            Takable.Text      = "Takable Pieces : 0";
-            CheckStatus.Text  = "CheckStatus    : 0";
-
-            // e.Graphics.DrawString(message, new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * 8 + border_size + 15, 140);   
         }
 
         private void BlackPieceSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -513,7 +510,14 @@ namespace ChessNut
 
             MovePiece(sender, e, SelectedPiece);
         }
-       
+
+        private void AvailableMoves_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // set currently selected column
+            
+      
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -532,6 +536,27 @@ namespace ChessNut
         private void Takable_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            initialise_table();
+            Table_Load(sender, e);
+            this.Invalidate();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Move selectedMove = AvailableMoves.SelectedItem as Move;
+
+            SelectedPiece.PrevColumn = SelectedPiece.Column;
+            SelectedPiece.PrevRow = SelectedPiece.Row;
+
+            SelectedPiece.Column = selectedMove.Column;
+            SelectedPiece.Row = 7 - selectedMove.Row;
+
+            MovePiece(sender, e, SelectedPiece);
         }
     }
 }
