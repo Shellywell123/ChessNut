@@ -64,86 +64,61 @@ namespace ChessNut
             switch (currentPiece.Class)
             {
                 case "Knight":
-                    // can be rewitten 
-                    if (SquareOnBoard(currentSquare.RowNumber + 2, currentSquare.ColumnNumber + 1) == true)
-                    {
-                        squares[currentSquare.RowNumber + 2, currentSquare.ColumnNumber + 1].LegalNextMove = true;
-                        availableMoves.Add(new Move { BoardPosition = "XX", Column = 0, Row = 0 });
-                    }
-                    if (SquareOnBoard(currentSquare.RowNumber + 2, currentSquare.ColumnNumber - 1) == true)
-                    {
-                        squares[currentSquare.RowNumber + 2, currentSquare.ColumnNumber - 1].LegalNextMove = true;
-                        availableMoves.Add(new Move { BoardPosition = "XX", Column = 0, Row = 0 });
-                    }
-                    if (SquareOnBoard(currentSquare.RowNumber - 2, currentSquare.ColumnNumber + 1) == true)
-                    {
-                        squares[currentSquare.RowNumber - 2, currentSquare.ColumnNumber + 1].LegalNextMove = true;
-                        availableMoves.Add(new Move { BoardPosition = "XX", Column = 0, Row = 0 });
-                    }
-                    if (SquareOnBoard(currentSquare.RowNumber - 2, currentSquare.ColumnNumber - 1) == true)
-                    {
-                        squares[currentSquare.RowNumber - 2, currentSquare.ColumnNumber - 1].LegalNextMove = true;
-                        availableMoves.Add(new Move { BoardPosition = "XX", Column = 0, Row = 0 });
-                    }
-                    if (SquareOnBoard(currentSquare.RowNumber + 1, currentSquare.ColumnNumber + 2) == true)
-                    {
-                        squares[currentSquare.RowNumber + 1, currentSquare.ColumnNumber + 2].LegalNextMove = true;
-                        availableMoves.Add(new Move { BoardPosition = "XX", Column = 0, Row = 0 });
-                    }
-                    if (SquareOnBoard(currentSquare.RowNumber + 1, currentSquare.ColumnNumber - 2) == true)
-                    {
-                        squares[currentSquare.RowNumber + 1, currentSquare.ColumnNumber - 2].LegalNextMove = true;
-                        availableMoves.Add(new Move { BoardPosition = "XX", Column = 0, Row = 0 });
-                    }
-                    if (SquareOnBoard(currentSquare.RowNumber - 1, currentSquare.ColumnNumber + 2) == true)
-                    {
-                        squares[currentSquare.RowNumber - 1, currentSquare.ColumnNumber + 2].LegalNextMove = true;
-                        availableMoves.Add(new Move { BoardPosition = "XX", Column = 0, Row = 0 });
-                    }
-                    if (SquareOnBoard(currentSquare.RowNumber - 1, currentSquare.ColumnNumber - 2) == true)
-                    {
-                        squares[currentSquare.RowNumber - 1, currentSquare.ColumnNumber - 2].LegalNextMove = true;
-                        availableMoves.Add(new Move { BoardPosition = "XX", Column = 0, Row = 0 });
-                    }
-                    break;
+                    List<Move> allowedKnightMoves = new List<Move>();
 
-                case "King":
-                    int leftLim = currentSquare.ColumnNumber - 1;
-                    int rightLim = currentSquare.ColumnNumber + 1;
-                    int topLim = currentSquare.RowNumber - 1;
-                    int bottomLim = currentSquare.RowNumber + 1;
+                    allowedKnightMoves.Add(new Move { Column = (currentSquare.RowNumber + 2), Row = (currentSquare.ColumnNumber + 1) });
+                    allowedKnightMoves.Add(new Move { Column = (currentSquare.RowNumber + 2), Row = (currentSquare.ColumnNumber - 1) });
+                    allowedKnightMoves.Add(new Move { Column = (currentSquare.RowNumber - 2), Row = (currentSquare.ColumnNumber + 1) });
+                    allowedKnightMoves.Add(new Move { Column = (currentSquare.RowNumber - 2), Row = (currentSquare.ColumnNumber - 1) });
+                    allowedKnightMoves.Add(new Move { Column = (currentSquare.RowNumber + 1), Row = (currentSquare.ColumnNumber + 2) });
+                    allowedKnightMoves.Add(new Move { Column = (currentSquare.RowNumber + 1), Row = (currentSquare.ColumnNumber - 2) });
+                    allowedKnightMoves.Add(new Move { Column = (currentSquare.RowNumber - 1), Row = (currentSquare.ColumnNumber + 2) });
+                    allowedKnightMoves.Add(new Move { Column = (currentSquare.RowNumber - 1), Row = (currentSquare.ColumnNumber - 2) });
 
-                    if (leftLim < 0)
+                    foreach (Move allowedKnightMove in allowedKnightMoves)
                     {
-                        leftLim = 0;
-                    }
-                    if (rightLim > 7)
-                    {
-                        rightLim = 7;
-                    }
-                    if (topLim < 0)
-                    {
-                        topLim = 0;
-                    }
-                    if (bottomLim > 7)
-                    {
-                        bottomLim = 7;
-                    }
+                        int x = allowedKnightMove.Column;
+                        int y = allowedKnightMove.Row;
 
-                    for (int x = topLim; x <= bottomLim; x++)
-                    {
-                        for (int y = leftLim; y <= rightLim; y++)
+                        if (SquareOnBoard(x, y) == true)
                         {
-                            if ((x == currentPiece.Column) & (y == currentPiece.Row))
-                            {
-                                continue;
-                            }
                             squares[x, y].LegalNextMove = true;
                             availableMoves.Add(new Move
                             {
                                 BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
                                 Column = x,
-                                Row = 7-y
+                                Row = 7 - y
+                            });
+                        }
+                    }
+                    break;
+
+                case "King":
+
+                    List<Move> allowedKingMoves = new List<Move>();
+
+                    allowedKingMoves.Add(new Move { Column = (currentSquare.RowNumber + 1), Row = (currentSquare.ColumnNumber + 1) });
+                    allowedKingMoves.Add(new Move { Column = (currentSquare.RowNumber + 1), Row = (currentSquare.ColumnNumber - 1) });
+                    allowedKingMoves.Add(new Move { Column = (currentSquare.RowNumber + 1), Row = (currentSquare.ColumnNumber + 0) });
+                    allowedKingMoves.Add(new Move { Column = (currentSquare.RowNumber + 0), Row = (currentSquare.ColumnNumber + 1) });
+                    allowedKingMoves.Add(new Move { Column = (currentSquare.RowNumber + 0), Row = (currentSquare.ColumnNumber - 1) });
+                    allowedKingMoves.Add(new Move { Column = (currentSquare.RowNumber - 1), Row = (currentSquare.ColumnNumber + 1) });
+                    allowedKingMoves.Add(new Move { Column = (currentSquare.RowNumber - 1), Row = (currentSquare.ColumnNumber - 1) });
+                    allowedKingMoves.Add(new Move { Column = (currentSquare.RowNumber - 1), Row = (currentSquare.ColumnNumber + 0) });
+
+                    foreach (Move allowedKnightMove in allowedKingMoves)
+                    {
+                        int x = allowedKnightMove.Column;
+                        int y = allowedKnightMove.Row;
+
+                        if (SquareOnBoard(x, y) == true)
+                        {
+                            squares[x, y].LegalNextMove = true;
+                            availableMoves.Add(new Move
+                            {
+                                BoardPosition = letters[x] + (8 - y).ToString() + " " + x.ToString() + y.ToString(),
+                                Column = x,
+                                Row = 7 - y
                             });
                         }
                     }
