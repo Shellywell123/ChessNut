@@ -16,6 +16,7 @@ namespace ChessNut
         public int PrevColumn               { get; set; }
         public List<Move> AvailableMoves    { get; set; }
         public string Color                 { get; set; }
+        public int NumberOftimesMoved       { get; set; }
 
     }
 }
