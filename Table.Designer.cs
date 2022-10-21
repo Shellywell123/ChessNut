@@ -28,8 +28,6 @@
         private void InitializeComponent()
         {
             this.WhitePieceSelectionBox = new System.Windows.Forms.ComboBox();
-            this.RowSelectionBox = new System.Windows.Forms.ComboBox();
-            this.ColumnSelectionBox = new System.Windows.Forms.ComboBox();
             this.BlackPieceSelectionBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,8 +38,8 @@
             this.Takable = new System.Windows.Forms.Label();
             this.CheckStatus = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.ResetButton = new System.Windows.Forms.Button();
+            this.MoveButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // WhitePieceSelectionBox
@@ -54,46 +52,6 @@
             this.WhitePieceSelectionBox.TabIndex = 0;
             this.WhitePieceSelectionBox.Text = "Piece ...";
             this.WhitePieceSelectionBox.SelectedIndexChanged += new System.EventHandler(this.WhitePieceSelectionBox_SelectedIndexChanged);
-            // 
-            // RowSelectionBox
-            // 
-            this.RowSelectionBox.FormattingEnabled = true;
-            this.RowSelectionBox.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8"});
-            this.RowSelectionBox.Location = new System.Drawing.Point(727, 183);
-            this.RowSelectionBox.Margin = new System.Windows.Forms.Padding(4);
-            this.RowSelectionBox.Name = "RowSelectionBox";
-            this.RowSelectionBox.Size = new System.Drawing.Size(97, 24);
-            this.RowSelectionBox.TabIndex = 1;
-            this.RowSelectionBox.Text = "Row ...";
-            this.RowSelectionBox.SelectedIndexChanged += new System.EventHandler(this.RowSelectionBox_SelectedIndexChanged);
-            // 
-            // ColumnSelectionBox
-            // 
-            this.ColumnSelectionBox.FormattingEnabled = true;
-            this.ColumnSelectionBox.Items.AddRange(new object[] {
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H"});
-            this.ColumnSelectionBox.Location = new System.Drawing.Point(624, 183);
-            this.ColumnSelectionBox.Margin = new System.Windows.Forms.Padding(4);
-            this.ColumnSelectionBox.Name = "ColumnSelectionBox";
-            this.ColumnSelectionBox.Size = new System.Drawing.Size(95, 24);
-            this.ColumnSelectionBox.TabIndex = 2;
-            this.ColumnSelectionBox.Text = "Column ...";
-            this.ColumnSelectionBox.SelectedIndexChanged += new System.EventHandler(this.ColumnSelectionBox_SelectedIndexChanged);
             // 
             // BlackPieceSelectionBox
             // 
@@ -119,9 +77,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(624, 45);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 16);
+            this.label1.Size = new System.Drawing.Size(98, 16);
             this.label1.TabIndex = 8;
-            this.label1.Text = "White";
+            this.label1.Text = "White Pieces";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
@@ -131,9 +89,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(624, 105);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 16);
+            this.label2.Size = new System.Drawing.Size(98, 16);
             this.label2.TabIndex = 9;
-            this.label2.Text = "Black";
+            this.label2.Text = "Black Pieces";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // Moves
@@ -158,7 +116,7 @@
             // AvailableMoves
             // 
             this.AvailableMoves.FormattingEnabled = true;
-            this.AvailableMoves.Location = new System.Drawing.Point(624, 214);
+            this.AvailableMoves.Location = new System.Drawing.Point(624, 182);
             this.AvailableMoves.Name = "AvailableMoves";
             this.AvailableMoves.Size = new System.Drawing.Size(200, 24);
             this.AvailableMoves.TabIndex = 13;
@@ -189,11 +147,12 @@
             // CheckStatus
             // 
             this.CheckStatus.AutoSize = true;
-            this.CheckStatus.Location = new System.Drawing.Point(624, 458);
+            this.CheckStatus.Location = new System.Drawing.Point(624, 453);
             this.CheckStatus.Name = "CheckStatus";
             this.CheckStatus.Size = new System.Drawing.Size(44, 16);
             this.CheckStatus.TabIndex = 17;
             this.CheckStatus.Text = "label5";
+            this.CheckStatus.Click += new System.EventHandler(this.CheckStatus_Click);
             // 
             // label5
             // 
@@ -206,33 +165,33 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "Info";
             // 
-            // button1
+            // ResetButton
             // 
-            this.button1.Location = new System.Drawing.Point(749, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 26);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Reset";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ResetButton.Location = new System.Drawing.Point(624, 12);
+            this.ResetButton.Name = "ResetButton";
+            this.ResetButton.Size = new System.Drawing.Size(200, 26);
+            this.ResetButton.TabIndex = 19;
+            this.ResetButton.Text = "Reset Pieces";
+            this.ResetButton.UseVisualStyleBackColor = true;
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
-            // button2
+            // MoveButton
             // 
-            this.button2.Location = new System.Drawing.Point(678, 273);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 26);
-            this.button2.TabIndex = 20;
-            this.button2.Text = "Move";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.MoveButton.Location = new System.Drawing.Point(624, 212);
+            this.MoveButton.Name = "MoveButton";
+            this.MoveButton.Size = new System.Drawing.Size(200, 26);
+            this.MoveButton.TabIndex = 20;
+            this.MoveButton.Text = "Move";
+            this.MoveButton.UseVisualStyleBackColor = true;
+            this.MoveButton.Click += new System.EventHandler(this.MoveButton_Click);
             // 
             // Table
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(837, 615);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.MoveButton);
+            this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.CheckStatus);
             this.Controls.Add(this.Takable);
@@ -243,8 +202,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BlackPieceSelectionBox);
-            this.Controls.Add(this.ColumnSelectionBox);
-            this.Controls.Add(this.RowSelectionBox);
             this.Controls.Add(this.WhitePieceSelectionBox);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Table";
@@ -260,8 +217,6 @@
 
         private System.Windows.Forms.ComboBox WhitePieceSelectionBox;
         private System.Windows.Forms.ComboBox BlackPieceSelectionBox;
-        private System.Windows.Forms.ComboBox RowSelectionBox;
-        private System.Windows.Forms.ComboBox ColumnSelectionBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label Moves;
@@ -271,8 +226,8 @@
         private System.Windows.Forms.Label Takable;
         private System.Windows.Forms.Label CheckStatus;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button ResetButton;
+        private System.Windows.Forms.Button MoveButton;
     }
 }
 

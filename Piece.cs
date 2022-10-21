@@ -10,13 +10,15 @@ namespace ChessNut
     {
         public string Name                  { get; set; }
         public string Class                 { get; set; }
+        public int StartRow                 { get; set; }
+        public int StartColumn              { get; set; }
         public int Row                      { get; set; }
         public int Column                   { get; set; }
         public int PrevRow                  { get; set; }
         public int PrevColumn               { get; set; }
         public List<Move> AvailableMoves    { get; set; }
         public string Color                 { get; set; }
-        public int NumberOftimesMoved       { get; set; }
-
+        public int NumberOfTimesMoved       { get; set; }
+        public bool Taken                   { get; set; }
     }
 }
