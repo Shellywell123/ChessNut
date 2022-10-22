@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using System.IO;
 
 namespace ChessNut
 {
@@ -129,530 +130,6 @@ namespace ChessNut
                             }
                         }
                     }
-                    break;
-
-                case "Rook":
-
-                    //top
-                    
-                    for (int y = currentPiece.Row; y >= 0; y--)
-                    {
-                        int x = currentPiece.Column;
-                        //ignore currently occupied square
-                        if (y == currentPiece.Row)
-                        {
-                            continue;
-                        }
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                        {
-                            break;
-                        }
-
-                        squares[x, y].LegalNextMove = true;
-                        availableMoves.Add(new Move
-                        {
-                            BoardPosition = letters[x] + (8 - y).ToString(),
-                            Column = x,
-                            Row = 7 - y
-                        });
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                        {
-                            break;
-                        }
-                    }
-
-                    // right
-                    
-                    for (int x = currentPiece.Column; x < 8; x++)
-                    {
-                        int y = currentPiece.Row;
-                        //ignore currently occupied square
-                        if (x == currentSquare.RowNumber)
-                        {
-                            continue;
-                        }
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                        {
-                            break;
-                        }
-
-                        squares[x, currentPiece.Row].LegalNextMove = true;
-                        availableMoves.Add(new Move
-                        {
-                            BoardPosition = letters[x] + (8 - y).ToString(),
-                            Column = x,
-                            Row = 7 - y
-                        });
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                        {
-                            break;
-                        }
-                    }
-
-                    // bottom
-                    for (int y = currentPiece.Row; y < 8; y++)
-                    {
-                        int x = currentPiece.Column;
-                        //ignore currently occupied square
-                        if (y == currentSquare.ColumnNumber)
-                        {
-                            continue;
-                        }
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                        {
-                            break;
-                        }
-
-                        squares[x, y].LegalNextMove = true;
-                        availableMoves.Add(new Move
-                        {
-                            BoardPosition = letters[x] + (8 - y).ToString(),
-                            Column = x,
-                            Row = 7 - y
-                        });
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                        {
-                            break;
-                        }
-                    }
-
-                    // left
-                    for (int x = currentPiece.Column; x >= 0; x--)
-                    {
-                        int y = currentPiece.Row;
-                        //ignore currently occupied square
-                        if (x == currentSquare.RowNumber)
-                        {
-                            continue;
-                        }
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                        {
-                            break;
-                        }
-
-                        squares[x, y].LegalNextMove = true;
-                        availableMoves.Add(new Move
-                        {
-                            BoardPosition = letters[x] + (8 - y).ToString(),
-                            Column = x,
-                            Row = 7 - y
-                        });
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                        {
-                            break;
-                        }
-                    }
-                    break;
-
-                case "Bishop":
-                    // top left
-                    for (int x = currentPiece.Column; x >= 0; x--)
-                    {
-                        for (int y = currentPiece.Row; y >= 0; y--)
-                        {
-                            // ignore currently occupied square
-                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
-                            {
-                                continue;
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                            {
-                                break;
-                            }
-
-                            // y=-x
-                            if ((x - currentSquare.RowNumber) == (y - currentSquare.ColumnNumber))
-                            {
-                                squares[x, y].LegalNextMove = true;
-                                availableMoves.Add(new Move
-                                {
-                                    BoardPosition = letters[x] + (8 - y).ToString(),
-                                    Column = x,
-                                    Row = 7 - y
-                                });
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                            {
-                                break;
-                            }
-                        }
-                    }
-
-                    // top right
-                    for (int x = currentPiece.Column; x < 8; x++)
-                    {
-                        for (int y = currentPiece.Row; y >= 0; y--)
-                        {
-                            // ignore currently occupied square
-                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
-                            {
-                                continue;
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                            {
-                                break;
-                            }
-
-                            // y=x
-                            if ((x - currentSquare.RowNumber) == -(y - currentSquare.ColumnNumber))
-                            {
-                                squares[x, y].LegalNextMove = true;
-                                availableMoves.Add(new Move
-                                {
-                                    BoardPosition = letters[x] + (8 - y).ToString(),
-                                    Column = x,
-                                    Row = 7 - y
-                                });
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                            {
-                                break;
-                            }
-                        }
-                    }
-
-                    // bottom right
-                    for (int x = currentPiece.Column; x < 8; x++)
-                    {
-                        for (int y = currentPiece.Row; y < 8; y++)
-                        {
-                            // ignore currently occupied square
-                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
-                            {
-                                continue;
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                            {
-                                break;
-                            }
-
-                            // y=x
-                            if ((x - currentSquare.RowNumber) == (y - currentSquare.ColumnNumber))
-                            {
-                                squares[x, y].LegalNextMove = true;
-                                availableMoves.Add(new Move
-                                {
-                                    BoardPosition = letters[x] + (8 - y).ToString(),
-                                    Column = x,
-                                    Row = 7 - y
-                                });
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                            {
-                                break;
-                            }
-                        }
-                    }
-
-                    // bottom left
-                    for (int x = currentPiece.Column; x >= 0; x--)
-                    {
-                        for (int y = currentPiece.Row; y < 8; y++)
-                        {
-                            // ignore currently occupied square
-                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
-                            {
-                                continue;
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                            {
-                                break;
-                            }
-
-                            // y=x
-                            if ((x - currentSquare.RowNumber) == -(y - currentSquare.ColumnNumber))
-                            {
-                                squares[x, y].LegalNextMove = true;
-                                availableMoves.Add(new Move
-                                {
-                                    BoardPosition = letters[x] + (8 - y).ToString(),
-                                    Column = x,
-                                    Row = 7 - y
-                                });
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    break;
-
-                case "Queen":
-
-                    // top left
-                    for (int x = currentPiece.Column; x >= 0; x--)
-                    {
-                        for (int y = currentPiece.Row; y >= 0; y--)
-                        {
-                            // ignore currently occupied square
-                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
-                            {
-                                continue;
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                            {
-                                break;
-                            }
-
-                            // y=-x
-                            if ((x - currentSquare.RowNumber) == (y - currentSquare.ColumnNumber))
-                            {
-                                squares[x, y].LegalNextMove = true;
-                                availableMoves.Add(new Move
-                                {
-                                    BoardPosition = letters[x] + (8 - y).ToString(),
-                                    Column = x,
-                                    Row = 7 - y
-                                });
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    
-
-                    //top
-                    for (int y = currentPiece.Row; y >= 0; y--)
-                    {
-                        int x = currentPiece.Column;
-                        //ignore currently occupied square
-                        if (y == currentPiece.Row)
-                        {
-                            continue;
-                        }
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                        {
-                            break;
-                        }
-
-                        squares[x, y].LegalNextMove = true;
-                        availableMoves.Add(new Move
-                        {
-                            BoardPosition = letters[x] + (8 - y).ToString(),
-                            Column = x,
-                            Row = 7 - y
-                        });
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                        {
-                            break;
-                        }
-                    }
-
-                    // top right
-                    for (int x = currentPiece.Column; x < 8; x++)
-                    {
-                        for (int y = currentPiece.Row; y >= 0; y--)
-                        {
-                            // ignore currently occupied square
-                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
-                            {
-                                continue;
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                            {
-                                break;
-                            }
-
-                            // y=x
-                            if ((x - currentSquare.RowNumber) == -(y - currentSquare.ColumnNumber))
-                            {
-                                squares[x, y].LegalNextMove = true;
-                                availableMoves.Add(new Move
-                                {
-                                    BoardPosition = letters[x] + (8 - y).ToString(),
-                                    Column = x,
-                                    Row = 7 - y
-                                });
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                            {
-                                break;
-                            }
-                        }
-                    }
-
-                    // right
-                    for (int x = currentPiece.Column; x < 8; x++)
-                    {
-                        int y = currentPiece.Row;
-                        //ignore currently occupied square
-                        if (x == currentSquare.RowNumber)
-                        {
-                            continue;
-                        }
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                        {
-                            break;
-                        }
-
-                        squares[x, y].LegalNextMove = true;
-                        availableMoves.Add(new Move
-                        {
-                            BoardPosition = letters[x] + (8 - y).ToString(),
-                            Column = x,
-                            Row = 7 - y
-                        });
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                        {
-                            break;
-                        }
-                    }
-
-                    // bottom right
-                    for (int x = currentPiece.Column; x < 8; x++)
-                    {
-                        for (int y = currentPiece.Row; y < 8; y++)
-                        {
-                            // ignore currently occupied square
-                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
-                            {
-                                continue;
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                            {
-                                break;
-                            }
-
-                            // y=x
-                            if ((x - currentSquare.RowNumber) == (y - currentSquare.ColumnNumber))
-                            {
-                                squares[x, y].LegalNextMove = true;
-                                availableMoves.Add(new Move
-                                {
-                                    BoardPosition = letters[x] + (8 - y).ToString(),
-                                    Column = x,
-                                    Row = 7 - y
-                                });
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                            {
-                                break;
-                            }
-                        }
-                    }
-
-                    // bottom
-                    for (int y = currentPiece.Row; y < 8; y++)
-                    {
-                        int x = currentPiece.Column;
-                        //ignore currently occupied square
-                        if (y == currentSquare.ColumnNumber)
-                        {
-                            continue;
-                        }
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                        {
-                            break;
-                        }
-
-                        squares[x, y].LegalNextMove = true;
-                        availableMoves.Add(new Move
-                        {
-                            BoardPosition = letters[x] + (8 - y).ToString(),
-                            Column = x,
-                            Row = 7 - y
-                        });
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                        {
-                            break;
-                        }
-                    }
-
-                    // bottom left
-                    for (int x = currentPiece.Column; x >= 0; x--)
-                    {
-                        for (int y = currentPiece.Row; y < 8; y++)
-                        {
-                            // ignore currently occupied square
-                            if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
-                            {
-                                continue;
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                            {
-                                break;
-                            }
-
-                            // y=x
-                            if ((x - currentSquare.RowNumber) == -(y - currentSquare.ColumnNumber))
-                            {
-                                squares[x, y].LegalNextMove = true;
-                                availableMoves.Add(new Move
-                                {
-                                    BoardPosition = letters[x] + (8 - y).ToString(),
-                                    Column = x,
-                                    Row = 7 - y
-                                });
-                            }
-
-                            if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                            {
-                                break;
-                            }
-                        }
-                    }
-
-                    // left
-                    for (int x = currentPiece.Column; x >= 0; x--)
-                    {
-                        int y = currentPiece.Row;
-                        //ignore currently occupied square
-                        if (x == currentSquare.RowNumber)
-                        {
-                            continue;
-                        }
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
-                        {
-                            break;
-                        }
-
-                        squares[x, y].LegalNextMove = true;
-                        availableMoves.Add(new Move
-                        {
-                            BoardPosition = letters[x] + (8 - y).ToString(),
-                            Column = x,
-                            Row = 7 - y
-                        });
-
-                        if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
-                        {
-                            break;
-                        }
-                    }
-
                     break;
 
                 case "Pawn":
@@ -805,10 +282,320 @@ namespace ChessNut
                             break;
                     }
                     break;
+
+                case "Rook":
+                    availableMoves = Top(currentBoard, currentPiece, availableMoves);
+                    availableMoves = Right(currentBoard, currentPiece, availableMoves);
+                    availableMoves = Bottom(currentBoard, currentPiece, availableMoves);
+                    availableMoves = Left(currentBoard, currentPiece, availableMoves);
+                    break;
+
+                case "Bishop":
+                    availableMoves = TopLeft(currentBoard, currentPiece, availableMoves);
+                    availableMoves = TopRight(currentBoard, currentPiece, availableMoves);
+                    availableMoves = BottomRight(currentBoard, currentPiece, availableMoves);
+                    availableMoves = BottomLeft(currentBoard, currentPiece, availableMoves);
+                    break;
+
+                case "Queen":
+                    availableMoves = TopLeft(currentBoard, currentPiece, availableMoves);
+                    availableMoves = TopRight(currentBoard, currentPiece, availableMoves);
+                    availableMoves = BottomRight(currentBoard, currentPiece, availableMoves);
+                    availableMoves = BottomLeft(currentBoard, currentPiece, availableMoves);
+                    break;
             }
             return availableMoves;
         }
 
+        public List<Move> Right(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
+        {
+            Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
+            // right
+            for (int x = currentPiece.Column; x < 8; x++)
+            {
+                int y = currentPiece.Row;
+                //ignore currently occupied square
+                if (x == currentSquare.RowNumber)
+                {
+                    continue;
+                }
+
+                if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
+                {
+                    return availableMoves;
+                }
+
+                squares[x, y].LegalNextMove = true;
+                availableMoves.Add(new Move
+                {
+                    BoardPosition = letters[x] + (8 - y).ToString(),
+                    Column = x,
+                    Row = 7 - y
+                });
+
+                if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
+                {
+                    break;
+                }
+            }
+            return availableMoves;
+        }
+
+        public List<Move> Left(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
+        {
+            Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
+            // left
+            for (int x = currentPiece.Column; x >= 0; x--)
+            {
+                int y = currentPiece.Row;
+                //ignore currently occupied square
+                if (x == currentSquare.RowNumber)
+                {
+                    continue;
+                }
+
+                if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
+                {
+                    return availableMoves;
+                }
+
+                squares[x, y].LegalNextMove = true;
+                availableMoves.Add(new Move
+                {
+                    BoardPosition = letters[x] + (8 - y).ToString(),
+                    Column = x,
+                    Row = 7 - y
+                });
+
+                if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
+                {
+                    break;
+                }
+            }
+            return availableMoves;
+        }
+
+        public List<Move> Bottom(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
+        {
+            Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
+            // bottom
+            for (int y = currentPiece.Row; y < 8; y++)
+            {
+                int x = currentPiece.Column;
+                //ignore currently occupied square
+                if (y == currentSquare.ColumnNumber)
+                {
+                    continue;
+                }
+
+                squares[x, y].LegalNextMove = true;
+                availableMoves.Add(new Move
+                {
+                    BoardPosition = letters[x] + (8 - y).ToString(),
+                    Column = x,
+                    Row = 7 - y
+                });
+
+                if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
+                {
+                    break;
+                }
+            }
+            return availableMoves;
+        }
+        public List<Move> Top(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
+        {
+            Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
+            //top
+            for (int y = currentPiece.Row; y >= 0; y--)
+            {
+                int x = currentPiece.Column;
+                //ignore currently occupied square
+                if (y == currentPiece.Row)
+                {
+                    continue;
+                }
+
+                if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
+                {
+                    return availableMoves;
+                }
+
+                squares[x, y].LegalNextMove = true;
+                availableMoves.Add(new Move
+                {
+                    BoardPosition = letters[x] + (8 - y).ToString(),
+                    Column = x,
+                    Row = 7 - y
+                });
+
+                if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
+                {
+                    break;
+                }
+            }
+            return availableMoves;
+        }
+        public List<Move> TopLeft(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
+        { 
+            Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
+        
+            // top left
+            for (int x = currentPiece.Column; x >= 0; x--)
+            {
+                for (int y = currentPiece.Row; y >= 0; y--)
+                {
+                    // ignore currently occupied square
+                    if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
+                    {
+                        continue;
+                    }
+
+                    // y=-x
+                    if ((x - currentSquare.RowNumber) == (y - currentSquare.ColumnNumber))
+                    {
+                        if (currentBoard.squares[x, y].CurrentlyOccupied == currentPiece.Color)
+                        {
+                            return availableMoves;
+                        }
+
+                        squares[x, y].LegalNextMove = true;
+                        availableMoves.Add(new Move
+                        {
+                            BoardPosition = letters[x] + (8 - y).ToString(),
+                            Column = x,
+                            Row = 7 - y
+                        });
+                    }
+
+                    if (currentBoard.squares[x, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
+                    {
+                        break;
+                    }
+                }
+            }
+            return availableMoves;
+        }
+        public List<Move> TopRight(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
+        {
+
+            Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
+
+            for (int x = currentPiece.Column; x < 8; x++)
+            {
+                for (int y = currentPiece.Row; y >= 0; y--)
+                {
+                    // ignore currently occupied square
+                    if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
+                    {
+                        continue;
+                    }
+
+                    // y=x
+                    if ((x - currentSquare.RowNumber) == -(y - currentSquare.ColumnNumber))
+                    {
+                        if (currentBoard.squares[x, y].CurrentlyOccupied == currentPiece.Color)
+                        {
+                            return availableMoves;
+                        }
+                        squares[x, y].LegalNextMove = true;
+                        availableMoves.Add(new Move
+                        {
+                            BoardPosition = letters[x] + (8 - y).ToString(),
+                            Column = x,
+                            Row = 7 - y
+                        });
+                    }
+
+                    if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
+                    {
+                        break;
+                    }
+                }
+            }
+            return availableMoves;
+        }
+        public List<Move> BottomRight(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
+        {
+
+            Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
+
+            // bottom right
+            for (int x = currentPiece.Column; x < 8; x++)
+            {
+                for (int y = currentPiece.Row; y < 8; y++)
+                {
+                    // ignore currently occupied square
+                    if ((x == currentPiece.Column) & (y == currentPiece.Row))
+                    {
+                        continue;
+                    }
+
+                    // y=x
+                    if ((x - currentSquare.RowNumber) == (y - currentSquare.ColumnNumber))
+                    {
+                        if (currentBoard.squares[x, y].CurrentlyOccupied == currentPiece.Color)
+                        {
+                            return availableMoves;
+                        }
+
+                        squares[x, y].LegalNextMove = true;
+                        availableMoves.Add(new Move
+                        {
+                            BoardPosition = letters[x] + (8 - y).ToString(),
+                            Column = x,
+                            Row = 7 - y
+                        });
+                    }
+
+                    if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
+                    {
+                        break;
+                    }
+                }
+            }
+            return availableMoves;
+        }
+
+        public List<Move> BottomLeft(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
+        {
+            Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
+
+
+            for (int x = currentPiece.Column; x >= 0; x--)
+            {
+                for (int y = currentPiece.Row; y < 8; y++)
+                {
+                    // ignore currently occupied square
+                    if ((x == currentSquare.RowNumber) & (y == currentSquare.ColumnNumber))
+                    {
+                        continue;
+                    }
+
+                    // y=x
+                    if ((x - currentSquare.RowNumber) == -(y - currentSquare.ColumnNumber))
+                    {
+                        if (currentBoard.squares[x, y].CurrentlyOccupied == currentPiece.Color)
+                        {
+                            return availableMoves;
+                        }
+                        squares[x, y].LegalNextMove = true;
+                        availableMoves.Add(new Move
+                        {
+                            BoardPosition = letters[x] + (8 - y).ToString(),
+                            Column = x,
+                            Row = 7 - y
+                        });
+                    }
+
+                    if (currentBoard.squares[x, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
+                    {
+                        break;
+                    }
+                }
+            }
+            return availableMoves;
+        }
         public bool SquareOnBoard(int RowNumber, int ColumnNumber)
         {
             bool onBoard = false;

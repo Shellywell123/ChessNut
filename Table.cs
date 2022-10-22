@@ -182,7 +182,7 @@ namespace ChessNut
 
                     if ((s.CurrentlyOccupied == "Black") | (s.CurrentlyOccupied == "White"))
                     {
-                //        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, 255, 77, 77)), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, 255, 77, 77)), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
                     }
 
                     if (SelectedPiece != null)
@@ -192,7 +192,7 @@ namespace ChessNut
                             e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, 255, 255, 51)), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
                         }
                     }
-                    //e.Graphics.DrawString(x.ToString()+y.ToString(), new Font("Courier New", 7), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size);
+                    e.Graphics.DrawString(x.ToString()+y.ToString(), new Font("Courier New", 7), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size);
                 }
             }
         }
