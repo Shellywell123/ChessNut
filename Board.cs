@@ -298,6 +298,10 @@ namespace ChessNut
                     break;
 
                 case "Queen":
+                    availableMoves = Top(currentBoard, currentPiece, availableMoves);
+                    availableMoves = Right(currentBoard, currentPiece, availableMoves);
+                    availableMoves = Bottom(currentBoard, currentPiece, availableMoves);
+                    availableMoves = Left(currentBoard, currentPiece, availableMoves);
                     availableMoves = TopLeft(currentBoard, currentPiece, availableMoves);
                     availableMoves = TopRight(currentBoard, currentPiece, availableMoves);
                     availableMoves = BottomRight(currentBoard, currentPiece, availableMoves);
@@ -320,7 +324,7 @@ namespace ChessNut
                     continue;
                 }
 
-                if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
+                if (currentBoard.squares[x, y].CurrentlyOccupied == currentPiece.Color)
                 {
                     return availableMoves;
                 }
@@ -354,7 +358,7 @@ namespace ChessNut
                     continue;
                 }
 
-                if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
+                if (currentBoard.squares[x, y].CurrentlyOccupied == currentPiece.Color)
                 {
                     return availableMoves;
                 }
@@ -367,7 +371,7 @@ namespace ChessNut
                     Row = 7 - y
                 });
 
-                if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
+                if (currentBoard.squares[x, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
                 {
                     break;
                 }
@@ -388,6 +392,11 @@ namespace ChessNut
                     continue;
                 }
 
+                if (currentBoard.squares[x, y].CurrentlyOccupied == currentPiece.Color)
+                {
+                    return availableMoves;
+                }
+
                 squares[x, y].LegalNextMove = true;
                 availableMoves.Add(new Move
                 {
@@ -396,7 +405,7 @@ namespace ChessNut
                     Row = 7 - y
                 });
 
-                if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
+                if (currentBoard.squares[x, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
                 {
                     break;
                 }
@@ -416,7 +425,7 @@ namespace ChessNut
                     continue;
                 }
 
-                if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == currentPiece.Color)
+                if (currentBoard.squares[x, y].CurrentlyOccupied == currentPiece.Color)
                 {
                     return availableMoves;
                 }
@@ -429,7 +438,7 @@ namespace ChessNut
                     Row = 7 - y
                 });
 
-                if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
+                if (currentBoard.squares[x, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
                 {
                     break;
                 }

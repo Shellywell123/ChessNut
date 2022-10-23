@@ -1,16 +1,16 @@
 # Development To Do List
 
 ### Marknextlegalmoves:
-- fix coloring to be relevant to piece color
 - add interceptions / able to take piece
-- remove currently occupied space as an avalible move
 
 ### UI
+- fix combobox piece name update
+- click to select piece
 - drag and drop pieces
 - check fonts dont need to be externally downloaded
 
 ### Game
-- load piece setup
+- take pieces
 - checkmate checker 
 
 ### Git

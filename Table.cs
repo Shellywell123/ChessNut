@@ -182,7 +182,7 @@ namespace ChessNut
 
                     if ((s.CurrentlyOccupied == "Black") | (s.CurrentlyOccupied == "White"))
                     {
-                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, 255, 77, 77)), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
+               //         e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, 255, 77, 77)), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
                     }
 
                     if (SelectedPiece != null)
@@ -192,7 +192,7 @@ namespace ChessNut
                             e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, 255, 255, 51)), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
                         }
                     }
-                    e.Graphics.DrawString(x.ToString()+y.ToString(), new Font("Courier New", 7), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size);
+                   // e.Graphics.DrawString(x.ToString()+y.ToString(), new Font("Courier New", 7), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size);
                 }
             }
         }
@@ -207,8 +207,6 @@ namespace ChessNut
                 num += 1;
             }
 
-            // add letters
-            string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H" };
             for (int x = 0; x < letters.Length; x++)
             {
                 e.Graphics.DrawString(letters[x], new Font("Courier New", 10), new SolidBrush(Color.Black), square_size * x + border_size + 16, square_size * 8 + border_size);
@@ -458,6 +456,7 @@ namespace ChessNut
 
                 BlackPieceSelectionBox.DataSource = blackPieces;
                 WhitePieceSelectionBox.DataSource = whitePieces;
+
                 // SelectedPiece.Name = letters[SelectedPiece.Column] + (8 - SelectedPiece.Row).ToString() + " - " + SelectedPiece.Color + " " + SelectedPiece.Class;
             }
         }
