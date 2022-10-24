@@ -177,7 +177,7 @@ namespace ChessNut
                             // diagonal take move
                             if (SquareOnBoard(x + 1, y) == true)
                             {
-                                if (currentBoard.squares[x + 1, y].CurrentlyOccupied == currentPiece.Color)
+                                if (currentBoard.squares[x + 1, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
                                 {
                                     if (squares[x, y].CurrentlyOccupied != currentPiece.Color)
                                     {
@@ -193,7 +193,7 @@ namespace ChessNut
                             }
                             if (SquareOnBoard(x - 1, y) == true)
                             {
-                                if (currentBoard.squares[x - 1, y].CurrentlyOccupied == currentPiece.Color)
+                                if (currentBoard.squares[x - 1, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
                                 {
                                     if (squares[x, y].CurrentlyOccupied != currentPiece.Color)
                                     {
@@ -249,7 +249,7 @@ namespace ChessNut
                             // diagonal take move
                             if (SquareOnBoard(xb + 1, yb) == true)
                             {
-                                if (currentBoard.squares[xb + 1, yb].CurrentlyOccupied == currentPiece.Color)
+                                if (currentBoard.squares[xb + 1, yb].CurrentlyOccupied == OppositeColor(currentPiece.Color))
                                 {
                                     if (squares[xb, yb].CurrentlyOccupied != currentPiece.Color)
                                     {
@@ -265,7 +265,7 @@ namespace ChessNut
                             }
                             if (SquareOnBoard(xb - 1, yb) == true)
                             {
-                                if (currentBoard.squares[xb - 1, yb].CurrentlyOccupied == currentPiece.Color)
+                                if (currentBoard.squares[xb - 1, yb].CurrentlyOccupied == OppositeColor(currentPiece.Color))
                                 {
                                     if (squares[xb, yb].CurrentlyOccupied != currentPiece.Color)
                                     {
