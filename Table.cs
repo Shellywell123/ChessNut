@@ -27,6 +27,8 @@ namespace ChessNut
         
         List<Piece> whitePieces = new List<Piece>();
         List<Piece> blackPieces = new List<Piece>();
+        List<Piece> whitePiecesTaken = new List<Piece>();
+        List<Piece> blackPiecesTaken = new List<Piece>();
 
         Piece WhiteRook1   = new Piece { Class = "Rook",   Color = "White", Name = "White Rook 1"  , StartColumn = 0, StartRow = 7};
         Piece WhiteKnight1 = new Piece { Class = "Knight", Color = "White", Name = "White Knight 1", StartColumn = 1, StartRow = 7};
@@ -78,14 +80,14 @@ namespace ChessNut
             whitePieces.Add(WhiteBishop2);     
             whitePieces.Add(WhiteKnight2);            
             whitePieces.Add(WhiteRook2);
-            whitePieces.Add(WhitePawn1);
+            //whitePieces.Add(WhitePawn1);
             whitePieces.Add(WhitePawn2);
             whitePieces.Add(WhitePawn3);
             whitePieces.Add(WhitePawn4);
             whitePieces.Add(WhitePawn5);
             whitePieces.Add(WhitePawn6);
             whitePieces.Add(WhitePawn7);
-            whitePieces.Add(WhitePawn8);
+            //whitePieces.Add(WhitePawn8);
 
             WhitePieceSelectionBox.DataSource = whitePieces;
             WhitePieceSelectionBox.DisplayMember = "Name";
@@ -356,27 +358,42 @@ namespace ChessNut
             chessNutBoard.squares[pieceToMove.PrevColumn, pieceToMove.PrevRow].CurrentlyOccupied = "free";
             chessNutBoard.squares[pieceToMove.Column, pieceToMove.Row].CurrentlyOccupied = pieceToMove.Color;
 
-            foreach (Piece piece in whitePieces)
+            Piece pieceToTake = new Piece();
+            switch (pieceToMove.Color)
             {
-                if (piece.Color == OppositeColor(piece.Color))
-                {
-                    if ((piece.Column == pieceToMove.Column) & (piece.Row == pieceToMove.Row))
+                case "White":
+                    foreach (Piece piece in blackPieces)
                     {
-                        piece.Taken = true;
+                        if (piece.Color == OppositeColor(pieceToMove.Color))
+                        {
+                            if ((piece.Column == pieceToMove.Column) & (piece.Row == pieceToMove.Row))
+                            {
+                                pieceToTake = piece;
+                            }
+                        }
                     }
-                }
-            }
+                    pieceToTake.Taken = true;
+                    blackPiecesTaken.Add(pieceToTake);
+                    blackPieces.Remove(pieceToTake);
+                    break;
 
-            foreach (Piece piece in blackPieces)
-            {
-                if (piece.Color == OppositeColor(piece.Color))
-                {
-                    if ((piece.Column == pieceToMove.Column) & (piece.Row == pieceToMove.Row))
+                case "Black":
+                    foreach (Piece piece in whitePieces)
                     {
-                        piece.Taken = true;
+                        if (piece.Color == OppositeColor(pieceToMove.Color))
+                        {
+                            if ((piece.Column == pieceToMove.Column) & (piece.Row == pieceToMove.Row))
+                            {
+                                pieceToTake = piece;
+                            }
+                        }
                     }
-                }
+                    pieceToTake.Taken = true;
+                    whitePiecesTaken.Add(pieceToTake);
+                    whitePieces.Remove(pieceToTake);
+                    break;
             }
+                    
             Table_Load(sender, e);
             this.Invalidate();
         }
