@@ -27,10 +27,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.WhitePieceSelectionBox = new System.Windows.Forms.ComboBox();
-            this.BlackPieceSelectionBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.Moves = new System.Windows.Forms.Label();
             this.CurrentPiece = new System.Windows.Forms.Label();
             this.AvailableMoves = new System.Windows.Forms.ComboBox();
@@ -44,58 +40,6 @@
             this.TakenWhite = new System.Windows.Forms.Label();
             this.BoardLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
-            // 
-            // WhitePieceSelectionBox
-            // 
-            this.WhitePieceSelectionBox.FormattingEnabled = true;
-            this.WhitePieceSelectionBox.Location = new System.Drawing.Point(468, 54);
-            this.WhitePieceSelectionBox.Name = "WhitePieceSelectionBox";
-            this.WhitePieceSelectionBox.Size = new System.Drawing.Size(151, 21);
-            this.WhitePieceSelectionBox.TabIndex = 0;
-            this.WhitePieceSelectionBox.Text = "Piece ...";
-            this.WhitePieceSelectionBox.SelectedIndexChanged += new System.EventHandler(this.WhitePieceSelectionBox_SelectedIndexChanged);
-            // 
-            // BlackPieceSelectionBox
-            // 
-            this.BlackPieceSelectionBox.FormattingEnabled = true;
-            this.BlackPieceSelectionBox.Items.AddRange(new object[] {
-            "King",
-            "Queen",
-            "Knight",
-            "Rook",
-            "Bishop"});
-            this.BlackPieceSelectionBox.Location = new System.Drawing.Point(468, 102);
-            this.BlackPieceSelectionBox.Name = "BlackPieceSelectionBox";
-            this.BlackPieceSelectionBox.Size = new System.Drawing.Size(151, 21);
-            this.BlackPieceSelectionBox.TabIndex = 5;
-            this.BlackPieceSelectionBox.Text = "Piece ...";
-            this.BlackPieceSelectionBox.SelectedIndexChanged += new System.EventHandler(this.BlackPieceSelectionBox_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(468, 37);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "White Pieces";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(468, 85);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Black Pieces";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // Moves
             // 
@@ -121,7 +65,7 @@
             // AvailableMoves
             // 
             this.AvailableMoves.FormattingEnabled = true;
-            this.AvailableMoves.Location = new System.Drawing.Point(468, 148);
+            this.AvailableMoves.Location = new System.Drawing.Point(474, 74);
             this.AvailableMoves.Margin = new System.Windows.Forms.Padding(2);
             this.AvailableMoves.Name = "AvailableMoves";
             this.AvailableMoves.Size = new System.Drawing.Size(151, 21);
@@ -134,7 +78,7 @@
             this.label3.AutoSize = true;
             this.label3.Cursor = System.Windows.Forms.Cursors.Default;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(468, 132);
+            this.label3.Location = new System.Drawing.Point(471, 50);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 13);
@@ -188,7 +132,7 @@
             // 
             // MoveButton
             // 
-            this.MoveButton.Location = new System.Drawing.Point(468, 172);
+            this.MoveButton.Location = new System.Drawing.Point(475, 99);
             this.MoveButton.Margin = new System.Windows.Forms.Padding(2);
             this.MoveButton.Name = "MoveButton";
             this.MoveButton.Size = new System.Drawing.Size(150, 21);
@@ -260,10 +204,6 @@
             this.Controls.Add(this.AvailableMoves);
             this.Controls.Add(this.CurrentPiece);
             this.Controls.Add(this.Moves);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.BlackPieceSelectionBox);
-            this.Controls.Add(this.WhitePieceSelectionBox);
             this.Controls.Add(this.BoardLayoutPanel);
             this.Name = "Table";
             this.Text = "ChessNut";
@@ -275,11 +215,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox WhitePieceSelectionBox;
-        private System.Windows.Forms.ComboBox BlackPieceSelectionBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label Moves;
         private System.Windows.Forms.Label CurrentPiece;
         private System.Windows.Forms.ComboBox AvailableMoves;

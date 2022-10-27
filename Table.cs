@@ -67,13 +67,13 @@ namespace ChessNut
         Piece BlackPawn8   = new Piece { Class = "Pawn",   Color = "Black", Name = "Black Pawn 8",   StartColumn = 7, StartRow = 1};
 
         Piece SelectedPiece;
+        Move  SelectedMove;
 
         public Table()
         {
             InitializeComponent();
 
-            // white combo box piece selector
-
+            // add black pieces
             whitePieces.Add(WhiteRook1);
             whitePieces.Add(WhiteKnight1);
             whitePieces.Add(WhiteBishop1);
@@ -82,20 +82,16 @@ namespace ChessNut
             whitePieces.Add(WhiteBishop2);     
             whitePieces.Add(WhiteKnight2);            
             whitePieces.Add(WhiteRook2);
-            //whitePieces.Add(WhitePawn1);
+            whitePieces.Add(WhitePawn1);
             whitePieces.Add(WhitePawn2);
             whitePieces.Add(WhitePawn3);
             whitePieces.Add(WhitePawn4);
             whitePieces.Add(WhitePawn5);
             whitePieces.Add(WhitePawn6);
             whitePieces.Add(WhitePawn7);
-            //whitePieces.Add(WhitePawn8);
+            whitePieces.Add(WhitePawn8);
 
-            WhitePieceSelectionBox.DataSource = whitePieces;
-            WhitePieceSelectionBox.DisplayMember = "Name";
-            WhitePieceSelectionBox.SelectedIndex = -1;
-
-            // black combo box piece selector
+            // add white pieces
             blackPieces.Add(BlackRook1);
             blackPieces.Add(BlackKnight1);
             blackPieces.Add(BlackBishop1);
@@ -113,17 +109,13 @@ namespace ChessNut
             blackPieces.Add(BlackPawn7);
             blackPieces.Add(BlackPawn8);
 
-            BlackPieceSelectionBox.DataSource = blackPieces;
-            BlackPieceSelectionBox.DisplayMember = "Name";
-            BlackPieceSelectionBox.SelectedIndex = -1;
-
+            // create button array
+            InitializeTableLayoutPanel();
+            AssignClickEvent();
             initialise_table();
 
-            SelectedPiece = new Piece { Name = "No SelectedPiece"};
-            //SelectedPiece.AvailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, SelectedPiece);
-
-            AvailableMoves.DisplayMember = "BoardPosition";
-            //AvailableMoves.Text = "Avaliable Moves ...";
+            // init selected piece is empty
+            SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>() };
         }
 
         public void initialise_table()
@@ -154,8 +146,24 @@ namespace ChessNut
                 chessNutBoard.squares[piece.Column, piece.Row].CurrentlyOccupied = piece.Color;
                 piece.Name = letters[piece.Column] + (8 - piece.Row).ToString() + " - " + piece.Color + " " + piece.Class;
             }
+        }
+        private void GameOverCheck()
+        {
+            foreach (Piece piece in blackPiecesTaken)
+            {
+                if (piece.Name == "Black King")
+                {
+                    MessageBox.Show("White Wins");
+                }
+            }
 
-            InitializeTableLayoutPanel();
+            foreach (Piece piece in whitePiecesTaken)
+            {
+                if (piece.Name == "White King")
+                {
+                    MessageBox.Show("Black Wins");
+                }
+            }
         }
 
         private void InitializeTableLayoutPanel()
@@ -183,64 +191,49 @@ namespace ChessNut
             }
         }
 
-        private void Draw_Board(object sender, PaintEventArgs e)
+        private void UpdateTableLayoutPanel()
         {
-            // Creating multiple shapes with filled color
-
-            Color white = Color.FromArgb(255, 249, 177);
-            Color black = Color.FromArgb(191, 152, 95);
-
-            SolidBrush whiteBrush = new SolidBrush(white);
-            SolidBrush blackBrush = new SolidBrush(black);
-
-            //chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
-
-            // draw squares
-            for (int x = 0; x < 8; x++)
+            foreach (Button c in BoardLayoutPanel.Controls.OfType<Button>())
             {
-                for (int y = 0; y < 8; y++)
-                {
-                    Square s = chessNutBoard.squares[x, y];
-
-                    if (((x % 2 == 0) & (y % 2 == 0)) | ((x % 2 != 0) & (y % 2 != 0)))
-                    {
-                        e.Graphics.FillRectangle(whiteBrush, x * square_size + border_size, y * square_size + border_size, square_size, square_size);
-                    }
-                    else
-                    {
-                        e.Graphics.FillRectangle(blackBrush, x * square_size + border_size, y * square_size + border_size, square_size, square_size);
-                    }
-
-                    if ((s.CurrentlyOccupied == "Black") | (s.CurrentlyOccupied == "White"))
-                    {
-               //         e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, 255, 77, 77)), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
-                    }
-
-                    if (SelectedPiece != null)
-                    {
-                        if ((x == SelectedPiece.Column) & (y == SelectedPiece.Row))
-                        {
-                            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, 255, 255, 51)), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
-                        }
-                    }
-                   // e.Graphics.DrawString(x.ToString()+y.ToString(), new Font("Courier New", 7), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size);
-                }
+                
+                int i = BoardLayoutPanel.GetPositionFromControl(c).Column;
+                int j = BoardLayoutPanel.GetPositionFromControl(c).Row;
+                ButtonPieceText(c, i, j); 
             }
         }
 
-        private void ShowLegalMoves(Button button)
+        private void ShowLegalMoves()
         {
-            for (int i = 0; i < BoardLayoutPanel.ColumnCount; i++)
+            foreach (Control button in BoardLayoutPanel.Controls.OfType<Button>())
             {
-                for (int j = 0; j < BoardLayoutPanel.RowCount; j++)
-                {
-                    Square s = chessNutBoard.squares[i, j];
+                int i = BoardLayoutPanel.GetPositionFromControl(button).Column;
+                int j = BoardLayoutPanel.GetPositionFromControl(button).Row;
 
-                    if (s.LegalNextMove == true)
+                if ((i == SelectedPiece.Column) & (j == SelectedPiece.Row))
+                {
+                    button.BackColor = Color.Purple;
+                }
+                
+                else if (chessNutBoard.squares[i, j].LegalNextMove == true)
                     {
-                        //e.Graphics.DrawString("+", new Font("Verdana", 20), new SolidBrush(Color.Red), (x - 1 / 2) * square_size + border_size, y * square_size + border_size + 1);
-                        button.BackColor = Color.FromArgb(6, 77, 255, 77);//), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
-                        //e.Graphics.DrawString(x.ToString() + y.ToString(), new Font("Courier New", 10), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size);
+                    if (((i % 2 == 0) & (j % 2 == 0)) | ((i % 2 != 0) & (j % 2 != 0)))
+                    {
+                        button.BackColor = Color.Yellow;
+                    }
+                    else
+                    {
+                        button.BackColor = Color.Green;
+                    }
+                }
+                else
+                {
+                    if (((i % 2 == 0) & (j % 2 == 0)) | ((i % 2 != 0) & (j % 2 != 0)))
+                    {
+                        button.BackColor = Color.FromArgb(255, 249, 177);
+                    }
+                    else
+                    {
+                        button.BackColor = Color.FromArgb(191, 152, 95);
                     }
                 }
             }
@@ -272,75 +265,6 @@ namespace ChessNut
             }
         }
 
-        private void Draw_Piece(object sender, PaintEventArgs e, Piece piece)
-        {
-            
-            string icon = "";
-            string outline = "";
-            switch (piece.Class)
-            {
-                case "King":
-                    icon = "S";
-                    outline = "X";
-                    break;
-
-                case "Queen":
-                    icon = "T";
-                    outline = "Y";
-                    break;
-
-                case "Rook":
-                    icon = "P";
-                    outline = "V";
-                    break;
-
-                case "Knight":
-                    icon = "Q";
-                    outline = "W";
-                    break;
-
-                case "Bishop":
-                    icon = "R";
-                    outline = "Z";
-                    break;
-
-                case "Pawn":
-                    icon = "O";
-                    outline = "U";
-                    break;
-            }
-            //if (piece.Name == SelectedPiece.Name)
-            //{
-            //    e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(10, 77, 255, 77)), SelectedPiece.Column * square_size + border_size, SelectedPiece.Row * square_size + border_size, square_size, square_size);
-            //}
-            switch (piece.Color)
-            {
-                case "Black":
-                    e.Graphics.DrawString(icon, new Font("Chess TFB", 40), new SolidBrush(Color.Black), (piece.Column - 1 / 2) * square_size + border_size, piece.Row * square_size + border_size);
-                    break;
-
-                case "White":
-                    e.Graphics.DrawString(icon, new Font("Chess TFB", 40), new SolidBrush(Color.White), (piece.Column  - 1 / 2) * square_size + border_size, piece.Row * square_size + border_size);
-                    e.Graphics.DrawString(outline, new Font("Chess TFB", 40), new SolidBrush(Color.Black), (piece.Column - 1 / 2) * square_size + border_size, piece.Row * square_size + border_size);
-
-                    break;
-            }
-
-            for (int x = 0; x < 8; x++)
-            {
-                for (int y = 0; y < 8; y++)
-                {
-                    Square s = chessNutBoard.squares[x, y];
-
-                    if (s.LegalNextMove == true)
-                    {
-                        //e.Graphics.DrawString("+", new Font("Verdana", 20), new SolidBrush(Color.Red), (x - 1 / 2) * square_size + border_size, y * square_size + border_size + 1);
-                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(6,77,255,77)), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
-                        //e.Graphics.DrawString(x.ToString() + y.ToString(), new Font("Courier New", 10), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size);
-                    }
-                }
-            }
-        }
         private void ButtonPieceText(Button button, int x, int y)
         {
             Piece pieceToDraw = null;
@@ -364,9 +288,9 @@ namespace ChessNut
             }
             if (pieceToDraw == null)
             {
+                button.Text = "";
                 return ;
             }
-
 
             string icon = "";
             string outline = "";
@@ -402,88 +326,47 @@ namespace ChessNut
                     outline = "U";
                     break;
             }
-            //if (piece.Name == SelectedPiece.Name)
-            //{
-            //    e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(10, 77, 255, 77)), SelectedPiece.Column * square_size + border_size, SelectedPiece.Row * square_size + border_size, square_size, square_size);
-            //}
             switch (pieceToDraw.Color)
             {
                 case "Black":
                     button.Text = icon;
-                    button.Font = new Font("Chess TFB", 30);//,
-                    button.ForeColor = Color.Black;//), (piece.Column - 1 / 2) * square_size + border_size, piece.Row * square_size + border_size);
+                    button.Font = new Font("Chess TFB", 30);
+                    button.ForeColor = Color.Black;
                     button.TextAlign = ContentAlignment.MiddleCenter;
                     break;
 
                 case "White":
                     button.Text = icon;
-                    button.Font = new Font("Chess TFB", 30);//,
+                    button.Font = new Font("Chess TFB", 30);
                     button.ForeColor = Color.Gray;
                     button.TextAlign = ContentAlignment.MiddleCenter;
                     //e.Graphics.DrawString(icon, new Font("Chess TFB", 40), new SolidBrush(Color.White), (piece.Column - 1 / 2) * square_size + border_size, piece.Row * square_size + border_size);
                     //e.Graphics.DrawString(outline, new Font("Chess TFB", 40), new SolidBrush(Color.Black), (piece.Column - 1 / 2) * square_size + border_size, piece.Row * square_size + border_size);
-
                     break;
-            }
-
-            //for (int x = 0; x < 8; x++)
-            //{
-            //    for (int y = 0; y < 8; y++)
-            //    {
-            //        Square s = chessNutBoard.squares[x, y];
-
-            //        if (s.LegalNextMove == true)
-            //        {
-            //            //e.Graphics.DrawString("+", new Font("Verdana", 20), new SolidBrush(Color.Red), (x - 1 / 2) * square_size + border_size, y * square_size + border_size + 1);
-            //          //  e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(6, 77, 255, 77)), x * square_size + border_size, y * square_size + border_size, square_size, square_size);
-            //            //e.Graphics.DrawString(x.ToString() + y.ToString(), new Font("Courier New", 10), new SolidBrush(Color.Black), x * square_size + border_size, y * square_size + border_size);
-            //        }
-            //    }
-            //}
-        }
-
-        private void Draw_Pieces(object sender, PaintEventArgs e)
-        {
-            foreach (Piece piece in whitePieces)
-            {
-                Draw_Piece(sender, e, piece);
-            }
-
-            foreach (Piece piece in blackPieces)
-            {
-                Draw_Piece(sender, e, piece);
             }
         }
 
         private void Draw_CurrentInfo(object sender, PaintEventArgs e)
         {
             // print number of avalible moves
-
-            Moves.Text = "Possible Moves : " + SelectedPiece.AvailableMoves.Count.ToString();
-            CurrentPiece.Text = "Current Piece  : " + SelectedPiece.Name.ToString();
-            Takable.Text = "Takable Pieces : 0";
-            CheckStatus.Text = "CheckStatus    : 0";
-            TakenBlack.Text = "taken black pieces    : "+blackPieces.Count.ToString();
-            TakenWhite.Text = "taken white pieces    : " + whitePieces.Count.ToString();
-
-            // e.Graphics.DrawString(message, new Font("Verdana", 10), new SolidBrush(Color.Black), square_size * 8 + border_size + 15, 140);   
+            Moves.Text        = "Possible Moves     : " + SelectedPiece.AvailableMoves.Count.ToString();
+            CurrentPiece.Text = "Current Piece      : " + SelectedPiece.Name.ToString();
+            Takable.Text      = "Takable Pieces     : 0";
+            CheckStatus.Text  = "CheckStatus        : 0";
+            TakenBlack.Text   = "taken black pieces : " + blackPiecesTaken.Count.ToString();
+            TakenWhite.Text   = "taken white pieces : " + whitePiecesTaken.Count.ToString();
         }
 
         private void Table_Load(object sender, PaintEventArgs e)
         {
-            //chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
-            //chessNutBoard.squares[Piece1.Column, Piece1.Row].CurrentlyOccupied = true;
-
             Draw_Title(sender, e);
-            Draw_Board(sender, e);
             Draw_Labels(sender, e);
-            Draw_Pieces(sender, e);
             Draw_CurrentInfo(sender, e);
         }
 
         private void Table_Load(object sender, EventArgs e)
         {
-            //chessNutBoard.squares[Piece1.PrevColumn, Piece1.PrevRow].CurrentlyOccupied = false;
+            GameOverCheck();
             if (SelectedPiece!= null)
             {
                 SelectedPiece.AvailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, SelectedPiece);
@@ -493,13 +376,12 @@ namespace ChessNut
                 {
                     moves.Add(avaliableMove);
                 }
-                //Moves.add(BoardPosition);
                 AvailableMoves.DataSource = moves;
+                AvailableMoves.DisplayMember = "BoardPosition";
                 AvailableMoves.SelectedIndex = -1;
                 AvailableMoves.Text = SelectedPiece.AvailableMoves.Count.ToString() + " Possible Moves";
 
-                
-                //BlackPieceSelectionBox.Text = SelectedPiece.AvailableMoves.Count.ToString() + " Possible Moves";
+                UpdateTableLayoutPanel();
             }
         }
 
@@ -527,7 +409,6 @@ namespace ChessNut
                         blackPiecesTaken.Add(pieceToTake);
                         blackPieces.Remove(pieceToTake);
                     }
-                    
                     break;
 
                 case "Black":
@@ -548,61 +429,22 @@ namespace ChessNut
                     }
                     break;
             }
-
-            BlackPieceSelectionBox.DataSource = blackPieces;
-            BlackPieceSelectionBox.DisplayMember = "Name";
-
+            SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>() };
             Table_Load(sender, e);
             this.Invalidate();
-        }
-
-        private void WhitePieceSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (WhitePieceSelectionBox.SelectedIndex < 0)
-            {
-                WhitePieceSelectionBox.Text = "No Selected Piece";
-            }
-            else
-            {
-                SelectedPiece = WhitePieceSelectionBox.SelectedItem as Piece;
-
-                // set currently selected piece 
-                //Piece1.Class = PieceSelectionBox.GetItemText(this.PieceSelectionBox.SelectedItem);
-                Table_Load(sender, e);
-                this.Invalidate();
-            }
-        }
-
-        private void BlackPieceSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (BlackPieceSelectionBox.SelectedIndex < 0)
-            {
-                BlackPieceSelectionBox.Text = "No Selected Piece";
-            }
-            else
-            {
-                SelectedPiece = BlackPieceSelectionBox.SelectedItem as Piece;
-                // set currently selected piece
-                //Piece2.Class = BlackPieceSelectionBox.GetItemText(this.BlackPieceSelectionBox.SelectedItem);
-                Table_Load(sender, e);
-                this.Invalidate();
-            }
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
             initialise_table();
+            UpdateTableLayoutPanel();
             Table_Load(sender, e);
             this.Invalidate();
         }
 
         private void MoveButton_Click(object sender, EventArgs e)
         {
-            if ((WhitePieceSelectionBox.SelectedIndex < 0) & (BlackPieceSelectionBox.SelectedIndex < 0))
-            {
-                MessageBox.Show("Select a Piece");
-            }
-            else if (AvailableMoves.SelectedIndex < 0)
+            if (AvailableMoves.SelectedIndex < 0)
             {
                 MessageBox.Show("Select a Move");
             }
@@ -629,10 +471,7 @@ namespace ChessNut
                     piece.Name = letters[piece.Column] + (8 - piece.Row).ToString() + " - " + piece.Color + " " + piece.Class;
                 }
 
-                BlackPieceSelectionBox.DataSource = blackPieces;
-                WhitePieceSelectionBox.DataSource = whitePieces;
-
-                // SelectedPiece.Name = letters[SelectedPiece.Column] + (8 - SelectedPiece.Row).ToString() + " - " + SelectedPiece.Color + " " + SelectedPiece.Class;
+                Table_Load(sender, e);
             }
         }
 
@@ -649,6 +488,85 @@ namespace ChessNut
             }
             return oppositeColor;
         }
+        private void AssignClickEvent()
+        {
+            foreach (Control c in BoardLayoutPanel.Controls.OfType<Button>())
+            {
+                c.Click += new EventHandler(OnClick);
+            }
+        }
+
+        private void OnClick(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+
+            int column = BoardLayoutPanel.GetPositionFromControl(button).Column;
+            int row = BoardLayoutPanel.GetPositionFromControl(button).Row;
+
+            // select a piece
+            if (SelectedPiece.Name == "Nothing")
+            {
+
+                foreach (Piece piece in blackPieces)
+                {
+
+                    if ((piece.Column == column) & (piece.Row == row))
+                    {
+                        SelectedPiece = piece;
+                    }
+
+                }
+                foreach (Piece piece in whitePieces)
+                {
+
+                    if ((piece.Column == column) & (piece.Row == row))
+                    {
+                        SelectedPiece = piece;
+                    }
+
+                }
+
+                SelectedPiece.AvailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, SelectedPiece);
+
+                ShowLegalMoves();
+                Table_Load(sender, e);
+            }
+            //select a move
+            else
+            {
+                bool moveValid = false;
+                foreach (Move move in SelectedPiece.AvailableMoves)
+                {
+                    //MessageBox.Show(column.ToString() + row.ToString() + " " + (move.Column-1).ToString()+ (move.Row - 1).ToString());
+
+                    // TODO this is not correct
+                    if ((move.Row-1 == row) & (move.Column == column))
+                    {
+                        //SelectedMove = AvailableMoves.SelectedItem as Move;
+
+                        SelectedPiece.PrevColumn = SelectedPiece.Column;
+                        SelectedPiece.PrevRow = SelectedPiece.Row;
+
+                        SelectedPiece.Column = move.Column;
+                        SelectedPiece.Row = 7 - move.Row;
+
+                        SelectedPiece.NumberOfTimesMoved += 1;
+
+                        moveValid = true;
+                        MovePiece(sender, e, SelectedPiece);
+
+                        Table_Load(sender, e);
+
+                    }
+                }
+
+                if (moveValid == false)
+                {
+                    SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>() };
+                }
+            }
+        }
+
         private void CheckStatus_Click(object sender, EventArgs e)
         {
 
@@ -656,7 +574,6 @@ namespace ChessNut
 
         private void AvailableMoves_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // set currently selected column
 
         }
 
@@ -684,23 +601,5 @@ namespace ChessNut
         {
 
         }
-        private void AssignClickEvent()
-        {
-            foreach (Control c in BoardLayoutPanel.Controls.OfType<Button>())
-            {
-                c.Click += new EventHandler(OnClick);
-            }
-        }
-
-        private void OnClick(object sender, EventArgs e)
-        {
-            Button button = sender as Button;
-            button.Visible = false;
-
-            int column = BoardLayoutPanel.GetPositionFromControl(button).Column;
-            int row = BoardLayoutPanel.GetPositionFromControl(button).Row;
-            ShowLegalMoves(button);
-        }
-
     }
 }
