@@ -115,7 +115,7 @@ namespace ChessNut
             initialise_table();
 
             // init selected piece is empty
-            SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>() };
+            SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
         }
 
         public void initialise_table()
@@ -211,18 +211,18 @@ namespace ChessNut
 
                 if ((i == SelectedPiece.Column) & (j == SelectedPiece.Row))
                 {
-                    button.BackColor = Color.Purple;
+                    button.BackColor = Color.FromArgb(77, 255, 77); 
                 }
                 
                 else if (chessNutBoard.squares[i, j].LegalNextMove == true)
                     {
                     if (((i % 2 == 0) & (j % 2 == 0)) | ((i % 2 != 0) & (j % 2 != 0)))
                     {
-                        button.BackColor = Color.Yellow;
+                        button.BackColor = Color.FromArgb(51, 186, 56);
                     }
                     else
                     {
-                        button.BackColor = Color.Green;
+                        button.BackColor = Color.FromArgb(28, 94, 28);
                     }
                 }
                 else
@@ -383,6 +383,7 @@ namespace ChessNut
 
                 UpdateTableLayoutPanel();
             }
+            ShowLegalMoves();
         }
 
         private void MovePiece(object sender, EventArgs e, Piece pieceToMove)
@@ -429,7 +430,7 @@ namespace ChessNut
                     }
                     break;
             }
-            SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>() };
+            SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
             Table_Load(sender, e);
             this.Invalidate();
         }
@@ -500,8 +501,12 @@ namespace ChessNut
         {
             Button button = sender as Button;
 
+
             int column = BoardLayoutPanel.GetPositionFromControl(button).Column;
             int row = BoardLayoutPanel.GetPositionFromControl(button).Row;
+
+            //MessageBox.Show(column.ToString() + row.ToString());// + " " + (move.Column - 1).ToString() + (move.Row - 1).ToString());// ;
+
 
             // select a piece
             if (SelectedPiece.Name == "Nothing")
@@ -528,7 +533,6 @@ namespace ChessNut
 
                 SelectedPiece.AvailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, SelectedPiece);
 
-                ShowLegalMoves();
                 Table_Load(sender, e);
             }
             //select a move
@@ -537,10 +541,7 @@ namespace ChessNut
                 bool moveValid = false;
                 foreach (Move move in SelectedPiece.AvailableMoves)
                 {
-                    //MessageBox.Show(column.ToString() + row.ToString() + " " + (move.Column-1).ToString()+ (move.Row - 1).ToString());
-
-                    // TODO this is not correct
-                    if ((move.Row-1 == row) & (move.Column == column))
+                    if ((move.Row== row) & (move.Column == column))
                     {
                         //SelectedMove = AvailableMoves.SelectedItem as Move;
 
@@ -548,22 +549,22 @@ namespace ChessNut
                         SelectedPiece.PrevRow = SelectedPiece.Row;
 
                         SelectedPiece.Column = move.Column;
-                        SelectedPiece.Row = 7 - move.Row;
+                        SelectedPiece.Row = move.Row;
 
                         SelectedPiece.NumberOfTimesMoved += 1;
 
-                        moveValid = true;
+                       // moveValid = true;
                         MovePiece(sender, e, SelectedPiece);
-
+                        
                         Table_Load(sender, e);
 
                     }
                 }
-
-                if (moveValid == false)
+                if (!moveValid)
                 {
-                    SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>() };
+                    SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
                 }
+
             }
         }
 

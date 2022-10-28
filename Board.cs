@@ -41,8 +41,6 @@ namespace ChessNut
         }
         public List<Move> MarkNextLegalMoves(Board currentBoard, Piece currentPiece)
         {
-            Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
-
             squares = currentBoard.squares;
 
             // clear the board
@@ -54,6 +52,13 @@ namespace ChessNut
                     //squares[i, j].CurrentlyOccupied = false;
                 }
             }
+            if (currentPiece.Name == "Nothing")
+            {
+                return new List<Move> { };
+            }
+            Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
+
+            
 
             // reset currently occupied square as it was cleared earlier
             //currentBoard.squares[currentPiece.Column, currentPiece.Row].CurrentlyOccupied = true;
@@ -91,7 +96,7 @@ namespace ChessNut
                                 {
                                     BoardPosition = letters[x] + (8 - y).ToString(),
                                     Column = x,
-                                    Row = 7 - y
+                                    Row = y
                                 });
                             }
                         }
@@ -125,7 +130,7 @@ namespace ChessNut
                                 {
                                     BoardPosition = letters[x] + (8 - y).ToString(),
                                     Column = x,
-                                    Row = 7 - y
+                                    Row = y
                                 });
                             }
                         }
@@ -151,7 +156,7 @@ namespace ChessNut
                                     {
                                         BoardPosition = letters[x] + (8 - y).ToString(),
                                         Column = x,
-                                        Row = 7 - y
+                                        Row = y
                                     });
                                 }
                             }
@@ -168,7 +173,7 @@ namespace ChessNut
                                         {
                                             BoardPosition = letters[x] + (8 - y + 1).ToString(),
                                             Column = x,
-                                            Row = 7 - y + 1
+                                            Row = y - 1
                                         });
                                     }
                                 }
@@ -186,7 +191,7 @@ namespace ChessNut
                                         {
                                             BoardPosition = letters[x+1] + (8 - y).ToString(),
                                             Column = x+1,
-                                            Row = 7 - y
+                                            Row = y
                                         });
                                     }
                                 }
@@ -202,7 +207,7 @@ namespace ChessNut
                                         {
                                             BoardPosition = letters[x -1] + (8 - y).ToString(),
                                             Column = x -1,
-                                            Row = 7 - y
+                                            Row = y
                                         });
                                     }
                                 }
@@ -223,7 +228,7 @@ namespace ChessNut
                                     {
                                         BoardPosition = letters[xb] + (8 - yb).ToString(),
                                         Column = xb,
-                                        Row = 7 - yb
+                                        Row = yb
                                     });
                                 }
                             }
@@ -238,9 +243,9 @@ namespace ChessNut
                                         currentBoard.squares[xb, yb + 1].LegalNextMove = true;
                                         availableMoves.Add(new Move
                                         {
-                                            BoardPosition = letters[xb] + (8 - yb - 1).ToString(),
+                                            BoardPosition = letters[xb] + (8 - yb +1).ToString(),
                                             Column = xb,
-                                            Row = 7 - yb - 1
+                                            Row = yb + 1
                                         });
                                     }
                                 }
@@ -258,7 +263,7 @@ namespace ChessNut
                                         {
                                             BoardPosition = letters[xb+1] + (8 - yb).ToString(),
                                             Column = xb + 1,
-                                            Row = 7 - yb
+                                            Row = yb
                                         });
                                     }
                                 }
@@ -274,7 +279,7 @@ namespace ChessNut
                                         {
                                             BoardPosition = letters[xb-1] + (8 - yb).ToString(),
                                             Column = xb-1,
-                                            Row = 7 - yb
+                                            Row = yb
                                         });
                                     }
                                 }
@@ -334,7 +339,7 @@ namespace ChessNut
                 {
                     BoardPosition = letters[x] + (8 - y).ToString(),
                     Column = x,
-                    Row = 7 - y
+                    Row = y
                 });
 
                 if (currentBoard.squares[x, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
@@ -368,7 +373,7 @@ namespace ChessNut
                 {
                     BoardPosition = letters[x] + (8 - y).ToString(),
                     Column = x,
-                    Row = 7 - y
+                    Row = y
                 });
 
                 if (currentBoard.squares[x, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
@@ -402,7 +407,7 @@ namespace ChessNut
                 {
                     BoardPosition = letters[x] + (8 - y).ToString(),
                     Column = x,
-                    Row = 7 - y
+                    Row = y
                 });
 
                 if (currentBoard.squares[x, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
@@ -435,7 +440,7 @@ namespace ChessNut
                 {
                     BoardPosition = letters[x] + (8 - y).ToString(),
                     Column = x,
-                    Row = 7 - y
+                    Row = y
                 });
 
                 if (currentBoard.squares[x, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
@@ -473,7 +478,7 @@ namespace ChessNut
                         {
                             BoardPosition = letters[x] + (8 - y).ToString(),
                             Column = x,
-                            Row = 7 - y
+                            Row = y
                         });
                     }
 
@@ -512,7 +517,7 @@ namespace ChessNut
                         {
                             BoardPosition = letters[x] + (8 - y).ToString(),
                             Column = x,
-                            Row = 7 - y
+                            Row = y
                         });
                     }
 
@@ -553,7 +558,7 @@ namespace ChessNut
                         {
                             BoardPosition = letters[x] + (8 - y).ToString(),
                             Column = x,
-                            Row = 7 - y
+                            Row = y
                         });
                     }
 
@@ -593,7 +598,7 @@ namespace ChessNut
                         {
                             BoardPosition = letters[x] + (8 - y).ToString(),
                             Column = x,
-                            Row = 7 - y
+                            Row = y
                         });
                     }
 
