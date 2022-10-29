@@ -25,6 +25,8 @@ namespace ChessNut
         int border_size = 50;
         int square_size = 50;
 
+        string turn;
+
         static Board chessNutBoard = new Board(8);
         
         List<Piece> whitePieces = new List<Piece>();
@@ -67,20 +69,23 @@ namespace ChessNut
         Piece BlackPawn8   = new Piece { Class = "Pawn",   Color = "Black", Name = "Black Pawn 8",   StartColumn = 7, StartRow = 1};
 
         Piece SelectedPiece;
-        Move  SelectedMove;
 
-        public Table()
+        public void ResetPieces()
         {
-            InitializeComponent();
+            whitePieces = new List<Piece> { };
+            blackPieces = new List<Piece> { };
+            whitePiecesTaken = new List<Piece> { };
+            blackPiecesTaken = new List<Piece> { };
+            turn = "White";
 
             // add black pieces
             whitePieces.Add(WhiteRook1);
             whitePieces.Add(WhiteKnight1);
             whitePieces.Add(WhiteBishop1);
             whitePieces.Add(WhiteQueen);
-            whitePieces.Add(WhiteKing);            
-            whitePieces.Add(WhiteBishop2);     
-            whitePieces.Add(WhiteKnight2);            
+            whitePieces.Add(WhiteKing);
+            whitePieces.Add(WhiteBishop2);
+            whitePieces.Add(WhiteKnight2);
             whitePieces.Add(WhiteRook2);
             whitePieces.Add(WhitePawn1);
             whitePieces.Add(WhitePawn2);
@@ -108,6 +113,12 @@ namespace ChessNut
             blackPieces.Add(BlackPawn6);
             blackPieces.Add(BlackPawn7);
             blackPieces.Add(BlackPawn8);
+        }
+        public Table()
+        {
+            InitializeComponent();
+
+            ResetPieces();
 
             // create button array
             InitializeTableLayoutPanel();
@@ -376,11 +387,6 @@ namespace ChessNut
                 {
                     moves.Add(avaliableMove);
                 }
-                AvailableMoves.DataSource = moves;
-                AvailableMoves.DisplayMember = "BoardPosition";
-                AvailableMoves.SelectedIndex = -1;
-                AvailableMoves.Text = SelectedPiece.AvailableMoves.Count.ToString() + " Possible Moves";
-
                 UpdateTableLayoutPanel();
             }
             ShowLegalMoves();
@@ -437,43 +443,11 @@ namespace ChessNut
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
+            ResetPieces();
             initialise_table();
             UpdateTableLayoutPanel();
             Table_Load(sender, e);
             this.Invalidate();
-        }
-
-        private void MoveButton_Click(object sender, EventArgs e)
-        {
-            if (AvailableMoves.SelectedIndex < 0)
-            {
-                MessageBox.Show("Select a Move");
-            }
-            else
-            {
-                Move selectedMove = AvailableMoves.SelectedItem as Move;
-
-                SelectedPiece.PrevColumn = SelectedPiece.Column;
-                SelectedPiece.PrevRow = SelectedPiece.Row;
-
-                SelectedPiece.Column = selectedMove.Column;
-                SelectedPiece.Row = 7 - selectedMove.Row;
-
-                SelectedPiece.NumberOfTimesMoved += 1;
-
-                MovePiece(sender, e, SelectedPiece);
-                foreach (Piece piece in whitePieces)
-                {
-                    piece.Name = letters[piece.Column] + (8 - piece.Row).ToString() + " - " + piece.Color + " " + piece.Class;
-                }
-
-                foreach (Piece piece in blackPieces)
-                {
-                    piece.Name = letters[piece.Column] + (8 - piece.Row).ToString() + " - " + piece.Color + " " + piece.Class;
-                }
-
-                Table_Load(sender, e);
-            }
         }
 
         public string OppositeColor(string color)
@@ -506,45 +480,51 @@ namespace ChessNut
             int row = BoardLayoutPanel.GetPositionFromControl(button).Row;
 
             //MessageBox.Show(column.ToString() + row.ToString());// + " " + (move.Column - 1).ToString() + (move.Row - 1).ToString());// ;
-
-
+      
             // select a piece
             if (SelectedPiece.Name == "Nothing")
             {
-
-                foreach (Piece piece in blackPieces)
+                string nextTurn = turn;
+                switch (turn)
                 {
+                    case "White":
+                        foreach (Piece piece in blackPieces)
+                        {
 
-                    if ((piece.Column == column) & (piece.Row == row))
-                    {
-                        SelectedPiece = piece;
-                    }
+                            if ((piece.Column == column) & (piece.Row == row))
+                            {
+                                SelectedPiece = piece;
+                            }
 
+                        }
+                        nextTurn = "Black";
+                        break;
+
+                    case "Black":
+                        foreach (Piece piece in whitePieces)
+                        {
+
+                            if ((piece.Column == column) & (piece.Row == row))
+                            {
+                                SelectedPiece = piece;
+                            }
+
+                        }
+                        nextTurn = "White";
+                        break;
                 }
-                foreach (Piece piece in whitePieces)
-                {
-
-                    if ((piece.Column == column) & (piece.Row == row))
-                    {
-                        SelectedPiece = piece;
-                    }
-
-                }
-
+                turn = nextTurn;
                 SelectedPiece.AvailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, SelectedPiece);
-
                 Table_Load(sender, e);
             }
+
             //select a move
             else
             {
-                bool moveValid = false;
                 foreach (Move move in SelectedPiece.AvailableMoves)
                 {
                     if ((move.Row== row) & (move.Column == column))
                     {
-                        //SelectedMove = AvailableMoves.SelectedItem as Move;
-
                         SelectedPiece.PrevColumn = SelectedPiece.Column;
                         SelectedPiece.PrevRow = SelectedPiece.Row;
 
@@ -553,18 +533,11 @@ namespace ChessNut
 
                         SelectedPiece.NumberOfTimesMoved += 1;
 
-                       // moveValid = true;
                         MovePiece(sender, e, SelectedPiece);
-                        
                         Table_Load(sender, e);
-
                     }
                 }
-                if (!moveValid)
-                {
-                    SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
-                }
-
+                SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
             }
         }
 

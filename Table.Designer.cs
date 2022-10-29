@@ -29,13 +29,10 @@
         {
             this.Moves = new System.Windows.Forms.Label();
             this.CurrentPiece = new System.Windows.Forms.Label();
-            this.AvailableMoves = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.Takable = new System.Windows.Forms.Label();
             this.CheckStatus = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.ResetButton = new System.Windows.Forms.Button();
-            this.MoveButton = new System.Windows.Forms.Button();
             this.TakenBlack = new System.Windows.Forms.Label();
             this.TakenWhite = new System.Windows.Forms.Label();
             this.BoardLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -61,29 +58,6 @@
             this.CurrentPiece.TabIndex = 12;
             this.CurrentPiece.Text = "Current Piece";
             this.CurrentPiece.Click += new System.EventHandler(this.CurrentPiece_Click);
-            // 
-            // AvailableMoves
-            // 
-            this.AvailableMoves.FormattingEnabled = true;
-            this.AvailableMoves.Location = new System.Drawing.Point(474, 74);
-            this.AvailableMoves.Margin = new System.Windows.Forms.Padding(2);
-            this.AvailableMoves.Name = "AvailableMoves";
-            this.AvailableMoves.Size = new System.Drawing.Size(151, 21);
-            this.AvailableMoves.TabIndex = 13;
-            this.AvailableMoves.Text = "Avaliable Moves ...";
-            this.AvailableMoves.SelectedIndexChanged += new System.EventHandler(this.AvailableMoves_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(471, 50);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 13);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Move";
             // 
             // Takable
             // 
@@ -121,7 +95,7 @@
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(468, 10);
+            this.ResetButton.Location = new System.Drawing.Point(467, 50);
             this.ResetButton.Margin = new System.Windows.Forms.Padding(2);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(150, 21);
@@ -129,17 +103,6 @@
             this.ResetButton.Text = "Reset Pieces";
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
-            // 
-            // MoveButton
-            // 
-            this.MoveButton.Location = new System.Drawing.Point(475, 99);
-            this.MoveButton.Margin = new System.Windows.Forms.Padding(2);
-            this.MoveButton.Name = "MoveButton";
-            this.MoveButton.Size = new System.Drawing.Size(150, 21);
-            this.MoveButton.TabIndex = 20;
-            this.MoveButton.Text = "Move";
-            this.MoveButton.UseVisualStyleBackColor = true;
-            this.MoveButton.Click += new System.EventHandler(this.MoveButton_Click);
             // 
             // TakenBlack
             // 
@@ -195,13 +158,10 @@
             this.ClientSize = new System.Drawing.Size(628, 500);
             this.Controls.Add(this.TakenWhite);
             this.Controls.Add(this.TakenBlack);
-            this.Controls.Add(this.MoveButton);
             this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.CheckStatus);
             this.Controls.Add(this.Takable);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.AvailableMoves);
             this.Controls.Add(this.CurrentPiece);
             this.Controls.Add(this.Moves);
             this.Controls.Add(this.BoardLayoutPanel);
@@ -217,13 +177,10 @@
         #endregion
         private System.Windows.Forms.Label Moves;
         private System.Windows.Forms.Label CurrentPiece;
-        private System.Windows.Forms.ComboBox AvailableMoves;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label Takable;
         private System.Windows.Forms.Label CheckStatus;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button ResetButton;
-        private System.Windows.Forms.Button MoveButton;
         private System.Windows.Forms.Label TakenBlack;
         private System.Windows.Forms.Label TakenWhite;
         private System.Windows.Forms.TableLayoutPanel BoardLayoutPanel;
