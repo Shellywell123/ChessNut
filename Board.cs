@@ -465,6 +465,7 @@ namespace ChessNut
                         continue;
                     }
 
+
                     // y=-x
                     if ((x - currentSquare.RowNumber) == (y - currentSquare.ColumnNumber))
                     {
@@ -521,7 +522,7 @@ namespace ChessNut
                         });
                     }
 
-                    if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
+                    if (currentBoard.squares[x, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
                     {
                         break;
                     }
@@ -531,7 +532,6 @@ namespace ChessNut
         }
         public List<Move> BottomRight(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
         {
-
             Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
 
             // bottom right
@@ -562,7 +562,7 @@ namespace ChessNut
                         });
                     }
 
-                    if (currentBoard.squares[currentPiece.Column, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
+                    if (currentBoard.squares[x, y].CurrentlyOccupied == OppositeColor(currentPiece.Color))
                     {
                         break;
                     }
@@ -574,7 +574,6 @@ namespace ChessNut
         public List<Move> BottomLeft(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
         {
             Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
-
 
             for (int x = currentPiece.Column; x >= 0; x--)
             {

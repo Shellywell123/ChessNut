@@ -36,25 +36,24 @@
             this.TakenBlack = new System.Windows.Forms.Label();
             this.TakenWhite = new System.Windows.Forms.Label();
             this.BoardLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.CurrentTurnBox = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Moves
             // 
             this.Moves.AutoSize = true;
-            this.Moves.Location = new System.Drawing.Point(468, 324);
-            this.Moves.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Moves.Location = new System.Drawing.Point(620, 289);
             this.Moves.Name = "Moves";
-            this.Moves.Size = new System.Drawing.Size(39, 13);
+            this.Moves.Size = new System.Drawing.Size(48, 16);
             this.Moves.TabIndex = 10;
             this.Moves.Text = "Moves";
             // 
             // CurrentPiece
             // 
             this.CurrentPiece.AutoSize = true;
-            this.CurrentPiece.Location = new System.Drawing.Point(468, 303);
-            this.CurrentPiece.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.CurrentPiece.Location = new System.Drawing.Point(620, 273);
             this.CurrentPiece.Name = "CurrentPiece";
-            this.CurrentPiece.Size = new System.Drawing.Size(71, 13);
+            this.CurrentPiece.Size = new System.Drawing.Size(87, 16);
             this.CurrentPiece.TabIndex = 12;
             this.CurrentPiece.Text = "Current Piece";
             this.CurrentPiece.Click += new System.EventHandler(this.CurrentPiece_Click);
@@ -62,10 +61,9 @@
             // Takable
             // 
             this.Takable.AutoSize = true;
-            this.Takable.Location = new System.Drawing.Point(468, 347);
-            this.Takable.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Takable.Location = new System.Drawing.Point(620, 305);
             this.Takable.Name = "Takable";
-            this.Takable.Size = new System.Drawing.Size(35, 13);
+            this.Takable.Size = new System.Drawing.Size(44, 16);
             this.Takable.TabIndex = 16;
             this.Takable.Text = "label5";
             this.Takable.Click += new System.EventHandler(this.Takable_Click);
@@ -73,10 +71,9 @@
             // CheckStatus
             // 
             this.CheckStatus.AutoSize = true;
-            this.CheckStatus.Location = new System.Drawing.Point(468, 368);
-            this.CheckStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.CheckStatus.Location = new System.Drawing.Point(620, 321);
             this.CheckStatus.Name = "CheckStatus";
-            this.CheckStatus.Size = new System.Drawing.Size(35, 13);
+            this.CheckStatus.Size = new System.Drawing.Size(44, 16);
             this.CheckStatus.TabIndex = 17;
             this.CheckStatus.Text = "label5";
             this.CheckStatus.Click += new System.EventHandler(this.CheckStatus_Click);
@@ -86,19 +83,18 @@
             this.label5.AutoSize = true;
             this.label5.Cursor = System.Windows.Forms.Cursors.Default;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(466, 280);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(620, 231);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 13);
+            this.label5.Size = new System.Drawing.Size(32, 16);
             this.label5.TabIndex = 18;
             this.label5.Text = "Info";
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(467, 50);
-            this.ResetButton.Margin = new System.Windows.Forms.Padding(2);
+            this.ResetButton.Location = new System.Drawing.Point(623, 62);
+            this.ResetButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(150, 21);
+            this.ResetButton.Size = new System.Drawing.Size(200, 26);
             this.ResetButton.TabIndex = 19;
             this.ResetButton.Text = "Reset Pieces";
             this.ResetButton.UseVisualStyleBackColor = true;
@@ -107,20 +103,18 @@
             // TakenBlack
             // 
             this.TakenBlack.AutoSize = true;
-            this.TakenBlack.Location = new System.Drawing.Point(471, 397);
-            this.TakenBlack.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.TakenBlack.Location = new System.Drawing.Point(620, 337);
             this.TakenBlack.Name = "TakenBlack";
-            this.TakenBlack.Size = new System.Drawing.Size(101, 13);
+            this.TakenBlack.Size = new System.Drawing.Size(123, 16);
             this.TakenBlack.TabIndex = 21;
             this.TakenBlack.Text = "back pieces taken :";
             // 
             // TakenWhite
             // 
             this.TakenWhite.AutoSize = true;
-            this.TakenWhite.Location = new System.Drawing.Point(471, 422);
-            this.TakenWhite.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.TakenWhite.Location = new System.Drawing.Point(620, 353);
             this.TakenWhite.Name = "TakenWhite";
-            this.TakenWhite.Size = new System.Drawing.Size(102, 13);
+            this.TakenWhite.Size = new System.Drawing.Size(123, 16);
             this.TakenWhite.TabIndex = 22;
             this.TakenWhite.Text = "white pieces taken :";
             // 
@@ -135,7 +129,7 @@
             this.BoardLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.BoardLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.BoardLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.BoardLayoutPanel.Location = new System.Drawing.Point(50, 50);
+            this.BoardLayoutPanel.Location = new System.Drawing.Point(67, 62);
             this.BoardLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.BoardLayoutPanel.Name = "BoardLayoutPanel";
             this.BoardLayoutPanel.RowCount = 8;
@@ -147,15 +141,26 @@
             this.BoardLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.BoardLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.BoardLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.BoardLayoutPanel.Size = new System.Drawing.Size(400, 400);
+            this.BoardLayoutPanel.Size = new System.Drawing.Size(533, 492);
             this.BoardLayoutPanel.TabIndex = 23;
             this.BoardLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.BoardLayoutPanel_Paint);
             // 
+            // CurrentTurnBox
+            // 
+            this.CurrentTurnBox.AutoSize = true;
+            this.CurrentTurnBox.Location = new System.Drawing.Point(620, 257);
+            this.CurrentTurnBox.Name = "CurrentTurnBox";
+            this.CurrentTurnBox.Size = new System.Drawing.Size(79, 16);
+            this.CurrentTurnBox.TabIndex = 24;
+            this.CurrentTurnBox.Text = "Current Turn";
+            this.CurrentTurnBox.Click += new System.EventHandler(this.label1_Click_1);
+            // 
             // Table
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 500);
+            this.ClientSize = new System.Drawing.Size(837, 615);
+            this.Controls.Add(this.CurrentTurnBox);
             this.Controls.Add(this.TakenWhite);
             this.Controls.Add(this.TakenBlack);
             this.Controls.Add(this.ResetButton);
@@ -165,6 +170,7 @@
             this.Controls.Add(this.CurrentPiece);
             this.Controls.Add(this.Moves);
             this.Controls.Add(this.BoardLayoutPanel);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Table";
             this.Text = "ChessNut";
             this.Load += new System.EventHandler(this.Table_Load);
@@ -184,6 +190,7 @@
         private System.Windows.Forms.Label TakenBlack;
         private System.Windows.Forms.Label TakenWhite;
         private System.Windows.Forms.TableLayoutPanel BoardLayoutPanel;
+        private System.Windows.Forms.Label CurrentTurnBox;
     }
 }
 

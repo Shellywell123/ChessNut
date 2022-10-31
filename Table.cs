@@ -146,7 +146,6 @@ namespace ChessNut
                 piece.Column = piece.StartColumn;
                 piece.Row = piece.StartRow;
                 chessNutBoard.squares[piece.Column, piece.Row].CurrentlyOccupied = piece.Color;
-                piece.Name = letters[piece.Column] + (8 - piece.Row).ToString() + " - " + piece.Color + " " + piece.Class;
             }
 
             foreach (Piece piece in blackPieces)
@@ -155,16 +154,16 @@ namespace ChessNut
                 piece.Column = piece.StartColumn;
                 piece.Row = piece.StartRow;
                 chessNutBoard.squares[piece.Column, piece.Row].CurrentlyOccupied = piece.Color;
-                piece.Name = letters[piece.Column] + (8 - piece.Row).ToString() + " - " + piece.Color + " " + piece.Class;
             }
         }
-        private void GameOverCheck()
+        private void GameOverCheck(object sender, EventArgs e)
         {
             foreach (Piece piece in blackPiecesTaken)
             {
                 if (piece.Name == "Black King")
                 {
                     MessageBox.Show("White Wins");
+                    ResetGame(sender, e);
                 }
             }
 
@@ -173,6 +172,7 @@ namespace ChessNut
                 if (piece.Name == "White King")
                 {
                     MessageBox.Show("Black Wins");
+                    ResetGame(sender, e);
                 }
             }
         }
@@ -360,10 +360,11 @@ namespace ChessNut
         private void Draw_CurrentInfo(object sender, PaintEventArgs e)
         {
             // print number of avalible moves
-            Moves.Text        = "Possible Moves     : " + SelectedPiece.AvailableMoves.Count.ToString();
-            CurrentPiece.Text = "Current Piece      : " + SelectedPiece.Name.ToString();
-            Takable.Text      = "Takable Pieces     : 0";
-            CheckStatus.Text  = "CheckStatus        : 0";
+            CurrentTurnBox.Text = "Current Trurn        : " + turn.ToString();
+            Moves.Text        = "Possible Moves        : " + SelectedPiece.AvailableMoves.Count.ToString();
+            CurrentPiece.Text = "Current Piece       : " + SelectedPiece.Name.ToString();
+            Takable.Text      = "Takable Pieces      : 0";
+            CheckStatus.Text  = "CheckStatus          : 0";
             TakenBlack.Text   = "taken black pieces : " + blackPiecesTaken.Count.ToString();
             TakenWhite.Text   = "taken white pieces : " + whitePiecesTaken.Count.ToString();
         }
@@ -377,7 +378,7 @@ namespace ChessNut
 
         private void Table_Load(object sender, EventArgs e)
         {
-            GameOverCheck();
+            GameOverCheck(sender, e);
             if (SelectedPiece!= null)
             {
                 SelectedPiece.AvailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, SelectedPiece);
@@ -440,14 +441,18 @@ namespace ChessNut
             Table_Load(sender, e);
             this.Invalidate();
         }
-
-        private void ResetButton_Click(object sender, EventArgs e)
+        private void ResetGame(object sender, EventArgs e)
         {
             ResetPieces();
             initialise_table();
             UpdateTableLayoutPanel();
             Table_Load(sender, e);
             this.Invalidate();
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            ResetGame(sender, e);            
         }
 
         public string OppositeColor(string color)
@@ -475,45 +480,49 @@ namespace ChessNut
         {
             Button button = sender as Button;
 
-
             int column = BoardLayoutPanel.GetPositionFromControl(button).Column;
             int row = BoardLayoutPanel.GetPositionFromControl(button).Row;
 
-            //MessageBox.Show(column.ToString() + row.ToString());// + " " + (move.Column - 1).ToString() + (move.Row - 1).ToString());// ;
-      
             // select a piece
+            string nextTurn = turn;
             if (SelectedPiece.Name == "Nothing")
             {
-                string nextTurn = turn;
                 switch (turn)
                 {
                     case "White":
-                        foreach (Piece piece in blackPieces)
+                        foreach (Piece piece in whitePieces)
                         {
-
                             if ((piece.Column == column) & (piece.Row == row))
                             {
                                 SelectedPiece = piece;
                             }
-
                         }
-                        nextTurn = "Black";
+                        foreach (Piece piece in blackPieces)
+                        {
+                            if ((piece.Column == column) & (piece.Row == row))
+                            {
+                                MessageBox.Show("White's Turn");
+                            }
+                        }
                         break;
 
                     case "Black":
-                        foreach (Piece piece in whitePieces)
+                        foreach (Piece piece in blackPieces)
                         {
-
                             if ((piece.Column == column) & (piece.Row == row))
                             {
                                 SelectedPiece = piece;
                             }
-
                         }
-                        nextTurn = "White";
+                        foreach (Piece piece in whitePieces)
+                        {
+                            if ((piece.Column == column) & (piece.Row == row))
+                            {
+                                MessageBox.Show("Black's Turn");
+                            }
+                        }
                         break;
                 }
-                turn = nextTurn;
                 SelectedPiece.AvailableMoves = chessNutBoard.MarkNextLegalMoves(chessNutBoard, SelectedPiece);
                 Table_Load(sender, e);
             }
@@ -534,6 +543,17 @@ namespace ChessNut
                         SelectedPiece.NumberOfTimesMoved += 1;
 
                         MovePiece(sender, e, SelectedPiece);
+                        switch (turn)
+                        {
+                            case "White":
+                                nextTurn = "Black";
+                                break;
+
+                            case "Black":
+                                nextTurn = "White";
+                                break;
+                        }
+                        turn = nextTurn;
                         Table_Load(sender, e);
                     }
                 }
@@ -572,6 +592,11 @@ namespace ChessNut
         }
 
         private void BoardLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
         {
 
         }
