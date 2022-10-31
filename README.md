@@ -8,12 +8,12 @@ Chess being written in c#
 ## Development To Do List
 
 #### Game
-* [ ] checkmate checker 
+* [ ] Check/Check-Mate checker 
 * [ ] Castling
 * [ ] Pawn Promotion
 * [ ] En Passant
 
 #### Git
-* [ ] check fonts prerequisits
-* [ ] fix gitignore
-* [ ] exe as release
+* [ ] Fonts Prerequisits
+* [ ] Fix gitignore
+* [ ] Create a Release 
