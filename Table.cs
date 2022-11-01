@@ -532,13 +532,13 @@ namespace ChessNut
             {
                 foreach (Move move in SelectedPiece.AvailableMoves)
                 {
-                    if ((move.Row== row) & (move.Column == column))
+                    if ((move.Row == row) & (move.Column == column))
                     {
                         SelectedPiece.PrevColumn = SelectedPiece.Column;
-                        SelectedPiece.PrevRow = SelectedPiece.Row;
+                        SelectedPiece.PrevRow    = SelectedPiece.Row;
 
                         SelectedPiece.Column = move.Column;
-                        SelectedPiece.Row = move.Row;
+                        SelectedPiece.Row    = move.Row;
 
                         SelectedPiece.NumberOfTimesMoved += 1;
 

@@ -12,6 +12,7 @@ Chess being written in c#
 * [x] Castling
 * [x] Pawn Promotion
 * [x] En Passant
+* [x] Clock
 
 #### Git
 * [x] check fonts prerequisits
