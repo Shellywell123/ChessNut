@@ -10,9 +10,8 @@ namespace ChessNut
     {
         public int RowNumber            { get; set; }
         public int ColumnNumber         { get; set; }
-        public string CurrentlyOccupied { get; set; }
+        public Piece CurrentlyOccupied  { get; set; }
         public bool LegalNextMove       { get; set; }
-
         public Square(int x, int y)
         {
             RowNumber = x;

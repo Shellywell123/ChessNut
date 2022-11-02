@@ -37,6 +37,7 @@
             this.TakenWhite = new System.Windows.Forms.Label();
             this.BoardLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.CurrentTurnBox = new System.Windows.Forms.Label();
+            this.Score = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Moves
@@ -155,11 +156,22 @@
             this.CurrentTurnBox.Text = "Current Turn";
             this.CurrentTurnBox.Click += new System.EventHandler(this.label1_Click_1);
             // 
+            // Score
+            // 
+            this.Score.AutoSize = true;
+            this.Score.Location = new System.Drawing.Point(620, 369);
+            this.Score.Name = "Score";
+            this.Score.Size = new System.Drawing.Size(77, 16);
+            this.Score.TabIndex = 25;
+            this.Score.Text = "Score W|B :";
+            this.Score.Click += new System.EventHandler(this.label1_Click_2);
+            // 
             // Table
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(837, 615);
+            this.Controls.Add(this.Score);
             this.Controls.Add(this.CurrentTurnBox);
             this.Controls.Add(this.TakenWhite);
             this.Controls.Add(this.TakenBlack);
@@ -170,7 +182,7 @@
             this.Controls.Add(this.CurrentPiece);
             this.Controls.Add(this.Moves);
             this.Controls.Add(this.BoardLayoutPanel);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Table";
             this.Text = "ChessNut";
             this.Load += new System.EventHandler(this.Table_Load);
@@ -191,6 +203,7 @@
         private System.Windows.Forms.Label TakenWhite;
         private System.Windows.Forms.TableLayoutPanel BoardLayoutPanel;
         private System.Windows.Forms.Label CurrentTurnBox;
+        private System.Windows.Forms.Label Score;
     }
 }
 

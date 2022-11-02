@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Text;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 using Button = System.Windows.Forms.Button;
 
 namespace ChessNut
@@ -19,6 +12,9 @@ namespace ChessNut
         //FontFamily ChessFont = new FontFamily(@"assets\fonts\#Chess TFB");
 
         string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H" };
+
+        int WhiteScore;
+        int BlackScore;
 
         List<Move> moves = new List<Move>();
 
@@ -136,7 +132,7 @@ namespace ChessNut
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    chessNutBoard.squares[i, j].CurrentlyOccupied = "free";
+                    chessNutBoard.squares[i, j].CurrentlyOccupied = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
                 }
             }
 
@@ -145,7 +141,7 @@ namespace ChessNut
                 piece.NumberOfTimesMoved = 0;
                 piece.Column = piece.StartColumn;
                 piece.Row = piece.StartRow;
-                chessNutBoard.squares[piece.Column, piece.Row].CurrentlyOccupied = piece.Color;
+                chessNutBoard.squares[piece.Column, piece.Row].CurrentlyOccupied = piece;
             }
 
             foreach (Piece piece in blackPieces)
@@ -153,7 +149,7 @@ namespace ChessNut
                 piece.NumberOfTimesMoved = 0;
                 piece.Column = piece.StartColumn;
                 piece.Row = piece.StartRow;
-                chessNutBoard.squares[piece.Column, piece.Row].CurrentlyOccupied = piece.Color;
+                chessNutBoard.squares[piece.Column, piece.Row].CurrentlyOccupied = piece;
             }
         }
         private void GameOverCheck(object sender, EventArgs e)
@@ -163,6 +159,7 @@ namespace ChessNut
                 if (piece.Name == "Black King")
                 {
                     MessageBox.Show("White Wins");
+                    WhiteScore += 1;
                     ResetGame(sender, e);
                 }
             }
@@ -172,6 +169,7 @@ namespace ChessNut
                 if (piece.Name == "White King")
                 {
                     MessageBox.Show("Black Wins");
+                    BlackScore += 1;
                     ResetGame(sender, e);
                 }
             }
@@ -366,7 +364,9 @@ namespace ChessNut
             Takable.Text      = "Takable Pieces      : 0";
             CheckStatus.Text  = "CheckStatus          : 0";
             TakenBlack.Text   = "taken black pieces : " + blackPiecesTaken.Count.ToString();
-            TakenWhite.Text   = "taken white pieces : " + whitePiecesTaken.Count.ToString();
+            Score.Text = "Score W| B      : " + WhiteScore.ToString() + "|" + BlackScore.ToString();
+
+            
         }
 
         private void Table_Load(object sender, PaintEventArgs e)
@@ -392,11 +392,62 @@ namespace ChessNut
             }
             ShowLegalMoves();
         }
+        private string CheckChecker()
+        {
+            string status = "okay";
+
+            // check selecter piece color king not at risk
+            String playerColor = SelectedPiece.Color;
+            String opponentColor = OppositeColor(playerColor);
+            
+            switch (playerColor)
+            {
+                case "White":
+
+                    // check players pieces for check
+                    foreach (Piece piece in whitePieces)
+                    {
+                        List<Move> MovesToCheck = chessNutBoard.MarkNextLegalMoves(chessNutBoard, SelectedPiece);
+
+                        foreach (Move move in MovesToCheck)
+                        {
+                            if (move.TakablePiece.Name == "White King")
+                            {
+                                MessageBox.Show("White in Check");
+                                // checked status = whitePieces in check
+                            }
+                        }
+                    }
+
+                    // check opponents pieces for check
+                    foreach (Piece piece in blackPieces)
+                    {
+
+                    }
+                    break;
+
+                case "Black":
+                    // check players pieces for check
+                    foreach (Piece piece in blackPieces)
+                    {
+          
+                    }
+
+                    // check opponents pieces for check
+                    foreach (Piece piece in whitePieces)
+                    {
+                   
+                    }
+                    break;
+            }
+
+            return status;
+        }
 
         private void MovePiece(object sender, EventArgs e, Piece pieceToMove)
         {
-            chessNutBoard.squares[pieceToMove.PrevColumn, pieceToMove.PrevRow].CurrentlyOccupied = "free";
-            chessNutBoard.squares[pieceToMove.Column, pieceToMove.Row].CurrentlyOccupied = pieceToMove.Color;
+            chessNutBoard.squares[pieceToMove.PrevColumn, pieceToMove.PrevRow].CurrentlyOccupied = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
+            chessNutBoard.squares[pieceToMove.Column, pieceToMove.Row].CurrentlyOccupied = pieceToMove;
 
             Piece pieceToTake = null;
             switch (pieceToMove.Color)
@@ -543,6 +594,7 @@ namespace ChessNut
                         SelectedPiece.NumberOfTimesMoved += 1;
 
                         MovePiece(sender, e, SelectedPiece);
+                        CheckChecker();
                         switch (turn)
                         {
                             case "White":
@@ -597,6 +649,11 @@ namespace ChessNut
         }
 
         private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_2(object sender, EventArgs e)
         {
 
         }

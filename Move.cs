@@ -11,5 +11,6 @@ namespace ChessNut
         public string BoardPosition { get; set; }
         public int Column           { get; set; }
         public int Row              { get; set; }
+        public Piece TakablePiece   { get; set; }
     }
 }
