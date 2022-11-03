@@ -38,9 +38,28 @@ namespace ChessNut
                 }
             }
         }
+        public List<Move> AppendLegalMove(Board currentBoard, Piece currentPiece, List<Move> availableMoves, int x, int y)
+           {
+            Piece takablePiece;
+            if (currentBoard.squares[x, y].CurrentlyOccupied.Color == OppositeColor(currentPiece.Color))
+            {
+                takablePiece = currentBoard.squares[x, y].CurrentlyOccupied;
+            }
+            else
+            {
+                takablePiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
+            }
+            availableMoves.Add(new Move
+            {
+                BoardPosition = letters[x] + (8 - y).ToString(),
+                Column = x,
+                Row = y,
+                TakablePiece = takablePiece
+            });
+            return availableMoves;
+        }
         public List<Move> MarkNextLegalMoves(Board currentBoard, Piece currentPiece)
         {
-
             // clear the board
             for (int i = 0; i < Size; i++)
             {
@@ -83,13 +102,7 @@ namespace ChessNut
                             if (currentBoard.squares[x, y].CurrentlyOccupied.Color != currentPiece.Color)
                             {
                                 currentBoard.squares[x, y].LegalNextMove = true;
-                                availableMoves.Add(new Move
-                                {
-                                    BoardPosition = letters[x] + (8 - y).ToString(),
-                                    Column = x,
-                                    Row = y,
-                                    TakablePiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 }
-                                });
+                                availableMoves = AppendLegalMove(currentBoard,currentPiece, availableMoves, x, y);
                             }
                         }
                     }
@@ -117,13 +130,7 @@ namespace ChessNut
                             if (currentBoard.squares[x, y].CurrentlyOccupied.Color != currentPiece.Color)
                             {
                                 currentBoard.squares[x, y].LegalNextMove = true;
-                                availableMoves.Add(new Move
-                                {
-                                    BoardPosition = letters[x] + (8 - y).ToString(),
-                                    Column = x,
-                                    Row = y,
-                                    TakablePiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 }
-                                });
+                                availableMoves = AppendLegalMove(currentBoard, currentPiece, availableMoves, x, y);
                             }
                         }
                     }
@@ -145,35 +152,21 @@ namespace ChessNut
                     int xp = currentPiece.Column;
                     int yp = currentPiece.Row + direction;
 
-                    // straight ahead move
-                    if (SquareOnBoard(xp, yp) == true)
+                    // straight ahead moves
+                    int[] yDirs = { 0, + direction};
+                    foreach (int yDir in yDirs)
                     {
-                        if (currentBoard.squares[xp, yp].CurrentlyOccupied.Name == "Nothing")
-                        {
-                            currentBoard.squares[xp, yp].LegalNextMove = true;
-                            availableMoves.Add(new Move
-                            {
-                                BoardPosition = letters[xp] + (8 - yp).ToString(),
-                                Column = xp,
-                                Row =yp,
-                                TakablePiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 }
-                            });
-                        }
-                    }
-
-                    // double move
-                    if (currentPiece.NumberOfTimesMoved == 0)
-                    {
-                        if (SquareOnBoard(xp, yp + direction) == true)
+                        // straight ahead move
+                        if (SquareOnBoard(xp, yp + yDir) == true)
                         {
                             if (currentBoard.squares[xp, yp].CurrentlyOccupied.Name == "Nothing")
                             {
-                                currentBoard.squares[xp, yp + direction].LegalNextMove = true;
+                                currentBoard.squares[xp, yp + yDir].LegalNextMove = true;
                                 availableMoves.Add(new Move
                                 {
-                                    BoardPosition = letters[xp] + (8 - yp + direction).ToString(),
+                                    BoardPosition = letters[xp] + (8 - yp).ToString(),
                                     Column = xp,
-                                    Row = yp + direction,
+                                    Row = yp + yDir,
                                     TakablePiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 }
                                 });
                             }
@@ -248,13 +241,7 @@ namespace ChessNut
                 }
 
                 currentBoard.squares[x, y].LegalNextMove = true;
-                availableMoves.Add(new Move
-                {
-                    BoardPosition = letters[x] + (8 - y).ToString(),
-                    Column = x,
-                    Row = y,
-                    TakablePiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 }
-                });
+                availableMoves = AppendLegalMove(currentBoard, currentPiece, availableMoves, x, y);
 
                 if (currentBoard.squares[x, y].CurrentlyOccupied.Color == OppositeColor(currentPiece.Color))
                 {
@@ -283,13 +270,7 @@ namespace ChessNut
                 }
 
                 currentBoard.squares[x, y].LegalNextMove = true;
-                availableMoves.Add(new Move
-                {
-                    BoardPosition = letters[x] + (8 - y).ToString(),
-                    Column = x,
-                    Row = y,
-                    TakablePiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 }
-                });
+                availableMoves = AppendLegalMove(currentBoard, currentPiece, availableMoves, x, y);
 
                 if (currentBoard.squares[x, y].CurrentlyOccupied.Color == OppositeColor(currentPiece.Color))
                 {
@@ -318,13 +299,7 @@ namespace ChessNut
                 }
 
                 currentBoard.squares[x, y].LegalNextMove = true;
-                availableMoves.Add(new Move
-                {
-                    BoardPosition = letters[x] + (8 - y).ToString(),
-                    Column = x,
-                    Row = y,
-                    TakablePiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 }
-                });
+                availableMoves = AppendLegalMove(currentBoard, currentPiece, availableMoves, x, y);
 
                 if (currentBoard.squares[x, y].CurrentlyOccupied.Color == OppositeColor(currentPiece.Color))
                 {
@@ -352,13 +327,7 @@ namespace ChessNut
                 }
 
                 currentBoard.squares[x, y].LegalNextMove = true;
-                availableMoves.Add(new Move
-                {
-                    BoardPosition = letters[x] + (8 - y).ToString(),
-                    Column = x,
-                    Row = y,
-                    TakablePiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 }
-                });
+                availableMoves = AppendLegalMove(currentBoard, currentPiece, availableMoves, x, y);
 
                 if (currentBoard.squares[x, y].CurrentlyOccupied.Color == OppositeColor(currentPiece.Color))
                 {
@@ -391,13 +360,7 @@ namespace ChessNut
                         }
 
                         currentBoard.squares[x, y].LegalNextMove = true;
-                        availableMoves.Add(new Move
-                        {
-                            BoardPosition = letters[x] + (8 - y).ToString(),
-                            Column = x,
-                            Row = y,
-                            TakablePiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 }
-                        });
+                        availableMoves = AppendLegalMove(currentBoard, currentPiece, availableMoves, x, y);
 
                         if (currentBoard.squares[x, y].CurrentlyOccupied.Color == OppositeColor(currentPiece.Color))
                         {
@@ -432,13 +395,7 @@ namespace ChessNut
                         }
 
                         currentBoard.squares[x, y].LegalNextMove = true;
-                        availableMoves.Add(new Move
-                        {
-                            BoardPosition = letters[x] + (8 - y).ToString(),
-                            Column = x,
-                            Row = y,
-                            TakablePiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 }
-                        });
+                        availableMoves = AppendLegalMove(currentBoard, currentPiece, availableMoves, x, y);
 
                         if (currentBoard.squares[x, y].CurrentlyOccupied.Color == OppositeColor(currentPiece.Color))
                         {
@@ -473,13 +430,7 @@ namespace ChessNut
                         }
 
                         currentBoard.squares[x, y].LegalNextMove = true;
-                        availableMoves.Add(new Move
-                        {
-                            BoardPosition = letters[x] + (8 - y).ToString(),
-                            Column = x,
-                            Row = y,
-                            TakablePiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 }
-                        });
+                        availableMoves = AppendLegalMove(currentBoard, currentPiece, availableMoves, x, y);
 
                         if (currentBoard.squares[x, y].CurrentlyOccupied.Color == OppositeColor(currentPiece.Color))
                         {
@@ -514,13 +465,7 @@ namespace ChessNut
                         }
 
                         currentBoard.squares[x, y].LegalNextMove = true;
-                        availableMoves.Add(new Move
-                        {
-                            BoardPosition = letters[x] + (8 - y).ToString(),
-                            Column = x,
-                            Row = y,
-                            TakablePiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 }
-                        });
+                        availableMoves = AppendLegalMove(currentBoard, currentPiece, availableMoves, x, y);
 
                         if (currentBoard.squares[x, y].CurrentlyOccupied.Color == OppositeColor(currentPiece.Color))
                         {

@@ -23,6 +23,9 @@ namespace ChessNut
 
         string turn;
 
+        string whiteCheckStatus;
+        string blackCheckStatus;
+
         static Board chessNutBoard = new Board(8);
         
         List<Piece> whitePieces = new List<Piece>();
@@ -358,15 +361,19 @@ namespace ChessNut
         private void Draw_CurrentInfo(object sender, PaintEventArgs e)
         {
             // print number of avalible moves
-            CurrentTurnBox.Text = "Current Trurn        : " + turn.ToString();
-            Moves.Text        = "Possible Moves        : " + SelectedPiece.AvailableMoves.Count.ToString();
-            CurrentPiece.Text = "Current Piece       : " + SelectedPiece.Name.ToString();
-            Takable.Text      = "Takable Pieces      : 0";
-            CheckStatus.Text  = "CheckStatus          : 0";
-            TakenBlack.Text   = "taken black pieces : " + blackPiecesTaken.Count.ToString();
-            Score.Text = "Score W| B      : " + WhiteScore.ToString() + "|" + BlackScore.ToString();
 
+            // Moves.Text        = "Possible Moves        : " + SelectedPiece.AvailableMoves.Count.ToString();
+            //  CurrentPiece.Text = "Current Piece       : " + SelectedPiece.Name.ToString();
+            // Takable.Text      = "Takable Pieces      : 0";
             
+            TakenBlack.Text       = "Taken Black Pieces : " + blackPiecesTaken.Count.ToString();
+            BlackCheckStatus.Text = "Black Check Status : " + blackCheckStatus;
+
+            TakenWhite.Text       = "Taken White Pieces : " + whitePiecesTaken.Count.ToString();
+            WhiteCheckStatus.Text = "White Check Status : " + whiteCheckStatus;
+
+            CurrentTurnBox.Text   = "Current Turn : " + turn;
+            Score.Text            = "Score W-B   : " + WhiteScore.ToString() + "-" + BlackScore.ToString();
         }
 
         private void Table_Load(object sender, PaintEventArgs e)
@@ -392,56 +399,45 @@ namespace ChessNut
             }
             ShowLegalMoves();
         }
-        private string CheckChecker()
+        private void CheckChecker()
         {
-            string status = "okay";
+            string blackCheckStatus_ = "Free";
 
-            // check selecter piece color king not at risk
-            String playerColor = SelectedPiece.Color;
-            String opponentColor = OppositeColor(playerColor);
-            
-            switch (playerColor)
+            // check players pieces for check
+            foreach (Piece piece in whitePieces)
             {
-                case "White":
+                List<Move> MovesToCheck = chessNutBoard.MarkNextLegalMoves(chessNutBoard, piece);
 
-                    // check players pieces for check
-                    foreach (Piece piece in whitePieces)
+                foreach (Move move in MovesToCheck)
+                {
+                    //MessageBox.Show(move.TakablePiece.Name + " "+piece.Name);
+                    if (move.TakablePiece.Name == "Black King")
                     {
-                        List<Move> MovesToCheck = chessNutBoard.MarkNextLegalMoves(chessNutBoard, SelectedPiece);
-
-                        foreach (Move move in MovesToCheck)
-                        {
-                            if (move.TakablePiece.Name == "White King")
-                            {
-                                MessageBox.Show("White in Check");
-                                // checked status = whitePieces in check
-                            }
-                        }
+                        MessageBox.Show("Black in Check");
+                        blackCheckStatus_ = "Check";
                     }
+                }
+            }
+            blackCheckStatus = blackCheckStatus_;
 
-                    // check opponents pieces for check
-                    foreach (Piece piece in blackPieces)
+
+            string whiteCheckStatus_ = "Free";
+            // check opponents pieces for check
+            foreach (Piece piece in blackPieces)
+            {
+                List<Move> MovesToCheck = chessNutBoard.MarkNextLegalMoves(chessNutBoard, piece);
+
+                foreach (Move move in MovesToCheck)
+                {
+                    if (move.TakablePiece.Name == "White King")
                     {
-
+                        MessageBox.Show("White in Check");
+                        whiteCheckStatus_ = "Check";
                     }
-                    break;
-
-                case "Black":
-                    // check players pieces for check
-                    foreach (Piece piece in blackPieces)
-                    {
-          
-                    }
-
-                    // check opponents pieces for check
-                    foreach (Piece piece in whitePieces)
-                    {
-                   
-                    }
-                    break;
+                }
             }
 
-            return status;
+            whiteCheckStatus = whiteCheckStatus_;
         }
 
         private void MovePiece(object sender, EventArgs e, Piece pieceToMove)
@@ -498,6 +494,7 @@ namespace ChessNut
             initialise_table();
             UpdateTableLayoutPanel();
             Table_Load(sender, e);
+            turn = "White";
             this.Invalidate();
         }
 
@@ -595,6 +592,7 @@ namespace ChessNut
 
                         MovePiece(sender, e, SelectedPiece);
                         CheckChecker();
+
                         switch (turn)
                         {
                             case "White":

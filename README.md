@@ -8,18 +8,10 @@ Chess being written in c#
 ## Development To Do List
 
 #### Game
-<<<<<<< HEAD
-* [x] checkmate checker 
-* [x] Castling
-* [x] Pawn Promotion
-* [x] En Passant
-* [x] Clock
-=======
-* [ ] Check/Check-Mate checker 
+* [ ] Check/CheckMate/StaleMate
 * [ ] Castling
 * [ ] Pawn Promotion
 * [ ] En Passant
->>>>>>> 1727d316435e02e3a6b69123b55c2edaeb0c7ea5
 
 #### Git
 * [ ] Fonts Prerequisits

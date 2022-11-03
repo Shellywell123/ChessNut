@@ -27,72 +27,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Moves = new System.Windows.Forms.Label();
-            this.CurrentPiece = new System.Windows.Forms.Label();
-            this.Takable = new System.Windows.Forms.Label();
-            this.CheckStatus = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.WhiteCheckStatus = new System.Windows.Forms.Label();
             this.ResetButton = new System.Windows.Forms.Button();
             this.TakenBlack = new System.Windows.Forms.Label();
             this.TakenWhite = new System.Windows.Forms.Label();
             this.BoardLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.CurrentTurnBox = new System.Windows.Forms.Label();
             this.Score = new System.Windows.Forms.Label();
+            this.BlackCheckStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // Moves
+            // WhiteCheckStatus
             // 
-            this.Moves.AutoSize = true;
-            this.Moves.Location = new System.Drawing.Point(620, 289);
-            this.Moves.Name = "Moves";
-            this.Moves.Size = new System.Drawing.Size(48, 16);
-            this.Moves.TabIndex = 10;
-            this.Moves.Text = "Moves";
-            // 
-            // CurrentPiece
-            // 
-            this.CurrentPiece.AutoSize = true;
-            this.CurrentPiece.Location = new System.Drawing.Point(620, 273);
-            this.CurrentPiece.Name = "CurrentPiece";
-            this.CurrentPiece.Size = new System.Drawing.Size(87, 16);
-            this.CurrentPiece.TabIndex = 12;
-            this.CurrentPiece.Text = "Current Piece";
-            this.CurrentPiece.Click += new System.EventHandler(this.CurrentPiece_Click);
-            // 
-            // Takable
-            // 
-            this.Takable.AutoSize = true;
-            this.Takable.Location = new System.Drawing.Point(620, 305);
-            this.Takable.Name = "Takable";
-            this.Takable.Size = new System.Drawing.Size(44, 16);
-            this.Takable.TabIndex = 16;
-            this.Takable.Text = "label5";
-            this.Takable.Click += new System.EventHandler(this.Takable_Click);
-            // 
-            // CheckStatus
-            // 
-            this.CheckStatus.AutoSize = true;
-            this.CheckStatus.Location = new System.Drawing.Point(620, 321);
-            this.CheckStatus.Name = "CheckStatus";
-            this.CheckStatus.Size = new System.Drawing.Size(44, 16);
-            this.CheckStatus.TabIndex = 17;
-            this.CheckStatus.Text = "label5";
-            this.CheckStatus.Click += new System.EventHandler(this.CheckStatus_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(620, 231);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(32, 16);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Info";
+            this.WhiteCheckStatus.AutoSize = true;
+            this.WhiteCheckStatus.Location = new System.Drawing.Point(620, 538);
+            this.WhiteCheckStatus.Name = "WhiteCheckStatus";
+            this.WhiteCheckStatus.Size = new System.Drawing.Size(122, 16);
+            this.WhiteCheckStatus.TabIndex = 17;
+            this.WhiteCheckStatus.Text = "White Check Status";
+            this.WhiteCheckStatus.Click += new System.EventHandler(this.CheckStatus_Click);
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(623, 62);
+            this.ResetButton.Location = new System.Drawing.Point(623, 11);
             this.ResetButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(200, 26);
@@ -104,20 +61,20 @@
             // TakenBlack
             // 
             this.TakenBlack.AutoSize = true;
-            this.TakenBlack.Location = new System.Drawing.Point(620, 337);
+            this.TakenBlack.Location = new System.Drawing.Point(620, 522);
             this.TakenBlack.Name = "TakenBlack";
-            this.TakenBlack.Size = new System.Drawing.Size(123, 16);
+            this.TakenBlack.Size = new System.Drawing.Size(160, 20);
             this.TakenBlack.TabIndex = 21;
-            this.TakenBlack.Text = "back pieces taken :";
+            this.TakenBlack.Text = "Black Pieces Taken";
             // 
             // TakenWhite
             // 
             this.TakenWhite.AutoSize = true;
-            this.TakenWhite.Location = new System.Drawing.Point(620, 353);
+            this.TakenWhite.Location = new System.Drawing.Point(620, 62);
             this.TakenWhite.Name = "TakenWhite";
-            this.TakenWhite.Size = new System.Drawing.Size(123, 16);
+            this.TakenWhite.Size = new System.Drawing.Size(160, 20);
             this.TakenWhite.TabIndex = 22;
-            this.TakenWhite.Text = "white pieces taken :";
+            this.TakenWhite.Text = "White Pieces Taken";
             // 
             // BoardLayoutPanel
             // 
@@ -149,7 +106,7 @@
             // CurrentTurnBox
             // 
             this.CurrentTurnBox.AutoSize = true;
-            this.CurrentTurnBox.Location = new System.Drawing.Point(620, 257);
+            this.CurrentTurnBox.Location = new System.Drawing.Point(620, 290);
             this.CurrentTurnBox.Name = "CurrentTurnBox";
             this.CurrentTurnBox.Size = new System.Drawing.Size(79, 16);
             this.CurrentTurnBox.TabIndex = 24;
@@ -159,28 +116,34 @@
             // Score
             // 
             this.Score.AutoSize = true;
-            this.Score.Location = new System.Drawing.Point(620, 369);
+            this.Score.Location = new System.Drawing.Point(620, 306);
             this.Score.Name = "Score";
-            this.Score.Size = new System.Drawing.Size(77, 16);
+            this.Score.Size = new System.Drawing.Size(75, 16);
             this.Score.TabIndex = 25;
-            this.Score.Text = "Score W|B :";
+            this.Score.Text = "Score W-B ";
             this.Score.Click += new System.EventHandler(this.label1_Click_2);
+            // 
+            // BlackCheckStatus
+            // 
+            this.BlackCheckStatus.AutoSize = true;
+            this.BlackCheckStatus.Location = new System.Drawing.Point(620, 78);
+            this.BlackCheckStatus.Name = "BlackCheckStatus";
+            this.BlackCheckStatus.Size = new System.Drawing.Size(122, 16);
+            this.BlackCheckStatus.TabIndex = 26;
+            this.BlackCheckStatus.Text = "Black Check Status";
             // 
             // Table
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 615);
+            this.ClientSize = new System.Drawing.Size(839, 613);
+            this.Controls.Add(this.BlackCheckStatus);
             this.Controls.Add(this.Score);
             this.Controls.Add(this.CurrentTurnBox);
             this.Controls.Add(this.TakenWhite);
             this.Controls.Add(this.TakenBlack);
             this.Controls.Add(this.ResetButton);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.CheckStatus);
-            this.Controls.Add(this.Takable);
-            this.Controls.Add(this.CurrentPiece);
-            this.Controls.Add(this.Moves);
+            this.Controls.Add(this.WhiteCheckStatus);
             this.Controls.Add(this.BoardLayoutPanel);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Table";
@@ -193,17 +156,14 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label Moves;
-        private System.Windows.Forms.Label CurrentPiece;
-        private System.Windows.Forms.Label Takable;
-        private System.Windows.Forms.Label CheckStatus;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label WhiteCheckStatus;
         private System.Windows.Forms.Button ResetButton;
         private System.Windows.Forms.Label TakenBlack;
         private System.Windows.Forms.Label TakenWhite;
         private System.Windows.Forms.TableLayoutPanel BoardLayoutPanel;
         private System.Windows.Forms.Label CurrentTurnBox;
         private System.Windows.Forms.Label Score;
+        private System.Windows.Forms.Label BlackCheckStatus;
     }
 }
 
