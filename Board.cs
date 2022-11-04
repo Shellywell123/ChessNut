@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.IO;
+using System.Windows.Forms;
 
 namespace ChessNut
 {
@@ -179,6 +180,7 @@ namespace ChessNut
                     {
                         if (SquareOnBoard(xp + xDir, yp) == true)
                         {
+
                             if (currentBoard.squares[xp + xDir, yp].CurrentlyOccupied.Color == OppositeColor(currentPiece.Color))
                             {
                                 currentBoard.squares[xp + xDir, yp].LegalNextMove = true;
@@ -192,6 +194,33 @@ namespace ChessNut
                             }
                         }
                     }
+
+                    // en passant 
+                    int[] XDirs = { +1, -1 };
+                    foreach (int xDir in XDirs)
+                    {
+                        if (SquareOnBoard(xp + xDir, yp) == true)
+                        {
+                            // piece to opposite pawn is to the immediate left and right with one 2 step move
+                            Piece pieceToSideOfCurrentPawn = currentBoard.squares[xp + xDir, yp - direction].CurrentlyOccupied;
+                            if ((pieceToSideOfCurrentPawn.Color == OppositeColor(currentPiece.Color)) & 
+                                (pieceToSideOfCurrentPawn.Class == "Pawn") & 
+                                (pieceToSideOfCurrentPawn.NumberOfTimesMoved == 1) &
+                                (pieceToSideOfCurrentPawn.LastPieceMoved == true))
+                            {
+                                //MessageBox.Show("En passant");
+                                currentBoard.squares[xp + xDir, yp].LegalNextMove = true;
+                                availableMoves.Add(new Move
+                                {
+                                    BoardPosition = letters[xp + xDir] + (8 - yp).ToString(),
+                                    Column = xp + xDir,
+                                    Row = yp,
+                                    TakablePiece = pieceToSideOfCurrentPawn
+                                }); ;
+                            }
+                        }
+                    }
+
                     break;
 
                 case "Rook":
@@ -308,6 +337,7 @@ namespace ChessNut
             }
             return availableMoves;
         }
+
         public List<Move> Top(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
         {
             Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
@@ -336,6 +366,7 @@ namespace ChessNut
             }
             return availableMoves;
         }
+
         public List<Move> TopLeft(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
         { 
             Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
@@ -371,6 +402,7 @@ namespace ChessNut
             }
             return availableMoves;
         }
+
         public List<Move> TopRight(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
         {
 
@@ -406,6 +438,7 @@ namespace ChessNut
             }
             return availableMoves;
         }
+
         public List<Move> BottomRight(Board currentBoard, Piece currentPiece, List<Move> availableMoves)
         {
             Square currentSquare = currentBoard.squares[currentPiece.Column, currentPiece.Row];
@@ -476,6 +509,7 @@ namespace ChessNut
             }
             return availableMoves;
         }
+
         public bool SquareOnBoard(int RowNumber, int ColumnNumber)
         {
             bool onBoard = false;

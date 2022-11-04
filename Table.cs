@@ -420,7 +420,6 @@ namespace ChessNut
             }
             blackCheckStatus = blackCheckStatus_;
 
-
             string whiteCheckStatus_ = "Free";
             // check opponents pieces for check
             foreach (Piece piece in blackPieces)
@@ -436,54 +435,53 @@ namespace ChessNut
                     }
                 }
             }
-
             whiteCheckStatus = whiteCheckStatus_;
         }
 
         private void MovePiece(object sender, EventArgs e, Piece pieceToMove)
         {
+            // move piece
             chessNutBoard.squares[pieceToMove.PrevColumn, pieceToMove.PrevRow].CurrentlyOccupied = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
             chessNutBoard.squares[pieceToMove.Column, pieceToMove.Row].CurrentlyOccupied = pieceToMove;
 
-            Piece pieceToTake = null;
-            switch (pieceToMove.Color)
+            // set last piece moved (needed for en passant)
+            foreach (Piece piece in blackPieces)
             {
-                case "White":
-                    foreach (Piece piece in blackPieces)
-                    {
-                        if (piece.Color == OppositeColor(pieceToMove.Color))
-                        {
-                            if ((piece.Column == pieceToMove.Column) & (piece.Row == pieceToMove.Row))
-                            {
-                                pieceToTake = piece;
-                            }
-                        }
-                    }
-                    if (pieceToTake != null)
-                    {
-                        blackPiecesTaken.Add(pieceToTake);
-                        blackPieces.Remove(pieceToTake);
-                    }
-                    break;
+                piece.LastPieceMoved = false;
+            }
+            foreach (Piece piece in whitePieces)
+            {
+                piece.LastPieceMoved = false;
+            }
+            pieceToMove.LastPieceMoved = true;
 
-                case "Black":
-                    foreach (Piece piece in whitePieces)
-                    {
-                        if (piece.Color == OppositeColor(pieceToMove.Color))
-                        {
-                            if ((piece.Column == pieceToMove.Column) & (piece.Row == pieceToMove.Row))
-                            {
-                                pieceToTake = piece;
-                            }
-                        }
-                    }
-                    if (pieceToTake != null)
-                    {
+            // new take system
+            Piece pieceToTake = null;
+            foreach (Move move in pieceToMove.AvailableMoves)
+            {
+                if ((move.Column == pieceToMove.Column) & (move.Row == pieceToMove.Row))
+                {
+                    pieceToTake = move.TakablePiece;
+                }
+            }
+
+            if (pieceToTake != null)
+            {
+                switch (pieceToTake.Color)
+                {
+                    case "White":
                         whitePiecesTaken.Add(pieceToTake);
                         whitePieces.Remove(pieceToTake);
-                    }
-                    break;
+                        break;
+
+                    case "Black":
+                        blackPiecesTaken.Add(pieceToTake);
+                        blackPieces.Remove(pieceToTake);
+                        break;
+                }
             }
+            
+            // reset selected piece
             SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
             Table_Load(sender, e);
             this.Invalidate();
@@ -496,11 +494,6 @@ namespace ChessNut
             Table_Load(sender, e);
             turn = "White";
             this.Invalidate();
-        }
-
-        private void ResetButton_Click(object sender, EventArgs e)
-        {
-            ResetGame(sender, e);            
         }
 
         public string OppositeColor(string color)
@@ -609,6 +602,11 @@ namespace ChessNut
                 }
                 SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
             }
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            ResetGame(sender, e);
         }
 
         private void CheckStatus_Click(object sender, EventArgs e)

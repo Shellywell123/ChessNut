@@ -20,5 +20,6 @@ namespace ChessNut
         public string Color                 { get; set; }
         public int NumberOfTimesMoved       { get; set; }
         public bool Taken                   { get; set; }
+        public bool LastPieceMoved          { get; set; }
     }
 }
