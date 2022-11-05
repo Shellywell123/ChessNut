@@ -480,7 +480,12 @@ namespace ChessNut
                         break;
                 }
             }
-            
+
+            if (pieceToTake.Name != "Nothing")
+            {
+                chessNutBoard.squares[pieceToTake.Column, pieceToTake.Row].CurrentlyOccupied = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
+            }
+
             // reset selected piece
             SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
             Table_Load(sender, e);
@@ -509,6 +514,7 @@ namespace ChessNut
             }
             return oppositeColor;
         }
+
         private void AssignClickEvent()
         {
             foreach (Control c in BoardLayoutPanel.Controls.OfType<Button>())
