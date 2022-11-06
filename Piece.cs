@@ -21,5 +21,6 @@ namespace ChessNut
         public int NumberOfTimesMoved       { get; set; }
         public bool Taken                   { get; set; }
         public bool LastPieceMoved          { get; set; }
+        public bool Promoted                { get; set; }
     }
 }

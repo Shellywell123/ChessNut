@@ -160,6 +160,11 @@ namespace ChessNut
                         // straight ahead move
                         if (SquareOnBoard(xp, yp + yDir) == true)
                         {
+                            // if already moved once dont allow double move
+                            if ((yDir == direction) & (currentPiece.NumberOfTimesMoved != 0))
+                            {
+                                continue;
+                            }
                             if (currentBoard.squares[xp, yp].CurrentlyOccupied.Name == "Nothing")
                             {
                                 currentBoard.squares[xp, yp + yDir].LegalNextMove = true;

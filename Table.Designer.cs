@@ -35,6 +35,9 @@
             this.CurrentTurnBox = new System.Windows.Forms.Label();
             this.Score = new System.Windows.Forms.Label();
             this.BlackCheckStatus = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // WhiteCheckStatus
@@ -63,7 +66,7 @@
             this.TakenBlack.AutoSize = true;
             this.TakenBlack.Location = new System.Drawing.Point(620, 522);
             this.TakenBlack.Name = "TakenBlack";
-            this.TakenBlack.Size = new System.Drawing.Size(160, 20);
+            this.TakenBlack.Size = new System.Drawing.Size(128, 16);
             this.TakenBlack.TabIndex = 21;
             this.TakenBlack.Text = "Black Pieces Taken";
             // 
@@ -72,7 +75,7 @@
             this.TakenWhite.AutoSize = true;
             this.TakenWhite.Location = new System.Drawing.Point(620, 62);
             this.TakenWhite.Name = "TakenWhite";
-            this.TakenWhite.Size = new System.Drawing.Size(160, 20);
+            this.TakenWhite.Size = new System.Drawing.Size(128, 16);
             this.TakenWhite.TabIndex = 22;
             this.TakenWhite.Text = "White Pieces Taken";
             // 
@@ -132,11 +135,27 @@
             this.BlackCheckStatus.TabIndex = 26;
             this.BlackCheckStatus.Text = "Black Check Status";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.fileSystemWatcher1.Changed += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
+            // 
             // Table
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(839, 613);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.BlackCheckStatus);
             this.Controls.Add(this.Score);
             this.Controls.Add(this.CurrentTurnBox);
@@ -150,6 +169,7 @@
             this.Text = "ChessNut";
             this.Load += new System.EventHandler(this.Table_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Table_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,6 +184,8 @@
         private System.Windows.Forms.Label CurrentTurnBox;
         private System.Windows.Forms.Label Score;
         private System.Windows.Forms.Label BlackCheckStatus;
+        private System.Windows.Forms.Button button1;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }
 

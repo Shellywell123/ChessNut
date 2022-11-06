@@ -50,6 +50,12 @@
     <Compile Include="ConsoleGame.cs" />
     <Compile Include="Move.cs" />
     <Compile Include="Piece.cs" />
+    <Compile Include="Promotion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Promotion.Designer.cs">
+      <DependentUpon>Promotion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Square.cs" />
     <Compile Include="Table.cs">
       <SubType>Form</SubType>
@@ -59,6 +65,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Promotion.resx">
+      <DependentUpon>Promotion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Table.resx">
       <DependentUpon>Table.cs</DependentUpon>
     </EmbeddedResource>

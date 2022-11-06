@@ -27,7 +27,7 @@ namespace ChessNut
         string blackCheckStatus;
 
         static Board chessNutBoard = new Board(8);
-        
+
         List<Piece> whitePieces = new List<Piece>();
         List<Piece> blackPieces = new List<Piece>();
         List<Piece> whitePiecesTaken = new List<Piece>();
@@ -68,6 +68,24 @@ namespace ChessNut
         Piece BlackPawn8   = new Piece { Class = "Pawn",   Color = "Black", Name = "Black Pawn 8",   StartColumn = 7, StartRow = 1};
 
         Piece SelectedPiece;
+        Piece PieceToPromote;
+
+        public Table()
+        {
+            InitializeComponent();
+
+            // starting positions for piceces
+            ResetPieces();
+
+            // create button array
+            InitializeTableLayoutPanel();
+            AssignClickEvent();
+            initialise_table();
+
+            // init selected piece is empty
+            SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
+            PieceToPromote = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
+        }
 
         public void ResetPieces()
         {
@@ -113,21 +131,7 @@ namespace ChessNut
             blackPieces.Add(BlackPawn7);
             blackPieces.Add(BlackPawn8);
         }
-        public Table()
-        {
-            InitializeComponent();
-
-            ResetPieces();
-
-            // create button array
-            InitializeTableLayoutPanel();
-            AssignClickEvent();
-            initialise_table();
-
-            // init selected piece is empty
-            SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
-        }
-
+        
         public void initialise_table()
         {
 
@@ -144,6 +148,7 @@ namespace ChessNut
                 piece.NumberOfTimesMoved = 0;
                 piece.Column = piece.StartColumn;
                 piece.Row = piece.StartRow;
+                piece.Promoted = false;
                 chessNutBoard.squares[piece.Column, piece.Row].CurrentlyOccupied = piece;
             }
 
@@ -152,6 +157,7 @@ namespace ChessNut
                 piece.NumberOfTimesMoved = 0;
                 piece.Column = piece.StartColumn;
                 piece.Row = piece.StartRow;
+                piece.Promoted = false;
                 chessNutBoard.squares[piece.Column, piece.Row].CurrentlyOccupied = piece;
             }
         }
@@ -207,7 +213,6 @@ namespace ChessNut
         {
             foreach (Button c in BoardLayoutPanel.Controls.OfType<Button>())
             {
-                
                 int i = BoardLayoutPanel.GetPositionFromControl(c).Column;
                 int j = BoardLayoutPanel.GetPositionFromControl(c).Row;
                 ButtonPieceText(c, i, j); 
@@ -282,21 +287,17 @@ namespace ChessNut
             Piece pieceToDraw = null;
             foreach (Piece piece in blackPieces)
             {
-                
                 if ((piece.Column == x) & (piece.Row == y))
                 {
                     pieceToDraw = piece;
                 }
-                
             }
             foreach (Piece piece in whitePieces)
             {
-
                 if ((piece.Column == x) & (piece.Row == y))
                 {
                     pieceToDraw = piece;
                 }
-
             }
             if (pieceToDraw == null)
             {
@@ -359,13 +360,7 @@ namespace ChessNut
         }
 
         private void Draw_CurrentInfo(object sender, PaintEventArgs e)
-        {
-            // print number of avalible moves
-
-            // Moves.Text        = "Possible Moves        : " + SelectedPiece.AvailableMoves.Count.ToString();
-            //  CurrentPiece.Text = "Current Piece       : " + SelectedPiece.Name.ToString();
-            // Takable.Text      = "Takable Pieces      : 0";
-            
+        {            
             TakenBlack.Text       = "Taken Black Pieces : " + blackPiecesTaken.Count.ToString();
             BlackCheckStatus.Text = "Black Check Status : " + blackCheckStatus;
 
@@ -399,6 +394,7 @@ namespace ChessNut
             }
             ShowLegalMoves();
         }
+
         private void CheckChecker()
         {
             string blackCheckStatus_ = "Free";
@@ -523,6 +519,24 @@ namespace ChessNut
             }
         }
 
+        private bool PawnPromotion(Piece piece)
+        {
+            bool promotable = false;
+            // check if piece to be promoted
+            if ((piece.Class == "Pawn") & (piece.Promoted == false))
+            {
+                if (((piece.Color == "White") & (piece.Row == 0)) || (piece.Color == "Black") & (piece.Row == 7))
+                {
+                    PieceToPromote = piece;
+                    Promotion PromoSelect = new Promotion(chessNutBoard, PieceToPromote);
+                    PromoSelect.Show();
+                    return true;
+                }
+            }
+            return false;
+            // rest of code executes from comboboxselection change
+        }
+
         private void OnClick(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -582,32 +596,57 @@ namespace ChessNut
                     if ((move.Row == row) & (move.Column == column))
                     {
                         SelectedPiece.PrevColumn = SelectedPiece.Column;
-                        SelectedPiece.PrevRow    = SelectedPiece.Row;
+                        SelectedPiece.PrevRow = SelectedPiece.Row;
 
                         SelectedPiece.Column = move.Column;
-                        SelectedPiece.Row    = move.Row;
+                        SelectedPiece.Row = move.Row;
 
                         SelectedPiece.NumberOfTimesMoved += 1;
 
-                        MovePiece(sender, e, SelectedPiece);
-                        CheckChecker();
-
-                        switch (turn)
+                        Piece pieceToMove = SelectedPiece;
+                        MovePiece(sender, e, pieceToMove);
+                        if (PawnPromotion(pieceToMove))
                         {
-                            case "White":
-                                nextTurn = "Black";
-                                break;
+                            switch (pieceToMove.Color)
+                            {
+                                case "White":
+                                    whitePieces.Remove(PieceToPromote);
+                                    whitePieces.Add(chessNutBoard.squares[PieceToPromote.Column, PieceToPromote.Row].CurrentlyOccupied);
+                                    break;
 
-                            case "Black":
-                                nextTurn = "White";
-                                break;
+                                case "Black":
+                                    blackPieces.Remove(PieceToPromote);
+                                    blackPieces.Add(chessNutBoard.squares[PieceToPromote.Column, PieceToPromote.Row].CurrentlyOccupied);
+                                    break;
+                            }
                         }
-                        turn = nextTurn;
-                        Table_Load(sender, e);
+                        else
+                        {
+                            CheckChecker();
+
+                            switch (turn)
+                            {
+                                case "White":
+                                    nextTurn = "Black";
+                                    break;
+
+                                case "Black":
+                                    nextTurn = "White";
+                                    break;
+                            }
+                            turn = nextTurn;
+                            Table_Load(sender, e);
+                            this.Invalidate();
+                        }
                     }
                 }
                 SelectedPiece = new Piece { Name = "Nothing", AvailableMoves = new List<Move>(), Column = -1, Row = -1 };
             }
+        }
+
+        private void promotionBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
@@ -656,6 +695,11 @@ namespace ChessNut
         }
 
         private void label1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+  
+        private void fileSystemWatcher1_Changed(object sender, System.IO.FileSystemEventArgs e)
         {
 
         }
