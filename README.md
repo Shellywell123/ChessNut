@@ -11,7 +11,7 @@ Chess being written in c#
 * [ ] Check/CheckMate/StaleMate
 * [ ] Castling
 * [ ] Pawn Promotion
-* [*] En Passant
+* [x] En Passant
 
 ## Development TODO
 #### Git
