@@ -5,14 +5,16 @@ Chess being written in c#
   <img src="assets/screenshots/screenshot9.png" width="600" />
 </p>
 
-## Development To Do List
+## Features
 
 #### Game
-* [ ] Check/CheckMate/StaleMate
-* [ ] Castling
+* [x] En Passant
 * [ ] Pawn Promotion (In Development)
-* [ ] En Passant
+* [ ] Check/CheckMate/StaleMate (Semi-Complete)
+* [ ] Castling
 
+
+## Development TODO
 #### Git
 * [ ] Fonts Prerequisits
 * [ ] Fix gitignore
