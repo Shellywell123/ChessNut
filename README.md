@@ -6,8 +6,13 @@ Chess being written in c#
 </p>
 
 ## Features
+* [x] 2 Player Turn Based Game
+* [x] Click controls to select/move piece
+* [x] Show available moves of a selected piece
+* [x] Check warning shown when King is under attack
+* [x] Basic Game stats for each player (number of game won, number of pieces captured)
 
-#### Game
+#### Special Moves
 * [x] En Passant
 * [ ] Pawn Promotion (In Development)
 * [ ] Check/CheckMate/StaleMate (Semi-Complete)
