@@ -525,6 +525,22 @@ namespace ChessNut
             return onBoard;
         }
 
+        public bool CanCastle()
+        {
+            // check if king has been moved
+
+            // check if king is under attack
+
+            // check if rooks have been moved
+
+            // check if spaces between king and rook is empty 
+
+            return true;
+
+        }
+
+
+
         public string OppositeColor(string color)
         {
             string oppositeColor = "";

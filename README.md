@@ -10,7 +10,7 @@ Chess being written in c#
 #### Game
 * [ ] Check/CheckMate/StaleMate
 * [ ] Castling
-* [ ] Pawn Promotion
+* [ ] Pawn Promotion (In Development)
 * [ ] En Passant
 
 #### Git
